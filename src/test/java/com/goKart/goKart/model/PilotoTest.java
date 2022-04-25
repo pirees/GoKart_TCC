@@ -13,9 +13,6 @@ class PilotoTest {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
-	@Autowired
-	private PilotoRepository pilotoRepository;
 
 	@Test
 	public void salvarTodosOsDadosDoPiloto() throws Exception {

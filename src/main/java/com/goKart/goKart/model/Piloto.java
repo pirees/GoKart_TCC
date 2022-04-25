@@ -15,7 +15,6 @@ public class Piloto extends Usuario {
 	private Nivel nivel;
 	
 	@Column
-	@NotBlank(message = "Sobrenome não pode ficar em branco")
 	private String sobrenome;
 
 	public Estado getEstado() {

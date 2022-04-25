@@ -1,7 +1,6 @@
 package com.goKart.goKart.controller;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -13,10 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.goKart.goKart.dto.PilotoDTO;
 import com.goKart.goKart.model.Piloto;
-import com.goKart.goKart.model.Usuario;
 import com.goKart.goKart.repository.PilotoRepository;
 import com.goKart.goKart.repository.UsuarioRepository;
 
@@ -39,14 +36,25 @@ public class PilotoController{
 		return "piloto/cadastroPiloto";
 	}
 	
+	/*Lista Nivel dos pilotos*/
+	
 	@GetMapping("atualizarPiloto/{id}")
-	public String atualizarFormulario(Model model, @PathVariable Long id) {
+	public String listaNivel(Model model, @PathVariable Long id) {
+		Piloto piloto = pilotoRepository.getById(id);
+		model.addAttribute("piloto", piloto);
 		
-		Piloto pilotos = pilotoRepository.getById(id);
-		model.addAttribute("pilotos", pilotos);
 		return "piloto/atualizarPiloto";
+		
 	}
 	
+	@PostMapping("atualizarPiloto/{id}")
+	public String atualizarNivel(@PathVariable Long id, PilotoDTO pilotoEdicao) {
+		
+		pilotoEdicao.atualizarNivel(id, pilotoRepository);
+
+		return "piloto/atualizarPiloto";
+	}
+
 	@GetMapping("login")
 	public String login(PilotoDTO pilotoDTO) {
 		return "piloto/menuPiloto";
@@ -67,6 +75,9 @@ public class PilotoController{
 		
 		return "piloto/cadastroPiloto";
 	}
+	
+	
+	
 	
 	/* Foi transferido para a classe USUARIO
 	public void verificaCadastro (String email) throws Exception{

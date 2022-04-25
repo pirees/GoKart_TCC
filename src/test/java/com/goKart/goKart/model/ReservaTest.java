@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.goKart.goKart.controller.ReservaController;
 import com.goKart.goKart.repository.ReservaRepository;
 
 @SpringBootTest
@@ -21,7 +23,7 @@ class ReservaTest {
 	piloto.setNome("Joaqui");
 	piloto.setSobrenome("Madeira");
 	piloto.setCidade("Araucária");
-	piloto.setEmail("contat@gmail.com");
+	piloto.setEmail("contatooo@gmail.com");
 	piloto.setEstado(Estado.AC);
 	piloto.setNivel(Nivel.Mediano);
 	piloto.setSenha("123");
@@ -47,6 +49,10 @@ class ReservaTest {
 	reserva.setBateria(bateria);
 	reserva.setKartodromo(kartodromo);
 	reserva.setPiloto(piloto);
+	
+	ReservaController reservaControl = new ReservaController();
+	
+	reservaControl.pilotoReserva(reserva, piloto);
 	
 	System.out.println(reserva.getPiloto().getId());
 	

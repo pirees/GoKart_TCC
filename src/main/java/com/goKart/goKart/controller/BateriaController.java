@@ -24,4 +24,6 @@ public class BateriaController {
 		
 		return "/piloto/menuPiloto";
 	}
+	
+	
 }

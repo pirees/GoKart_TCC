@@ -1,10 +1,12 @@
 package com.goKart.goKart.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.goKart.goKart.model.Estado;
 import com.goKart.goKart.model.Nivel;
 import com.goKart.goKart.model.Piloto;
+import com.goKart.goKart.repository.PilotoRepository;
 
 public class PilotoDTO {
 
@@ -93,6 +95,13 @@ public class PilotoDTO {
 		piloto.setEstado(getEstado());
 		piloto.setNivel(getNivel());
 		
+		return piloto;
+	}
+	
+	public Piloto atualizarNivel (Long id, PilotoRepository pilotoRepository) {
+		Piloto piloto = pilotoRepository.getById(id);
+		piloto.setNivel(this.nivel);
+		pilotoRepository.save(piloto);
 		return piloto;
 	}
 
