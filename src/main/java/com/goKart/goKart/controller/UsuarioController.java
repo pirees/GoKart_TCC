@@ -20,7 +20,7 @@ public class UsuarioController{
 	 this.usuarioRepository = usuarioRepository;
 	}
 
-	public void verificaCadastro (String email) throws Exception{
+	/*public void verificaCadastro (String email) throws Exception{
 		if(email != null) {
 			List<Usuario> usuarios = usuarioRepository.findByEmail(email);
 			for (Usuario usuario : usuarios) {
@@ -31,5 +31,5 @@ public class UsuarioController{
 				}
 			}
 		} 
-	}
+	}*/
 }

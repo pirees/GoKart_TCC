@@ -18,9 +18,9 @@ public class Reserva {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private int nrReserva;
+	private int nrReserva = 1;
 	
-	private boolean confirmado = false;
+	private boolean confirmado;
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="kartodromo_id")

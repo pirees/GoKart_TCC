@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -21,11 +21,13 @@ public class Bateria {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@DateTimeFormat (pattern="dd/MMM/YYYY")
 	private LocalDate data;
 	private LocalTime horaBateria;
 	private int nrMaxPiloto;
 	private String tracado;
 	private double valorBateria;
+	private int vagasDisponiveis;
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="kartodromo_id")
@@ -73,6 +75,13 @@ public class Bateria {
 	}
 	public void setValorBateria(double valorBateria) {
 		this.valorBateria = valorBateria;
+	}
+	
+	public int getVagasDisponiveis() {
+		return vagasDisponiveis;
+	}
+	public void setVagasDisponiveis(int vagasDisponiveis) {
+		this.vagasDisponiveis = vagasDisponiveis;
 	}
 	public Bateria() {
 		super();

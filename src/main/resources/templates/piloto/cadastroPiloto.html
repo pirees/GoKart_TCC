@@ -18,15 +18,13 @@
 	  				<strong>GoKart</strong>
 				</a>
 				<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-					<li><a href="#" class="nav-link px-2 link-dark">Início</a></li>
-					<li><a href="#" class="nav-link px-2 link-dark">Reserve agora</a></li>
-					<li><a href="#" class="nav-link px-2 link-dark">Kartódromos</a></li>
-					<li><a href="#" class="nav-link px-2 link-dark">Sobre</a></li>
+					<li><a th:href="@{/}" class="nav-link px-2 link-dark">Início</a></li>
+					<li><a th:href="@{/piloto/login}" class="nav-link px-2 link-dark">Reserve agora</a></li>
+					<li><a th:href="@{/kartodromos}" class="nav-link px-2 link-dark">Kartódromos</a></li>
+					<li><a th:href="@{/goKartNovidades}" class="nav-link px-2 link-dark">Sobre</a></li>
 				</ul>
 				<div class="col-md-3 text-end">
-					<a href="/login">
-						<button type="button" class="btn btn-primary">Entre</button>
-					</a> 
+					
 				</div>
 			</header>
 		</div>
@@ -34,28 +32,28 @@
 	<body>
 		<div class="container p-5">
 			<div class="d-flex justify-content-between mb-3">
-				<form class="row g-3" method="POST" action="/piloto/novo" th:object="${pilotoDTO}">
+				<form class="row g-3" method="POST" action="/piloto/cadastroPiloto" th:object="${pilotoDTO}">
 					<div class="row p-2">
 						<div class="col">
 		    				<label for="Nome" class="form-label">Nome</label>
-		    				<input type="text" class="form-control" id="nome" th:field="*{nome}">
-		    				<span th:if="${#fields.hasErrors('nome')}" class="text-danger" th:errors="*{nome}"></span> 
+		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="nome" th:field="*{nome}">
+		    				<div th:if="${#fields.hasErrors('nome')}" class="text-danger" th:errors="*{nome}"></div> 
 		  				</div>
 		  				<div class="col">
 		    				<label for="Sobrenome" class="form-label">Sobrenome</label>
-		    				<input type="text" class="form-control" id="sobrenome" th:field="*{sobrenome}">
-		    				<span th:if="${#fields.hasErrors('sobrenome')}" class="text-danger" th:errors="*{sobrenome}"></span> 
+		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="sobrenome" th:field="*{sobrenome}">
+		    				<div class = "invalid-feedback" th:errors="*{sobrenome}"></div> 
 		  				</div>
 		  			</div>
 		  			<div class="row p-2">
 						<div class="col">
 				    		<label for="inputCity" class="form-label">Cidade</label>
-				    		<input type="text" class="form-control" id="cidade" th:field="*{cidade}">
+				    		<input type="text" class="form-control" th:errorclass="is-invalid" id="cidade" th:field="*{cidade}">
 				    		<span th:if="${#fields.hasErrors('cidade')}" class="text-danger" th:errors="*{cidade}"></span> 
 						</div>
 						<div class="col">
 				    		<label class="form-label">Estado</label>
-				    		<select class="form-select"  name ="estado">
+				    		<select class="form-select" th:errorclass="is-invalid" name ="estado">
 				      		<option selected>Escolha...</option>
 				     		<option th:each="estado : ${T(com.goKart.goKart.model.Estado).values()}" 
 						    	  	th:value="${estado}"
@@ -64,7 +62,7 @@
 				 		</div>
 					 	<div class="col-md-4">
 					    	<label class="form-label">Nível</label>
-					    	<select class="form-select" name ="nivel">
+					    	<select class="form-select" th:errorclass="is-invalid" name ="nivel">
 					      	<option selected>Escolha...</option>
 					      	<option th:each= "nivel : ${T(com.goKart.goKart.model.Nivel).values()}"  
 							  	    th:value="${nivel}"
@@ -74,18 +72,20 @@
 						 <div class="row p-2">
 		 	 			<div class="col">
 		    				<label for="inputEmail4" class="form-label">Email</label>
-		    				<input type="email" class="form-control" id="inputEmail4" th:field="*{email}">
+		    				<input type="email" class="form-control" th:errorclass="is-invalid" id="inputEmail4" th:field="*{email}">
 		    				<span th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></span> 
 		  				</div>	  		
 		  				<div class="col-md-4">
 		    				<label for="inputPassword4" class="form-label">Senha</label>
-		    				<input type="password" class="form-control" id="inputPassword4" th:field="*{senha}">
+		    				<input type="password" class="form-control" th:errorclass="is-invalid" id="inputPassword4" th:field="*{senha}">
 		    				<span th:if="${#fields.hasErrors('senha')}" class="text-danger" th:errors="*{senha}"></span> 
 		  				</div>
 		  			</div>
 				 	</div>
 				 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				 	<a href="piloto/login">
 				    	<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
+				    	</a>
 					</div>  						
 				</form>
 			</div>

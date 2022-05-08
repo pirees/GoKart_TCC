@@ -1,7 +1,12 @@
 package com.goKart.goKart.dto;
 
+import javax.persistence.Column;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.goKart.goKart.model.Estado;
 import com.goKart.goKart.model.Nivel;
@@ -25,8 +30,10 @@ public class PilotoDTO {
 	@NotBlank(message = "Sobrenome não pode ficar em branco")
 	private String sobrenome;
 	
+	@NotNull (message = "Estado não pode ficar em branco")
 	private Estado estado;
 	
+	@NotNull(message = "Nível não pode ficar em branco")
 	private Nivel nivel;
 	
 	public String getNome() {
@@ -85,11 +92,15 @@ public class PilotoDTO {
 	}
 	
 	public Piloto toPiloto() {
+		
 		Piloto piloto = new Piloto();
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(senha);
 		
 		piloto.setNome(nome);
 		piloto.setEmail(email);
-		piloto.setSenha(senha);
+		piloto.setSenha(encodedPassword);
 		piloto.setCidade(cidade);
 		piloto.setSobrenome(sobrenome);
 		piloto.setEstado(getEstado());
@@ -98,8 +109,9 @@ public class PilotoDTO {
 		return piloto;
 	}
 	
-	public Piloto atualizarNivel (Long id, PilotoRepository pilotoRepository) {
-		Piloto piloto = pilotoRepository.getById(id);
+	public Piloto atualizarNivel (String email, PilotoRepository pilotoRepository) {
+		
+		Piloto piloto = pilotoRepository.findByEmail(email);
 		piloto.setNivel(this.nivel);
 		pilotoRepository.save(piloto);
 		return piloto;

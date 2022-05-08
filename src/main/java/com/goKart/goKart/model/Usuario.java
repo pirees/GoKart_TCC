@@ -1,17 +1,22 @@
 package com.goKart.goKart.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_usuario")
-public abstract class Usuario {
+public abstract class Usuario{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -30,6 +35,9 @@ public abstract class Usuario {
 	@Column
 	@NotNull @NotBlank(message = "Nome não pode ficar em branco")
 	private String nome;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Perfil> perfis;
 
 	public Long getId() {
 		return id;
@@ -69,6 +77,14 @@ public abstract class Usuario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
 	}
 
 	public Usuario() {

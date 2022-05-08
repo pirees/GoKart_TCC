@@ -28,7 +28,7 @@ class PilotoTest {
 		piloto.setNivel(Nivel.Mediano);
 		piloto.setSenha("123");
 
-		userControl.verificaCadastro(piloto.getEmail());
+		//userControl.verificaCadastro(piloto.getEmail());
 		
 		usuarioRepository.save(piloto);
 		

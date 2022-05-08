@@ -18,14 +18,15 @@
 	  				<strong>GoKart</strong>
 				</a>
 				<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-					<li><a href="#" class="nav-link px-2 link-dark">Início</a></li>
-					<li><a href="#" class="nav-link px-2 link-dark">Reserve agora</a></li>
-					<li><a href="#" class="nav-link px-2 link-dark">Kartódromos</a></li>
-					<li><a href="#" class="nav-link px-2 link-dark">Sobre</a></li>
+					<li><a th:href="@{/piloto/menuPiloto}" class="nav-link px-2 link-dark">Menu</a></li>
+					<li><a th:href="@{/piloto/reservasPiloto}" class="nav-link px-2 link-dark">Minhas baterias</a></li>
+					<li><a th:href="@{/pilotos/atualizarPiloto}" class="nav-link px-2 link-secondary">Atualizar Nível</a></li>
+					<li><a th:href="@{/kartodromos}" class="nav-link px-2 link-dark">Kartódromos</a></li>
+			
 				</ul>
 				<div class="col-md-3 text-end">
 					<a href="/login">
-						<button type="button" class="btn btn-primary">Entre</button>
+						<button type="button" class="btn btn-outline-dark">Sair</button>
 					</a> 
 				</div>
 			</header>

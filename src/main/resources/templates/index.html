@@ -16,17 +16,17 @@
 	  				<strong>GoKart</strong>
 				</a>
 				<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-					<li><a href="#" class="nav-link px-2 link-secondary">Início</a></li>
-					<li><a href="#" class="nav-link px-2 link-dark">Reserve agora</a></li>
-					<li><a href="#" class="nav-link px-2 link-dark">Kartódromos</a></li>
-					<li><a href="#" class="nav-link px-2 link-dark">Sobre</a></li>
+					<li><a th:href="@{/}" class="nav-link px-2 link-secondary">Início</a></li>
+					<li><a th:href="@{/piloto/login}" class="nav-link px-2 link-dark">Reserve agora</a></li>
+					<li><a th:href="@{/kartodromos}" class="nav-link px-2 link-dark">Kartódromos</a></li>
+					<li><a th:href="@{/goKartNovidades}" class="nav-link px-2 link-dark">Sobre</a></li>
 				</ul>
 	
 				<div class="col-md-4 text-end">
-					<a href="/piloto/menuPiloto">
-						<button class="btn btn-outline-primary me-2">Entre</button></a> 
+					<a href="/piloto/login">
+						<button class="btn btn-outline-dark me-2">Entre</button></a> 
 					<a href="/piloto/cadastroPiloto">
-						<button class="btn btn-primary">Cadastre-se</button></a>
+						<button class="btn btn-dark">Cadastre-se</button></a>
 				</div>
 			</header>
 		</div>
@@ -44,14 +44,14 @@
     <h2 class="pb-2 border-bottom">Novidades para você</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
       <div class="feature col">
-        <div class="feature-icon bg-primary bg-gradient">
+        <div class="feature-icon bg-dark bg-gradient">
           <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"/></svg>
         </div>
         <h2>Grupo para correr de kart?</h2>
         <p>Aqui você não precisa ter um grupo, pode marcar a sua bateria com outros pilotos que queiram correr no mesmo horário e kartódromo.</p>
       </div>
       <div class="feature col">
-        <div class="feature-icon bg-primary bg-gradient">
+        <div class="feature-icon bg-dark bg-gradient">
           <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"/></svg>
         </div>
         <h2>Agende agora mesmo</h2>
@@ -62,7 +62,7 @@
         </a>
       </div>
       <div class="feature col">
-        <div class="feature-icon bg-primary bg-gradient">
+        <div class="feature-icon bg-dark bg-gradient">
           <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
         </div>
         <h2>Kartódromos</h2>
@@ -101,7 +101,7 @@
           <div class="d-flex w-100 gap-2">
             <label for="newsletter1" class="visually-hidden">Seu e-mail</label>
             <input id="newsletter1" type="text" class="form-control" placeholder="Seu e-mail">
-            <button class="btn btn-primary" type="button">Enviar</button>
+            <button class= "btn btn-outline-dark" type="button">Enviar</button>
           </div>
         </form>
       </div>

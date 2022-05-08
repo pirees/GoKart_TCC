@@ -23,17 +23,19 @@
 	  				</svg> <strong>GoKart</strong>
 		</a>
 		<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-			<li><a href="#" class="nav-link px-2 link-dark">Início</a></li>
-			<li><a href="#" class="nav-link px-2 link-dark">Reserve
-					agora</a></li>
-			<li><a href="#" class="nav-link px-2 link-dark">Kartódromos</a></li>
-			<li><a href="#" class="nav-link px-2 link-dark">Sobre</a></li>
+			<li><a th:href="@{/piloto/menuPiloto}"
+				class="nav-link px-2 link-dark">Menu</a></li>
+			<li><a th:href="@{/piloto/reservasPiloto}"
+				class="nav-link px-2 link-secondary">Minhas baterias</a></li>
+			<li><a th:href="@{/piloto/atualizarPiloto}" class="nav-link px-2 link-dark">Atualizar Nível</a></li>	
+			<li><a th:href="@{/kartodromos}" class="nav-link px-2 link-dark">Kartódromos</a></li>
 		</ul>
 		<div class="col-md-3 text-end">
-			<a href="/login">
-				<button type="button" class="btn btn-primary">Sair</button>
-			</a>
+
+			<button type="button" class="btn btn-outline-dark">Sair</button>
+
 		</div>
+		
 	</header>
 </div>
 </head>
@@ -57,6 +59,8 @@
 					<td th:text="${reserva.bateria.horaBateria}"></td>
 					<td th:text="${reserva.bateria.data}"></td>
 					<td th:text="${reserva.bateria.tracado}"></td>
+					<td th:text="${reserva.confirmado}"></td>
+					<td th:text="${reserva.id}"></td>
 				</tr>
 			</tbody>
 		</table>

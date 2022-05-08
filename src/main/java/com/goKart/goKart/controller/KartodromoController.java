@@ -47,7 +47,7 @@ public class KartodromoController{
 		
 		UsuarioController userControl = new UsuarioController(usuarioRepository);
 		
-		userControl.verificaCadastro(kartodromo.getEmail());
+		//userControl.verificaCadastro(kartodromo.getEmail());
 		kartodromoRepository.save(kartodromo);
 		
 		return "kartodromo/cadastroKartodromo";

@@ -12,7 +12,7 @@ import com.goKart.goKart.model.Piloto;
 @EnableJpaRepositories
 public interface PilotoRepository extends JpaRepository<Piloto, Long>  {
 
-	List<Piloto> findByEmail(String email);
+	Piloto findByEmail(String email);
 
 	
 }

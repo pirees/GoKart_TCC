@@ -25,7 +25,7 @@ class KartodromoTest {
 		kartodromo.setEstado(Estado.SP);
 		kartodromo.setSenha("123");
 		
-		userControl.verificaCadastro(kartodromo.getEmail());
+	//	userControl.verificaCadastro(kartodromo.getEmail());
 		
 		usuarioRepository.save(kartodromo);
 	}
