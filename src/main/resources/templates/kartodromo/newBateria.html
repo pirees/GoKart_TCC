@@ -18,15 +18,14 @@
 	  				<strong>GoKart</strong>
 				</a>
 				<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-					<li><a th:href="@{/piloto/menuPiloto}" class="nav-link px-2 link-dark">Menu</a></li>
-					<li><a th:href="@{/piloto/reservasPiloto}" class="nav-link px-2 link-dark">Minhas baterias</a></li>
-					<li><a th:href="@{/pilotos/atualizarPiloto}" class="nav-link px-2 link-secondary">Atualizar Nível</a></li>
-					<li><a th:href="@{/kartodromos}" class="nav-link px-2 link-dark">Kartódromos</a></li>
-			
+					<li><a th:href="@{/kartodromo/menuKartodromo}" class="nav-link px-2 link-dark">Menu</a></li>
+					<li><a th:href="@{/kartodromo/novaBateria}" class="nav-link px-2 link-secondary">Nova Bateria</a></li>
+					<li><a th:href="@{/kartodromo/meusDados}"class="nav-link px-2 link-dark">Meus Dados</a></li>
+					<li><a th:href="@{/kartodromo/relatorio}" class="nav-link px-2 link-dark">Relatório</a></li>
 				</ul>
 				<div class="col-md-3 text-end">
-					<a href="/logout">
-						<button type="button" class="btn btn-outline-dark">Sair</button></a>
+					<a th:href="@{/logout}">
+					<button type="button" class="btn btn-outline-dark">Sair</button></a>
 				</div>
 			</header>
 		</div>
@@ -34,43 +33,43 @@
 	<body>
 		<div class="container p-5">
 			<div class="d-flex justify-content-between mb-3">
-				<form class="row g-3" method="POST" th:action="@{/piloto/atualizarPiloto}" th:object="${pilotoDTO}" th:each="piloto : ${piloto}">
-					<div>
+				<form class="row g-3" method="post" th:action="@{/kartodromo/newBateria}" th:object="${bateriaDTO}">
+					<div class="row p-2">
 						<div class="col">
-		    				<div >
-		    				<h2>Olá Racer <span th:text="${piloto.nome}"> </span> :) </h2> 
-		    				<p>&nbsp;</p>
-		    				<h3>Você pode mudar o seu nível de acordo com as suas corridas. Hoje seu nível atual é: 
-		    				<i><span th:text="${piloto.nivel}"> </span> </i>.</h3> 
-		    				</div>
-		    				<p>&nbsp;</p>
-							<h3>Atualize logo abaixo:</h3>
-							<p>&nbsp;</p>
-							
-							<div class="col-md-3">				    	
-					    	<select class="form-select" name ="nivel">
-					      	<option selected>Escolha...</option>
-					      	<option th:each= "nivel : ${T(com.goKart.goKart.model.Nivel).values()}"  
-							  	    th:value="${nivel}"
-							   	   th:text="${nivel}"></option>
-					    	</select>
-					    	<p>&nbsp;</p>
-					    	<a th:href="@{/piloto/atualizarPiloto}">
-				    			<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
-				    		</a>
-						 </div>
+		    				<label for="data" class="form-label">Data</label>
+		    				<input type="text" class="form-control" id="data" th:field="*{data}">
 		  				</div>
-				 	</div>				
+		  				<div class="col">
+		    				<label for="horaBateria" class="form-label">Hora da Bateria</label>
+		    				<input  type="text" class="form-control" id="horaBateria" th:field="*{horaBateria}">
+		  				</div>
+		  				<div class="col">
+		    				<label for="tracado" class="form-label">Traçado</label>
+		    				<input type="text" class="form-control" id="tracado">
+		  				</div>
+		  				<div class="col">
+		    				<label for="valorBateria" class="form-label">Valor da Bateria</label>
+		    				<input  type="text" class="form-control" id="valorBateria" th:field="*{valorBateria}">
+		  				</div>
+		  				<div class="col">
+				    		<label for="nrMaxPiloto" class="form-label">Números de Pilotos</label>
+				    		<input type="text" class="form-control" id="nrMaxPiloto" th:field="*{nrMaxPiloto}">
+						</div>
+		  			</div>
+				 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				 	<a th:href="@{/kartodromo/newBateria}">
+				    	<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
+				    	</a>
+					</div>  						
 				</form>
 			</div>
-			
 		</div>
 	</body>
 	<div class="container">
-  		<footer class="py-5">
-    		<div class="d-flex justify-content-between py-4 my-4 border-top">
-      			<p>&copy; 2021 Company - GoKart - Todos os direitos reservados</p>  
-    		</div>
-  		</footer>
-	</div>
+	<footer class="py-5">
+		<div class="d-flex justify-content-between py-4 my-4 border-top">
+			<p>&copy; 2021 Company - GoKart - Todos os direitos reservados</p>
+		</div>
+	</footer>
+</div>
 </html>

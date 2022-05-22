@@ -62,11 +62,11 @@ class ReservaControllerTest {
 		
 		bateria.setData(LocalDate.now());
 		bateria.setHoraBateria(LocalTime.now());
-		bateria.setNrMaxPiloto(10);
+		//bateria.setNrMaxPiloto(10);
 		bateria.setTracado("Traçado Original");
 		bateria.setKartodromo(kartodromo);
-		bateria.setValorBateria(50.00);
-		bateria.setVagasDisponiveis(10);
+		//bateria.setValorBateria(50.00);
+		//bateria.setVagasDisponiveis(10);
 		
 		
 		
@@ -78,7 +78,7 @@ class ReservaControllerTest {
 		
 		
 		//bateriaRepository.save(bateria);
-		reControl.pilotoReserva(reserva);
+		//reControl.pilotoReserva(reserva);
 		
 		//System.out.println(reserva.getBateria().getVagasDisponiveis());
 	}

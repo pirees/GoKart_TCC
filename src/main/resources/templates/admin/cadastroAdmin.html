@@ -9,6 +9,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 <title>GoKart - Acelere conosco</title>
+</head>
 <div class="container">
 	<header
 		class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -23,45 +24,25 @@
 	  				</svg> <strong>GoKart</strong>
 		</a>
 		<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-			<li><a th:href="@{/piloto/menuPiloto}"
-				class="nav-link px-2 link-dark">Menu</a></li>
-			<li><a th:href="@{/piloto/reservasPiloto}"
-				class="nav-link px-2 link-secondary">Minhas baterias</a></li>
-			<li><a th:href="@{/piloto/atualizarPiloto}" class="nav-link px-2 link-dark">Atualizar Nível</a></li>	
-			<li><a th:href="@{/kartodromos}" class="nav-link px-2 link-dark">Kartódromos</a></li>
+			<li><a th:href="@{/admin/menuAdmin}" class="nav-link px-2 link-dark">Menu</a></li>
+			<li><a th:href="@{/admin/cadastroKartodromo}" class="nav-link px-2 link-dark">Novo Kartódromo</a></li>
+			<li><a th:href="@{/admin/cadastroAdmin}" class="nav-link px-2 link-secondary">Novo Administrador</a></li>	
+			<li><a th:href="@{/admin/todosKartodromos}" class="nav-link px-2 link-dark">Kartódromos</a></li>
+			<li><a th:href="@{/admin/todosPilotos}" class="nav-link px-2 link-dark">Pilotos</a></li>
 		</ul>
 		<div class="col-md-3 text-end">
 			<a href="/logout">
 			<button type="button" class="btn btn-outline-dark">Sair</button></a>
+
 		</div>
+		
 	</header>
 </div>
-</head>
 <body>
-	<div class="container p-5">
-		<h3>Olá Racer, veja o histórico das suas corridas:</h3>
-	</div>
-	<div class="container p-1">
-		<table class="table table-striped text-center">
-			<thead>
-				<tr>
-					<th scope="col">Kartódromo</th>
-					<th scope="col">Horário</th>
-					<th scope="col">Data</th>
-					<th scope="col">Traçado</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="reserva : ${reserva}">
-					<td th:text="${reserva.kartodromo.nome}"></td>
-					<td th:text="${reserva.bateria.horaBateria}"></td>
-					<td th:text="${reserva.bateria.data}"></td>
-					<td th:text="${reserva.bateria.tracado}"></td>
-					<td th:text="${reserva.confirmado}"></td>
-					<td th:text="${reserva.id}"></td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="container">
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+
+		</div>
 	</div>
 </body>
 <div class="container">
@@ -71,5 +52,4 @@
 		</div>
 	</footer>
 </div>
-
 </html>

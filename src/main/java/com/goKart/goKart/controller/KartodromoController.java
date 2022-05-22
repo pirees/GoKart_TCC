@@ -1,56 +1,52 @@
 package com.goKart.goKart.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.goKart.goKart.model.Kartodromo;
-import com.goKart.goKart.model.Piloto;
 import com.goKart.goKart.repository.KartodromoRepository;
 import com.goKart.goKart.repository.UsuarioRepository;
 
 @Controller
-@RequestMapping("kartodromo")
 public class KartodromoController{
 	
 	private KartodromoRepository kartodromoRepository;
 	
-	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@Autowired
-	public KartodromoController(KartodromoRepository kartodromoRepository){
-	 this.kartodromoRepository = kartodromoRepository;
+	public KartodromoController(KartodromoRepository kartodromoRepository, UsuarioRepository usuarioRepository) {
+		super();
+		this.kartodromoRepository = kartodromoRepository;
+		this.usuarioRepository = usuarioRepository;
 	}
 
-	@GetMapping("cadastroKartodromo")
-	public String formulario(Kartodromo kartodromo) {
-		return "kartodromo/cadastroKartodromo";
-	}
-	
-	@GetMapping("login")
-	public String login(Kartodromo Kartodromo) {
-		return "login";
-	}
-
-	@PostMapping ("novo")
+	@PostMapping ("admin/cadastroKartodromo")
 	public String salvarKartodromo(@Valid Kartodromo kartodromo,BindingResult resultado) throws Exception {
 		
 		if(resultado.hasErrors()) {
 			return "kartodromo/cadastroKartodromo";
 		}
-		
-		UsuarioController userControl = new UsuarioController(usuarioRepository);
+		//UsuarioController userControl = new UsuarioController(usuarioRepository);
 		
 		//userControl.verificaCadastro(kartodromo.getEmail());
 		kartodromoRepository.save(kartodromo);
 		
-		return "kartodromo/cadastroKartodromo";
+		return "admin/cadastroKartodromo";
 	}
-
+	
+	@GetMapping("admin/todosKartodromos")
+	public String listarKartodromos(Model model) {
+		List<Kartodromo> kartodromos = kartodromoRepository.findAll();
+		
+		model.addAttribute("kartodromos", kartodromos);
+		
+		return "admin/todosKartodromos";
+	}
 }

@@ -1,5 +1,6 @@
 package com.goKart.goKart.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -21,13 +22,13 @@ public class Bateria {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@DateTimeFormat (pattern="dd/MMM/YYYY")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate data;
 	private LocalTime horaBateria;
-	private int nrMaxPiloto;
+	private Integer nrMaxPiloto;
 	private String tracado;
-	private double valorBateria;
-	private int vagasDisponiveis;
+	private BigDecimal valorBateria;
+	private Integer vagasDisponiveis;
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="kartodromo_id")
@@ -51,12 +52,7 @@ public class Bateria {
 	public void setHoraBateria(LocalTime horaBateria) {
 		this.horaBateria = horaBateria;
 	}
-	public int getNrMaxPiloto() {
-		return nrMaxPiloto;
-	}
-	public void setNrMaxPiloto(int nrMaxPiloto) {
-		this.nrMaxPiloto = nrMaxPiloto;
-	}
+
 	public String getTracado() {
 		return tracado;
 	}
@@ -70,17 +66,22 @@ public class Bateria {
 		this.kartodromo = kartodromo;
 	}
 
-	public double getValorBateria() {
+	public BigDecimal getValorBateria() {
 		return valorBateria;
 	}
-	public void setValorBateria(double valorBateria) {
+	public void setValorBateria(BigDecimal valorBateria) {
 		this.valorBateria = valorBateria;
 	}
-	
-	public int getVagasDisponiveis() {
+	public Integer getNrMaxPiloto() {
+		return nrMaxPiloto;
+	}
+	public void setNrMaxPiloto(Integer nrMaxPiloto) {
+		this.nrMaxPiloto = nrMaxPiloto;
+	}
+	public Integer getVagasDisponiveis() {
 		return vagasDisponiveis;
 	}
-	public void setVagasDisponiveis(int vagasDisponiveis) {
+	public void setVagasDisponiveis(Integer vagasDisponiveis) {
 		this.vagasDisponiveis = vagasDisponiveis;
 	}
 	public Bateria() {

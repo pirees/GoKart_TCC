@@ -14,9 +14,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name = "tb_usuario")
-public abstract class Usuario{
+public abstract class Usuario {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

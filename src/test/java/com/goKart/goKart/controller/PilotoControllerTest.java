@@ -20,7 +20,7 @@ class PilotoControllerTest {
 	
 	@BeforeEach
 	public void iniciarClasse() {
-		this.pilControl = new PilotoController(pilotoRepository);
+		//this.pilControl = new PilotoController(pilotoRepository);
 		this.piloto = new Piloto();
 		
 	}

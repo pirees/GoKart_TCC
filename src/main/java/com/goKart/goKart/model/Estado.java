@@ -18,7 +18,7 @@ public enum Estado {
 	PA ("Pará"),
 	PB ("Paraíba"),
 	PE ("Pernambuco"),
-	PI ("Piauí­"),
+	PI ("Piauí­"), 
 	PR ("Paraná"),
 	RJ ("Rio de Janeiro"),
 	RN ("Rio Grande do Norte"),

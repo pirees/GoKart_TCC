@@ -28,7 +28,7 @@ public class ReservaController {
 	}
 
 	// PRECISA CRIAR REGRA NOVA
-	public Integer pilotoReserva(Reserva reserva) {
+	/*public Integer pilotoReserva(Reserva reserva) {
 		int newVaga = 0;
 		Reserva reservaa = new Reserva();
 		if (reserva.getNrReserva() != 0 && reserva.isConfirmado()) {
@@ -38,7 +38,7 @@ public class ReservaController {
 
 		return newVaga;
 
-	}
+	}*/
 
 	// LISTA TODAS AS BATERIAS DISPONÍVEIS
 	@GetMapping("piloto/reservasPiloto")
@@ -70,7 +70,7 @@ public class ReservaController {
 	 * }else {
 	 * 
 	 * }
-	 * 
+	 *  
 	 * return "piloto/confirmarReserva"; }
 	 */
 

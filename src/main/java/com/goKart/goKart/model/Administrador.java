@@ -3,37 +3,14 @@ package com.goKart.goKart.model;
 import java.util.Collection;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Kartodromo extends Usuario implements UserDetails  {
+public class Administrador extends Usuario implements UserDetails {
 	
-	@NotNull (message = "Estado não pode ficar em branco")
-	private Estado estado;
-	
-	@NotNull @NotBlank(message = "CNPJ não pode ficar em branco")
-	private String CNPJ;
-	
-	public Estado getEstado() {
-		return estado;
-	}
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-	public String getCNPJ() {
-		return CNPJ; 
-	}
-	public void setCNPJ(String cNPJ) {
-		CNPJ = cNPJ;
-	}
-	
-	public Kartodromo() {
-		super();
-	}
+	private static final long serialVersionUID = 1L;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -47,9 +24,7 @@ public class Kartodromo extends Usuario implements UserDetails  {
 
 	@Override
 	public String getUsername() {
-		System.out.println(getId());
 		return this.getEmail();
-		
 	}
 
 	@Override

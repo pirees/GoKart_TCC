@@ -1,11 +1,10 @@
 package com.goKart.goKart.controller;
 
 
-import java.util.List;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.web.bind.annotation.GetMapping;
-
-import com.goKart.goKart.model.Pedido;
+@Controller
 public class HomeController {
 
 	/*@Autowired
@@ -18,4 +17,15 @@ public class HomeController {
 		
 		return "home";
 	}*/
+	
+	@RequestMapping("/login")
+	public String login() {
+		return "/login";
+	}	
+	
+	@RequestMapping("/kartodromos")
+	public String todosKartodromos() {
+		System.out.println("Acessando a página inicial 2");
+		return "/kartodromos";
+	}
 }

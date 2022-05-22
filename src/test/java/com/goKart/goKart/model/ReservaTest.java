@@ -39,10 +39,10 @@ class ReservaTest {
 	Bateria bateria = new Bateria();
 	bateria.setData(LocalDate.now());
 	bateria.setHoraBateria(LocalTime.now());
-	bateria.setNrMaxPiloto(10);
+	//bateria.setNrMaxPiloto(10);
 	bateria.setTracado("Traçado Original");
 	bateria.setKartodromo(kartodromo);
-	bateria.setValorBateria(50.00);
+	//bateria.setValorBateria(50.00);
 	
 	Reserva reserva = new Reserva();
 	reserva.setNrReserva(1);
@@ -58,7 +58,7 @@ class ReservaTest {
 	System.out.println("Número de reserva do piloto  " + reserva.getNrReserva());
 	System.out.println("Número máximo de piloto " + reserva.getBateria().getNrMaxPiloto());
 	
-	int newVagas = reserva.getBateria().getNrMaxPiloto() - reserva.getNrReserva();
+	//int newVagas = reserva.getBateria().getNrMaxPiloto() - reserva.getNrReserva();
 	
 	//newVagas = reserva.getBateria().getVagasDisponiveis();
 	

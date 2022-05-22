@@ -1,15 +1,13 @@
 package com.goKart.goKart.dto;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.goKart.goKart.model.Estado;
 import com.goKart.goKart.model.Nivel;
+import com.goKart.goKart.model.Perfil;
 import com.goKart.goKart.model.Piloto;
 import com.goKart.goKart.repository.PilotoRepository;
 
@@ -35,6 +33,8 @@ public class PilotoDTO {
 	
 	@NotNull(message = "Nível não pode ficar em branco")
 	private Nivel nivel;
+	
+	private Perfil perfis;
 	
 	public String getNome() {
 		return nome;
@@ -79,8 +79,15 @@ public class PilotoDTO {
 		this.sobrenome = sobrenome;
 	}
 
+	public Perfil getPerfis() {
+		return perfis;
+	}
+	public void setPerfis(Perfil perfis) {
+		this.perfis = perfis;
+	}
+	
 	public PilotoDTO(String nome, String email, String senha, String cidade, String sobrenome, Estado estado,
-			Nivel nivel) {
+			Nivel nivel, Perfil perfil) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -89,6 +96,7 @@ public class PilotoDTO {
 		this.sobrenome = sobrenome;
 		this.estado = estado;
 		this.nivel = nivel;
+		this.perfis = perfil;
 	}
 	
 	public Piloto toPiloto() {

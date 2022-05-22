@@ -41,7 +41,7 @@ class BateriaTest {
 		bateria.setNrMaxPiloto(9);
 		bateria.setTracado("Invertido");
 		bateria.setKartodromo(kartodromo);
-		bateria.setValorBateria(89.99);
+		//bateria.setValorBateria(89.99);
 
 		bateriaRepository.save(bateria);
 	}

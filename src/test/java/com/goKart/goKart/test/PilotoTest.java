@@ -72,7 +72,7 @@ public class PilotoTest {
 		bateria.setData(LocalDate.now());
 		bateria.setHoraBateria(LocalTime.now());
 		bateria.setKartodromo(kartodromo);
-		bateria.setNrMaxPiloto(10);
+		//bateria.setNrMaxPiloto(10);
 		bateria.setTracado("Traçado Original");
 		
 		reserva.setNrReserva(2);
