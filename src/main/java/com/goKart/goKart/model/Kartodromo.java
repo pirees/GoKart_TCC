@@ -12,11 +12,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 public class Kartodromo extends Usuario implements UserDetails  {
 	
+	private static final long serialVersionUID = 1L;
+
 	@NotNull (message = "Estado não pode ficar em branco")
 	private Estado estado;
 	
 	@NotNull @NotBlank(message = "CNPJ não pode ficar em branco")
 	private String CNPJ;
+	
+	@NotNull @NotBlank(message = "Cidade não pode ficar em branco")
+	private String cidade;
 	
 	public Estado getEstado() {
 		return estado;
@@ -31,6 +36,12 @@ public class Kartodromo extends Usuario implements UserDetails  {
 		CNPJ = cNPJ;
 	}
 	
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
 	public Kartodromo() {
 		super();
 	}

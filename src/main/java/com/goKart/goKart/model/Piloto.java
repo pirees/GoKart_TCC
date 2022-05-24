@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,9 @@ public class Piloto extends Usuario implements UserDetails {
 
 	@Column
 	private Estado estado;
+	
+	@NotNull @NotBlank(message = "Cidade não pode ficar em branco")
+	private String cidade;
 	
 	@Column
 	private Nivel nivel;
@@ -46,6 +50,14 @@ public class Piloto extends Usuario implements UserDetails {
 
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
+	}
+	
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 	public Piloto() {

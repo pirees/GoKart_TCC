@@ -3,7 +3,6 @@ package com.goKart.goKart.model;
 import java.util.Collection;
 
 import javax.persistence.Entity;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +11,16 @@ public class Administrador extends Usuario implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private String sobrenome;
+	
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.getPerfis();

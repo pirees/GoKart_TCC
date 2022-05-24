@@ -10,11 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "tb_usuario")
@@ -23,14 +20,10 @@ public abstract class Usuario {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull @NotBlank(message = "Cidade não pode ficar em branco")
-	private String cidade;
-	
 	@Column(unique=true)
 	@NotNull @NotBlank(message = "E-mail não pode ficar em branco")
 	private String email;
 
-	@NotBlank
 	@NotNull @NotBlank(message = "Senha não pode ficar em branco")
 	private String senha;
 	
@@ -47,14 +40,6 @@ public abstract class Usuario {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
 	}
 
 	public String getEmail() {

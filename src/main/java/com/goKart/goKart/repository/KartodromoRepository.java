@@ -10,4 +10,6 @@ import com.goKart.goKart.model.Kartodromo;
 @EnableJpaRepositories
 public interface KartodromoRepository extends JpaRepository<Kartodromo, Long>  {
 
+	Kartodromo findByEmail(String email);
+
 }

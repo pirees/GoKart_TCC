@@ -36,7 +36,6 @@ class AdministradorTest {
 		adm.setEmail("adm@gmail.com");
 		adm.setNome("Administrador");
 		adm.setSenha(encodedPassword);
-		adm.setCidade("Curitiba");
 		adm.setPerfis(perfis);
 		
 		

@@ -1,6 +1,5 @@
 package com.goKart.goKart.controller;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,9 +22,13 @@ public class HomeController {
 		return "/login";
 	}	
 	
-	@RequestMapping("/kartodromos")
+	@RequestMapping("/piloto/kartodromos")
 	public String todosKartodromos() {
-		System.out.println("Acessando a página inicial 2");
+		return "/piloto/kartodromos";
+	}
+	
+	@RequestMapping("/kartodromos")
+	public String todosKartodromosIndex() {
 		return "/kartodromos";
 	}
 }

@@ -4,41 +4,32 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.goKart.goKart.model.Bateria;
 import com.goKart.goKart.model.Kartodromo;
 
 
 public class BateriaDTO {
-
 	
-	//@DateTimeFormat (pattern="dd/MMM/YYYY")
+	@DateTimeFormat (pattern="dd/MM/yyyy")
 	private LocalDate data;
 	
-	//@NotBlank(message = "Hora não pode ficar em branco")
+	@DateTimeFormat (pattern="HH:MM")
 	private LocalTime horaBateria;
 	
-	//@NotEmpty(message = "Número de pilotos não pode ficar em branco")
 	private Integer nrMaxPiloto;
 	
-	//@NotBlank(message = "Traçado não pode ficar em branco")
+	@NotBlank(message = "Traçado não pode ficar em branco")
 	private String tracado;
 	
-	//@NotBlank(message = "Valor não pode ficar em branco")
+	
 	private BigDecimal valorBateria;
 	
 	private Integer vagasDisponiveis;
-	
-	@ManyToOne
-	@JoinColumn(name="kartodromo_id")
-	private Kartodromo kartodromo;
 
+	private Kartodromo kartodromo;
+	
 	public LocalDate getData() {
 		return data;
 	}
@@ -63,14 +54,6 @@ public class BateriaDTO {
 		this.tracado = tracado;
 	}
 
-	public BigDecimal getValorBateria() {
-		return valorBateria;
-	}
-
-	public void setValorBateria(BigDecimal valorBateria) {
-		this.valorBateria = valorBateria;
-	}
-
 	public Integer getNrMaxPiloto() {
 		return nrMaxPiloto;
 	}
@@ -79,6 +62,15 @@ public class BateriaDTO {
 		this.nrMaxPiloto = nrMaxPiloto;
 	}
 
+	public BigDecimal getValorBateria() {
+		return valorBateria;
+	}
+
+	public void setValorBateria(BigDecimal valorBateria) {
+		this.valorBateria = valorBateria;
+	}
+
+	
 	public Integer getVagasDisponiveis() {
 		return vagasDisponiveis;
 	}
@@ -95,8 +87,7 @@ public class BateriaDTO {
 		this.kartodromo = kartodromo;
 	}
 
-	public BateriaDTO(LocalDate data, LocalTime horaBateria, Integer nrMaxPiloto, String tracado, BigDecimal valorBateria,
-			Integer vagasDisponiveis, Kartodromo kartodromo) {
+	public BateriaDTO(LocalDate data,LocalTime horaBateria,Integer nrMaxPiloto,String tracado,BigDecimal valorBateria, Integer vagasDisponiveis,Kartodromo kartodromo) {
 		super();
 		this.data = data;
 		this.horaBateria = horaBateria;
@@ -106,19 +97,18 @@ public class BateriaDTO {
 		this.vagasDisponiveis = vagasDisponiveis;
 		this.kartodromo = kartodromo;
 	}
-	
+
 	public Bateria toBateria() {
 		
-		Bateria bateria = new Bateria();
-		
+		Bateria bateria = new Bateria();		
+						
 		bateria.setData(data);
 		bateria.setHoraBateria(horaBateria);
-		bateria.setKartodromo(kartodromo);
 		bateria.setNrMaxPiloto(nrMaxPiloto);
 		bateria.setTracado(tracado);
-		bateria.setVagasDisponiveis(nrMaxPiloto);
 		bateria.setValorBateria(valorBateria);
-		
+		bateria.setVagasDisponiveis(nrMaxPiloto);
+
 		return bateria;
 	}
 }

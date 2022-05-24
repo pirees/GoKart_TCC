@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,16 +22,17 @@ public class Bateria {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat (pattern="dd/MM/yyyy")
 	private LocalDate data;
+	@DateTimeFormat (pattern="HH:MM")
 	private LocalTime horaBateria;
 	private Integer nrMaxPiloto;
 	private String tracado;
 	private BigDecimal valorBateria;
-	private Integer vagasDisponiveis;
+	private Integer vagasDisponiveis = nrMaxPiloto;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="kartodromo_id")
+	@ManyToOne/*(cascade=CascadeType.PERSIST)*/  (fetch = FetchType.LAZY)
+	@JoinColumn(name="kart_id")
 	private Kartodromo kartodromo;
 	
 	public Long getId() {
@@ -40,6 +41,8 @@ public class Bateria {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	
 	public LocalDate getData() {
 		return data;
 	}
@@ -52,7 +55,6 @@ public class Bateria {
 	public void setHoraBateria(LocalTime horaBateria) {
 		this.horaBateria = horaBateria;
 	}
-
 	public String getTracado() {
 		return tracado;
 	}
@@ -65,19 +67,7 @@ public class Bateria {
 	public void setKartodromo(Kartodromo kartodromo) {
 		this.kartodromo = kartodromo;
 	}
-
-	public BigDecimal getValorBateria() {
-		return valorBateria;
-	}
-	public void setValorBateria(BigDecimal valorBateria) {
-		this.valorBateria = valorBateria;
-	}
-	public Integer getNrMaxPiloto() {
-		return nrMaxPiloto;
-	}
-	public void setNrMaxPiloto(Integer nrMaxPiloto) {
-		this.nrMaxPiloto = nrMaxPiloto;
-	}
+	
 	public Integer getVagasDisponiveis() {
 		return vagasDisponiveis;
 	}
@@ -86,6 +76,18 @@ public class Bateria {
 	}
 	public Bateria() {
 		super();
+	}
+	public Integer getNrMaxPiloto() {
+		return nrMaxPiloto;
+	}
+	public void setNrMaxPiloto(Integer nrMaxPiloto) {
+		this.nrMaxPiloto = nrMaxPiloto;
+	}
+	public BigDecimal getValorBateria() {
+		return valorBateria;
+	}
+	public void setValorBateria(BigDecimal valorBateria) {
+		this.valorBateria = valorBateria;
 	}
 	
 
