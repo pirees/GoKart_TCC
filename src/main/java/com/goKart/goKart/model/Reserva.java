@@ -1,15 +1,16 @@
 package com.goKart.goKart.model;
 
-import javax.persistence.CascadeType;
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tb_reserva")
@@ -18,19 +19,22 @@ public class Reserva {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private int nrReserva = 1;
+	private Integer nrReserva = 1;
+
+	private boolean confirmado = false;
 	
-	private boolean confirmado;
+	@DateTimeFormat (pattern="dd/MM/yyyy")
+	private LocalDate dataReserva;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne/*(cascade=CascadeType.PERSIST)*/
 	@JoinColumn(name="kartodromo_id")
 	private Kartodromo kartodromo;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne/*(cascade=CascadeType.PERSIST)*/
 	@JoinColumn(name="bateria_id")
 	private Bateria bateria;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne/*(cascade=CascadeType.PERSIST)*/
 	@JoinColumn(name="piloto_id")
 	private Piloto piloto;
 
@@ -42,11 +46,11 @@ public class Reserva {
 		this.id = id;
 	}
 
-	public int getNrReserva() {
+	public Integer getNrReserva() {
 		return nrReserva;
 	}
 
-	public void setNrReserva(int nrReserva) {
+	public void setNrReserva(Integer nrReserva) {
 		this.nrReserva = nrReserva;
 	}
 
@@ -54,7 +58,7 @@ public class Reserva {
 		return kartodromo;
 	}
 
-	public void setKartodromo(Kartodromo kartodromo) {
+	public void setKartodromo(Kartodromo kartodromo) { 
 		this.kartodromo = kartodromo;
 	}
 
@@ -80,6 +84,14 @@ public class Reserva {
 
 	public void setConfirmado(boolean confirmado) {
 		this.confirmado = confirmado;
+	}
+
+	public LocalDate getDataReserva() {
+		return dataReserva;
+	}
+
+	public void setDataReserva(LocalDate dataReserva) {
+		this.dataReserva = dataReserva;
 	}
 
 	public Reserva() {

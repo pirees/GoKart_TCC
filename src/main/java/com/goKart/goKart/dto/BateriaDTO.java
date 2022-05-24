@@ -23,7 +23,6 @@ public class BateriaDTO {
 	@NotBlank(message = "Traçado não pode ficar em branco")
 	private String tracado;
 	
-	
 	private BigDecimal valorBateria;
 	
 	private Integer vagasDisponiveis;

@@ -32,7 +32,7 @@ public class Bateria {
 	private Integer vagasDisponiveis = nrMaxPiloto;
 	
 	@ManyToOne/*(cascade=CascadeType.PERSIST)*/  (fetch = FetchType.LAZY)
-	@JoinColumn(name="kart_id")
+	@JoinColumn(name="kartodromo_id")
 	private Kartodromo kartodromo;
 	
 	public Long getId() {

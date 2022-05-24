@@ -33,10 +33,10 @@ class ReservaControllerTest {
 	
 	@BeforeEach
 	public void iniciarClasse() {
-		this.reControl = new ReservaController(reservaRepository);
+		//this.reControl = new ReservaController();
 		this.reserva = new Reserva();
 		this.bateria = new Bateria();
-		
+		 
 	}
 	
 	

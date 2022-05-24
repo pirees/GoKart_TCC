@@ -46,6 +46,9 @@ public class BateriaController {
 	public String listarBaterias(@PathVariable("id") Long id, Model model) {
 		
 		Bateria bateria = bateriaRepository.getById(id);
+		
+		System.out.println("aqui bateria" + bateria.getId() + bateria.getKartodromo().getId());
+		
 		model.addAttribute("bateria", bateria);
 			
 		return "piloto/confirmarReserva";
