@@ -24,7 +24,7 @@
 				<tr th:each="reserva : ${reserva}">
 					<td th:text="${reserva.kartodromo.nome}"></td>
 					<td th:text="${reserva.bateria.horaBateria}"></td>
-					<td th:text="${reserva.bateria.data}"></td>
+					<td th:text="${#temporals.format(reserva.bateria.data, 'dd/MM/yyyy')}"></td>
 					<td th:text="${reserva.bateria.tracado}"></td>
 					<td th:text="${reserva.confirmado}"></td>
 					<td th:text="${reserva.id}"></td>

@@ -10,34 +10,36 @@
 		<div class="container p-5">
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 			<div class="d-flex justify-content-between mb-3">
-				<form class="row g-3" method="POST" th:action="@{/kartodromo/cadastroBateria}" th:object="${bateriaDTO}">
+				<form class="row g-3" method="POST" th:action="@{/kartodromo/cadastroBateria}" th:object="${bateria}">
 					<div class="row p-2">
 						<div class="col">
 		    				<label for="data" class="form-label">Data</label>
-		    				<input type="text" class="form-control" id="data"th:field="*{data}">
-		    				<small class="text-muted">e.x "DD/MM/YYYY"</small>
+		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="data"th:field="*{data}">
+		    				<span th:if="${#fields.hasErrors('data')}" class="text-danger" th:errors="*{data}"></span> 
+		    				<small class="text-muted">E.x "DD/MM/YYYY"</small>
 		  				</div>
 		  				<div class="col">
 		    				<label for="horaBateria" class="form-label">Hora da Bateria</label>
-		    				<input type="time" class="form-control" id="horaBateria" th:field="*{horaBateria}">
+		    				<input type="time" class="form-control" th:errorclass="is-invalid" id="horaBateria" th:field="*{horaBateria}">
+		    				<span th:if="${#fields.hasErrors('horaBateria')}" class="text-danger" th:errors="*{horaBateria}"></span> 
 		  				</div>
 		  				<div class="col">
 		    				<label for="tracado" class="form-label">Traçado</label>
-		    				<input type="text" class="form-control" id="tracado" th:field="*{tracado}">
+		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="tracado" th:field="*{tracado}">
 		    				<span th:if="${#fields.hasErrors('tracado')}" class="text-danger" th:errors="*{tracado}"></span> 
-		    				<small class="text-muted">e.x "Original"</small>
+		    				<small class="text-muted">E.x "Original"</small>
 		  				</div>
 		  				<div class="col">
 		    				<label for="valorBateria" class="form-label">Valor da Bateria (R$)</label>
-		    				<input  type="text" class="form-control" id="valorBateria" th:field="*{valorBateria}">
+		    				<input  type="text" class="form-control" th:errorclass="is-invalid" id="valorBateria" th:field="*{valorBateria}">
 		    				<span th:if="${#fields.hasErrors('valorBateria')}" class="text-danger" th:errors="*{valorBateria}"></span> 
-		    				<small class="text-muted">e.x "90.00"</small>
+		    				<small class="text-muted">E.x "90.00"</small>
 		  				</div>
 		  				<div class="col">
 				    		<label for="nrMaxPiloto" class="form-label">Números de Pilotos</label>
-				    		<input type="text" class="form-control" id="nrMaxPiloto" th:field="*{nrMaxPiloto}">
+				    		<input type="text" class="form-control" th:errorclass="is-invalid" id="nrMaxPiloto" th:field="*{nrMaxPiloto}">
 				    		<span th:if="${#fields.hasErrors('nrMaxPiloto')}" class="text-danger" th:errors="*{nrMaxPiloto}"></span> 
-				    		<small class="text-muted">e.x "10"</small>
+				    		<small class="text-muted">E.x "10"</small>
 						</div>
 		  			</div>
 		  			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>

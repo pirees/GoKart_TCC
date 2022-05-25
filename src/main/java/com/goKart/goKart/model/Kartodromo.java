@@ -17,10 +17,10 @@ public class Kartodromo extends Usuario implements UserDetails  {
 	@NotNull (message = "Estado não pode ficar em branco")
 	private Estado estado;
 	
-	@NotNull @NotBlank(message = "CNPJ não pode ficar em branco")
+	@NotBlank(message = "CNPJ não pode ficar em branco")
 	private String CNPJ;
-	
-	@NotNull @NotBlank(message = "Cidade não pode ficar em branco")
+
+	@NotBlank(message = "Cidade não pode ficar em branco")
 	private String cidade;
 	
 	public Estado getEstado() {

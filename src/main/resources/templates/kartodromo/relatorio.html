@@ -16,13 +16,15 @@
 					<th scope="col">Nome</th>
 					<th scope="col">E-mail</th>
 					<th scope="col">Cidade</th>
+					<th scope="col">Última reserva</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="piloto : ${pilotos}">
-					<td th:text="${piloto.nome}"></td>
-					<td th:text="${piloto.email}"></td>
-					<td th:text="${piloto.cidade}"></td>
+				<tr th:each="reserva : ${reservas}">
+					<td th:text="${reserva.piloto.nome}"></td>
+					<td th:text="${reserva.piloto.email}"></td>
+					<td th:text="${reserva.piloto.cidade}"></td>
+					<td th:text="${#temporals.format(reserva.dataReserva, 'dd/MM/yyyy')}"></td>
 				</tr>
 			</tbody>
 		</table>

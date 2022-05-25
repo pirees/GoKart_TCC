@@ -1,8 +1,6 @@
 package com.goKart.goKart.model;
 
 import java.util.Collection;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,21 +8,22 @@ import javax.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.goKart.goKart.repository.PilotoRepository;
+
 @Entity
 public class Piloto extends Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column
+	@NotNull (message = "Estado não pode ficar em branco")
 	private Estado estado;
 	
-	@NotNull @NotBlank(message = "Cidade não pode ficar em branco")
+	@NotBlank(message = "Cidade não pode ficar em branco")
 	private String cidade;
 	
-	@Column
+	@NotNull (message = "Estado não pode ficar em branco")
 	private Nivel nivel;
 	
-	@Column
 	@NotBlank(message = "Sobrenome não pode ficar em branco")
 	private String sobrenome;
 
@@ -62,6 +61,14 @@ public class Piloto extends Usuario implements UserDetails {
 
 	public Piloto() {
 		super();
+	}
+	
+	public Piloto atualizarNivel (String email, PilotoRepository pilotoRepository) {
+		
+		Piloto piloto = pilotoRepository.findByEmail(email);
+		piloto.setNivel(this.nivel);
+		pilotoRepository.save(piloto);
+		return piloto;
 	}
 	
 	@Override

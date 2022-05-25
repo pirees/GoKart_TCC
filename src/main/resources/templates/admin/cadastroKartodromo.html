@@ -8,26 +8,29 @@
 <body>
 	<div class="container p-5">
 			<div class="d-flex justify-content-between mb-3">
-				<form class="row g-3" method="POST" th:action="@{/admin/cadastroKartodromo}" th:object="${kartodromoDTO}">
+				<form class="row g-3" method="POST" th:action="@{/admin/cadastroKartodromo}" th:object="${kartodromo}">
 					<div class="row p-2">
 						<div class="col">
 		    				<label for="nome" class="form-label">Nome</label>
-		    				<input type="text" class="form-control" id="nome" th:field="*{nome}">
+		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="nome" th:field="*{nome}">
+		    				<span th:if="${#fields.hasErrors('nome')}" class="text-danger" th:errors="*{nome}"></span> 
 		  				</div>
 		  				<div class="col">
 		    				<label for="email" class="form-label">E-mail</label>
-		    				<input  type="text" class="form-control" id="email" th:field="*{email}">
-		    				
+		    				<input type="email" class="form-control" th:errorclass="is-invalid" id="email" th:field="*{email}">
+		    				<span th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></span>
 		  				</div>
+		  				<div class="row p-2">
 		  				<div class="col">
 		    				<label for="senha" class="form-label">Senha</label>
-		    				<input type="password" class="form-control" id="tracado" th:field="*{senha}">
+		    				<input type="password" class="form-control" th:errorclass="is-invalid" id="senha" th:field="*{senha}">
 		    				<span th:if="${#fields.hasErrors('senha')}" class="text-danger" th:errors="*{senha}"></span> 
 		  				</div>
 		  				<div class="col">
 				    		<label for="CNPJ" class="form-label">CNPJ</label>
-				    		<input type="text" class="form-control" id="nrMaxPiloto" th:field="*{CNPJ}">
+				    		<input type="text" class="form-control" th:errorclass="is-invalid" id="nrMaxPiloto" th:field="*{CNPJ}">
 				    		<span th:if="${#fields.hasErrors('CNPJ')}" class="text-danger" th:errors="*{CNPJ}"></span> 
+				    		<small class="text-muted">E.x "99.999.999/9999-99"</small>
 						</div>
 						<div class="col">
 				    		<label for="inputCity" class="form-label">Cidade</label>
@@ -43,7 +46,7 @@
 							      	th:text="${estado}"> </option>
 				    		</select>
 				 		</div>
-
+				 		</div>
 		  			</div>
 		  			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 				 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">

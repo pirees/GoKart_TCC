@@ -3,6 +3,8 @@ package com.goKart.goKart.model;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,6 +13,7 @@ public class Administrador extends Usuario implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@NotBlank(message = "Sobrenome não pode ficar em branco")
 	private String sobrenome;
 	
 	public String getSobrenome() {

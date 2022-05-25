@@ -5,63 +5,60 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.goKart.goKart.dto.KartodromoDTO;
 import com.goKart.goKart.model.Kartodromo;
 import com.goKart.goKart.model.Perfil;
-import com.goKart.goKart.model.Piloto;
 import com.goKart.goKart.repository.KartodromoRepository;
 import com.goKart.goKart.repository.PerfilRepository;
-import com.goKart.goKart.repository.UsuarioRepository;
 
 @Controller
 public class KartodromoController{
 	
 	private KartodromoRepository kartodromoRepository;
 	
-	@Autowired
 	private PerfilRepository perfilRepository;
 	
-	private UsuarioRepository usuarioRepository;
+	private UsuarioController usuarioController;
 	
-	public KartodromoController(KartodromoRepository kartodromoRepository, UsuarioRepository usuarioRepository) {
-		super();
+	public KartodromoController(KartodromoRepository kartodromoRepository, PerfilRepository perfilRepository,
+			UsuarioController usuarioController) {
 		this.kartodromoRepository = kartodromoRepository;
-		this.usuarioRepository = usuarioRepository;
+		this.perfilRepository = perfilRepository;
+		this.usuarioController = usuarioController;
 	}
-	
+
 	@GetMapping("admin/cadastroKartodromo")
-	public String formulario(KartodromoDTO kartodromoDTO) {	
+	public String formulario(Kartodromo kartodromo) {	
 		return "admin/cadastroKartodromo";
 	}
 
 	@PostMapping ("admin/cadastroKartodromo")
-	public String salvarKartodromo( KartodromoDTO kartodromoDTO,BindingResult resultado){
+	public String salvarKartodromo(@Valid Kartodromo kartodromo,BindingResult resultado, String email) throws Exception{
 		
-		/*if(resultado.hasErrors()) {
+		if(resultado.hasErrors()) {			
 			return "admin/cadastroKartodromo";
-		}*/
-		//UsuarioController userControl = new UsuarioController(usuarioRepository);
+		}
 		
-		//userControl.verificaCadastro(kartodromo.getEmail());
-		
-		Kartodromo kartodromo = kartodromoDTO.toKartodromo();
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(kartodromo.getSenha());
 		
 		Perfil perfil = perfilRepository.findByNome("KARTODROMO");
 		List<Perfil> perfis = new ArrayList<Perfil>();
 		perfis.add(perfil);	
-		
 		kartodromo.setPerfis(perfis);
+		kartodromo.setSenha(encodedPassword);
+		
+		usuarioController.verificaCadastro(email);
 		
 		kartodromoRepository.save(kartodromo);
 		
-		return "redirect:/admin/cadastroKartodromo";
+		return "redirect:/admin/menuAdmin";
 	}
 	
 	@GetMapping("admin/todosKartodromos")

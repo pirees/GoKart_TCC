@@ -18,8 +18,6 @@ class AdministradorTest {
 	private AdministradorRepository  administradorRepository;
 	@Autowired
 	private PerfilRepository perfilRepository;
-	
-	
 
 	@Test
 	void salvarUmAdministrador() {

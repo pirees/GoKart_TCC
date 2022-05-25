@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,16 +24,27 @@ public class Bateria {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotNull(message = "Data não pode ficar em branco")
 	@DateTimeFormat (pattern="dd/MM/yyyy")
 	private LocalDate data;
+	
+	@NotNull(message = "Hora da bateria não pode ficar em branco")
 	@DateTimeFormat (pattern="HH:MM")
 	private LocalTime horaBateria;
-	private Integer nrMaxPiloto;
-	private String tracado;
-	private BigDecimal valorBateria;
-	private Integer vagasDisponiveis = nrMaxPiloto;
 	
-	@ManyToOne/*(cascade=CascadeType.PERSIST)*/  (fetch = FetchType.LAZY)
+	@NotNull(message = "Número de pilotos não pode ficar em branco")
+	private Integer nrMaxPiloto;
+	
+	@NotBlank(message = "Traçado não pode ficar em branco")
+	private String tracado;
+	
+	@NotNull(message = "Valor não pode ficar em branco")
+	private BigDecimal valorBateria;
+
+	private Integer vagasDisponiveis;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="kartodromo_id")
 	private Kartodromo kartodromo;
 	
@@ -41,7 +54,6 @@ public class Bateria {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 	
 	public LocalDate getData() {
 		return data;
@@ -74,9 +86,7 @@ public class Bateria {
 	public void setVagasDisponiveis(Integer vagasDisponiveis) {
 		this.vagasDisponiveis = vagasDisponiveis;
 	}
-	public Bateria() {
-		super();
-	}
+	
 	public Integer getNrMaxPiloto() {
 		return nrMaxPiloto;
 	}
@@ -90,5 +100,8 @@ public class Bateria {
 		this.valorBateria = valorBateria;
 	}
 	
+	public Bateria() {
+		super();
+	}
 
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.goKart.goKart.dto.BateriaDTO;
 import com.goKart.goKart.model.Bateria;
 import com.goKart.goKart.model.Kartodromo;
 import com.goKart.goKart.repository.BateriaRepository;
@@ -46,21 +45,19 @@ public class BateriaController {
 	public String listarBaterias(@PathVariable("id") Long id, Model model) {
 		
 		Bateria bateria = bateriaRepository.getById(id);
-		
-		System.out.println("aqui bateria" + bateria.getId() + bateria.getKartodromo().getId());
-		
+			
 		model.addAttribute("bateria", bateria);
 			
 		return "piloto/confirmarReserva";
 	}
 	
 	@GetMapping("kartodromo/cadastroBateria")
-	public String formulario(BateriaDTO bateriaDTO) {
+	public String formulario(Bateria bateria) {
 		return "kartodromo/cadastroBateria";
 	}
 	
 	@PostMapping ("kartodromo/cadastroBateria")
-	public String salvarBateria(@Valid BateriaDTO bateriaDTO, BindingResult resultado) {
+	public String salvarBateria(@Valid Bateria bateria, BindingResult resultado) {
 		
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
@@ -68,10 +65,9 @@ public class BateriaController {
 		if(resultado.hasErrors()) {
 			return "kartodromo/cadastroBateria";
 		}
-		
-		Bateria bateria = bateriaDTO.toBateria();
-		
+				
 		bateria.setKartodromo(kartodromo);
+		bateria.setVagasDisponiveis(bateria.getNrMaxPiloto());
 		
 		bateriaRepository.save(bateria);
 		

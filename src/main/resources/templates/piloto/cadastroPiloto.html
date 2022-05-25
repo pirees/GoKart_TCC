@@ -2,15 +2,14 @@
 <html xmlns:th="http://thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  lang="pt-br">
-	<head th:replace="~{baseCadastroPiloto :: head}">
-		<div class="container">
-			<header th:replace="~{baseCadastroPiloto :: header}"></header>
-		</div>
-	</head>	
+<head th:replace="~{baseCadastroPiloto :: head}"></head>	
+	<div class="container">
+		<header th:replace="~{baseCadastroPiloto :: header}"></header>
+	</div>
 	<body>
 		<div class="container p-5">
 			<div class="d-flex justify-content-between mb-3">
-				<form class="row g-3" method="POST" th:action="@{/piloto/cadastroPiloto}" th:object="${pilotoDTO}">
+				<form class="row g-3" method="POST" th:action="@{/piloto/cadastroPiloto}" th:object="${piloto}">
 					<div class="row p-2">
 						<div class="col">
 		    				<label for="Nome" class="form-label">Nome</label>
