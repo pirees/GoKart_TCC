@@ -24,6 +24,14 @@
 		    				<span th:if="${#fields.hasErrors('horaBateria')}" class="text-danger" th:errors="*{horaBateria}"></span> 
 		  				</div>
 		  				<div class="col">
+		    				<label for="duracaoBateria" class="form-label">Duração da bateria (MIN)</label>
+		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="duracaoBateria" th:field="*{duracaoBateria}">
+		    				<span th:if="${#fields.hasErrors('duracaoBateria')}" class="text-danger" th:errors="*{duracaoBateria}"></span> 
+		    				<small class="text-muted">E.x "30"</small>
+		  				</div>
+		  				</div>
+		  				<div class="row p-1">
+		  				<div class="col">
 		    				<label for="tracado" class="form-label">Traçado</label>
 		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="tracado" th:field="*{tracado}">
 		    				<span th:if="${#fields.hasErrors('tracado')}" class="text-danger" th:errors="*{tracado}"></span> 
@@ -41,13 +49,14 @@
 				    		<span th:if="${#fields.hasErrors('nrMaxPiloto')}" class="text-danger" th:errors="*{nrMaxPiloto}"></span> 
 				    		<small class="text-muted">E.x "10"</small>
 						</div>
-		  			</div>
+		  			
 		  			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 				 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 				 	<a th:href="@{/kartodromo/menuKartodromo}">
 				    	<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
 				    	</a>
-					</div>  						
+					</div>  
+					</div>						
 				</form>
 			</div>
 		</div>

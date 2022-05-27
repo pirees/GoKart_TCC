@@ -21,7 +21,9 @@ public class Reserva {
 	
 	private Integer nrReserva = 1;
 
-	private boolean confirmado = false;
+	//private boolean confirmado = false;
+	
+	private StatusPagamento status;
 	
 	@DateTimeFormat (pattern="dd/MM/yyyy")
 	private LocalDate dataReserva;
@@ -78,16 +80,24 @@ public class Reserva {
 		this.piloto = piloto;
 	}
 
-	public boolean isConfirmado() {
+	/*public boolean isConfirmado() {
 		return confirmado;
 	}
 
 	public void setConfirmado(boolean confirmado) {
 		this.confirmado = confirmado;
-	}
-
+	}*/
+	
 	public LocalDate getDataReserva() {
 		return dataReserva;
+	}
+
+	public StatusPagamento getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusPagamento status) {
+		this.status = status;
 	}
 
 	public void setDataReserva(LocalDate dataReserva) {

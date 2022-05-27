@@ -49,7 +49,7 @@ class ReservaTest {
 	reserva.setBateria(bateria);
 	reserva.setKartodromo(kartodromo);
 	reserva.setPiloto(piloto);
-	reserva.setConfirmado(true);
+	//reserva.setConfirmado(true);
 	
 	//ReservaController reservaControl = new ReservaController();
 	
@@ -62,7 +62,7 @@ class ReservaTest {
 	
 	//newVagas = reserva.getBateria().getVagasDisponiveis();
 	
-	System.out.println("Número atualizado de vagas " + reserva.getBateria().getNrMaxPiloto() + " || " + reserva.getBateria().getVagasDisponiveis());
+	//System.out.println("Número atualizado de vagas " + reserva.getBateria().getNrMaxPiloto() + " || " + reserva.getBateria().getVagasDisponiveis());
 	
 	//reservaRepository.save(reserva);
 	

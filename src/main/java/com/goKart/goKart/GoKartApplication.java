@@ -9,5 +9,4 @@ public class GoKartApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GoKartApplication.class, args);
 	}
-
 }

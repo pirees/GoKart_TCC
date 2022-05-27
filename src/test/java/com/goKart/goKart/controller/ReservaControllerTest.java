@@ -73,7 +73,7 @@ class ReservaControllerTest {
 		reserva.setBateria(bateria);
 		reserva.setKartodromo(kartodromo);
 		reserva.setPiloto(piloto);
-		reserva.setConfirmado(true);
+		//reserva.setConfirmado(true);
 		
 		
 		

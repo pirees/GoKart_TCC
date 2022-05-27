@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="pt-br">
+<head th:replace="~{baseKartodromo :: head}"></head>
+<div class="container">
+	<header th:replace="~{baseKartodromo :: header}"></header>
+</div>
+<body>
+	<div class="container p-5">
+		<h3>Baterias cadastradas até o momento</h3>
+		<a th:href="@{listaBaterias/exports/csv}"> <i class="fa-solid fa-file-csv btn-lg btn-dark"></i></a>
+		<table class="table table-striped text-center">
+			<thead>
+				<tr>
+					<th scope="col">Data</th>
+					<th scope="col">Hora</th>
+					<th scope="col">Valor (R$)</th>
+					<th scope="col">Vagas preenchidas</th>
+					<th scope="col">Total (R$)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="bateria : ${baterias}">
+					<td th:text="${#temporals.format(bateria.data, 'dd/MM/yyyy')}"></td>
+					<td th:text="${bateria.horaBateria}"></td>
+					<td th:text="${#numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></td>
+					<td th:text="${bateria.vagasConfirmadas}"></td>
+					<td th:text="${#numbers.formatDecimal(bateria.vagasConfirmadas * bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+<div class="container">
+	<footer th:replace="~{baseKartodromo :: footer}" class="py-5"></footer>
+</div>
+</html>

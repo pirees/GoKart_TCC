@@ -52,8 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.antMatchers("/kartodromo/**").hasAnyAuthority("KARTODROMO")
 		.antMatchers("/piloto/**").hasAnyAuthority("PILOTO")
 		.and()
-		//.exceptionHandling().accessDeniedPage("/auth/auth-acesso-negado")
-		//.and()
+		.exceptionHandling().accessDeniedPage("/semPermissao")
+		.and()
 		
 		.formLogin().successHandler(loginSucesso)
 		.loginPage("/login").permitAll()

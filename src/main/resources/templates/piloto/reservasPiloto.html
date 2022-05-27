@@ -14,20 +14,22 @@
 		<table class="table table-striped text-center">
 			<thead>
 				<tr>
+					<th scope="col">Número Reserva</th>
 					<th scope="col">Kartódromo</th>
 					<th scope="col">Horário</th>
 					<th scope="col">Data</th>
 					<th scope="col">Traçado</th>
+					<th scope="col">Pagamento</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="reserva : ${reserva}">
+					<td th:text="${reserva.id}"></td>
 					<td th:text="${reserva.kartodromo.nome}"></td>
 					<td th:text="${reserva.bateria.horaBateria}"></td>
 					<td th:text="${#temporals.format(reserva.bateria.data, 'dd/MM/yyyy')}"></td>
 					<td th:text="${reserva.bateria.tracado}"></td>
-					<td th:text="${reserva.confirmado}"></td>
-					<td th:text="${reserva.id}"></td>
+					<td th:text="${reserva.status}"></td>
 				</tr>
 			</tbody>
 		</table>

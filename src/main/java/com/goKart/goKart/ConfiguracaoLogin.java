@@ -11,7 +11,7 @@ public class ConfiguracaoLogin implements WebMvcConfigurer{
 		registry.addViewController("/admin/menuAdmin").setViewName("/admin/menuAdmin");
 		registry.addViewController("/piloto/menuPiloto").setViewName("/piloto/menuPiloto");
 		registry.addViewController("/kartodromo/menuKartodromo").setViewName("/kartodromo/menuKartodromo");
-		//registry.addViewController("/auth/auth-acesso-negado").setViewName("/auth/auth-acesso-negado");
+		registry.addViewController("/semPermissao").setViewName("/semPermissao");
 	}
 
 }

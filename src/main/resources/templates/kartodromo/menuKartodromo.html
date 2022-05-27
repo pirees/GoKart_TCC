@@ -16,29 +16,26 @@
 						</h5>
 						<div class="card-text">
 							<div>
-								Valor: R$ <span th:text="${bateria.valorBateria}">200,99</span>
+								Valor: <span th:text="${'R$' + #numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}">200,99</span>
 							</div>
 							<div>
 								Traçado: <span th:text="${bateria.tracado}">Externo A</span>
 							</div>
 							<div>
-								Data: <span th:text="${bateria.data}">16:00</span>
+								Data: <span th:text="${#temporals.format(bateria.data, 'dd/MM/yyyy')}">16:00</span>
 							</div>
 							<div>
 								Horário: <span th:text="${bateria.horaBateria}">16:00</span>
 							</div>
 							<div>
-								Vagas Disponíveis: <span th:text="${bateria.nrMaxPiloto}">10</span>
+								Duracao: <span th:text="${bateria.duracaoBateria + ' minutos'}">16:00</span>
 							</div>
 							<div>
-								Limite de pilotos: <span>10</span>
+								Pilotos confirmados: <span th:text="${bateria.vagasConfirmadas}">10</span>
 							</div>
-						</div>
-						<div class=" text-end">
-							<a
-								th:href="@{/piloto/confirmarReserva/{id}(id = ${bateria.id}) }">
-								<button type="button" class="btn btn-outline-dark">Reservar</button>
-							</a>
+							<div>
+								Limite de pilotos: <span th:text="${bateria.nrMaxPiloto}">10</span>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.goKart.goKart.repository.KartodromoRepository;
+
 @Entity
 public class Kartodromo extends Usuario implements UserDetails  {
 	
@@ -42,6 +44,7 @@ public class Kartodromo extends Usuario implements UserDetails  {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+	
 	public Kartodromo() {
 		super();
 	}
@@ -81,6 +84,14 @@ public class Kartodromo extends Usuario implements UserDetails  {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	
+	public Kartodromo atualizarEmail (String email, KartodromoRepository kartodromoRepository) {
+		
+		Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
+		kartodromo.setEmail(this.getEmail());
+		kartodromoRepository.save(kartodromo);
+		return kartodromo;
 	}
 
 }

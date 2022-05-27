@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +29,7 @@ public class Bateria {
 	private LocalDate data;
 	
 	@NotNull(message = "Hora da bateria não pode ficar em branco")
-	@DateTimeFormat (pattern="HH:MM")
+	@DateTimeFormat (pattern="HH:mm")
 	private LocalTime horaBateria;
 	
 	@NotNull(message = "Número de pilotos não pode ficar em branco")
@@ -41,10 +40,13 @@ public class Bateria {
 	
 	@NotNull(message = "Valor não pode ficar em branco")
 	private BigDecimal valorBateria;
-
-	private Integer vagasDisponiveis;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@NotBlank(message = "Duração da bateria não pode ficar em branco")
+	private String duracaoBateria;
+
+	private Integer vagasConfirmadas = 0;
+	
+	@ManyToOne
 	@JoinColumn(name="kartodromo_id")
 	private Kartodromo kartodromo;
 	
@@ -80,13 +82,12 @@ public class Bateria {
 		this.kartodromo = kartodromo;
 	}
 	
-	public Integer getVagasDisponiveis() {
-		return vagasDisponiveis;
+	public Integer getVagasConfirmadas() {
+		return vagasConfirmadas;
 	}
-	public void setVagasDisponiveis(Integer vagasDisponiveis) {
-		this.vagasDisponiveis = vagasDisponiveis;
+	public void setVagasConfirmadas(Integer vagasConfirmadas) {
+		this.vagasConfirmadas = vagasConfirmadas;
 	}
-	
 	public Integer getNrMaxPiloto() {
 		return nrMaxPiloto;
 	}
@@ -99,7 +100,13 @@ public class Bateria {
 	public void setValorBateria(BigDecimal valorBateria) {
 		this.valorBateria = valorBateria;
 	}
-	
+
+	public String getDuracaoBateria() {
+		return duracaoBateria;
+	}
+	public void setDuracaoBateria(String duracaoBateria) {
+		this.duracaoBateria = duracaoBateria;
+	}
 	public Bateria() {
 		super();
 	}
