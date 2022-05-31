@@ -4,7 +4,8 @@ public enum StatusPagamento {
 
 	CONFIRMADO("Confirmado"),
     NCONFIRMADO("Não confirmado"),
-	DEVOLVIDO("Devolvido");
+	DEVOLVIDO("Devolvido"),
+	REJEITADO("Rejeitado");
 	
 	private String StatusPagamento;
 

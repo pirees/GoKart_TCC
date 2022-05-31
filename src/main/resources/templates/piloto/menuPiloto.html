@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="pt-br">
-<head th:replace="~{basePiloto :: head}">
-</head>
+<head th:replace="~{basePiloto :: head}"></head>
 <div class="container">
 	<header th:replace="~{basePiloto :: header}"></header>
 </div>
@@ -27,6 +26,9 @@
 							</div>
 							<div>
 								Horário: <span th:text="${bateria.horaBateria}">16:00</span>
+							</div>
+							<div>
+								Duração: <span th:text="${bateria.duracaoBateria + ' minutos'}">10</span>
 							</div>
 							<div>
 								Pilotos confirmados: <span th:text="${bateria.vagasConfirmadas}">10</span>

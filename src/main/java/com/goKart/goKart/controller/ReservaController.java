@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.goKart.goKart.dto.PaymentResponseDTO;
 import com.goKart.goKart.excel.ReservaExcel;
 import com.goKart.goKart.model.Bateria;
 import com.goKart.goKart.model.Kartodromo;
@@ -74,27 +75,29 @@ public class ReservaController {
 	}
 
 
-	@PostMapping("piloto/confirmarReserva/{id}")
+	/*@PostMapping("piloto/confirmarReserva/{id}")
 	public String salvarReserva(@PathVariable Long id, Reserva reserva) throws Exception {
 		
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Piloto piloto = pilotoRepository.findByEmail(email);
 		
 		Bateria bateria = bateriaRepository.getById(id);
-		
-		reserva.setStatus(StatusPagamento.NCONFIRMADO);
+				
+		reserva.setStatus(StatusPagamento.CONFIRMADO);
 		reserva.setBateria(bateria);
 		reserva.setPiloto(piloto);
 		reserva.setKartodromo(reserva.getBateria().getKartodromo());
 		reserva.setDataReserva(LocalDate.now());
 		
-		atulizarVagasDisponiveis(reserva);
+		//atulizarVagasDisponiveis(reserva);
 		//verificaPilotoCadastrado(reserva,piloto);
 		
-		reservaRepository.save(reserva);
+		if(p.getStatus() == "approved") {
+			reservaRepository.save(reserva);
+		}
 
-		return "redirect:/piloto/menuPiloto";
-	}
+		return "/piloto/process_payment";
+	}*/
 	
 	public Reserva atulizarVagasDisponiveis(Reserva reserva) {
 					
@@ -149,5 +152,30 @@ public class ReservaController {
 		reservaExcel.export(response);
 	
 	}
+
+	
+	/*@PostMapping("piloto/confirmarPagamento/{id}")
+	public String salvarReserva1(@PathVariable Long id, Reserva reserva) throws Exception {
+		
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Piloto piloto = pilotoRepository.findByEmail(email);
+		
+		Bateria bateria = bateriaRepository.getById(id);
+		
+		System.out.println("aqui " + reserva.getBateria().getId());
+		
+		reserva.setStatus(StatusPagamento.NCONFIRMADO);
+		reserva.setBateria(bateria);
+		reserva.setPiloto(piloto);
+		reserva.setKartodromo(reserva.getBateria().getKartodromo());
+		reserva.setDataReserva(LocalDate.now());
+		
+		//atulizarVagasDisponiveis(reserva);
+		//verificaPilotoCadastrado(reserva,piloto);
+		
+		reservaRepository.save(reserva);
+
+		return "piloto/confirmarPagamento";
+	}*/
 
 }

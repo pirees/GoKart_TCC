@@ -23,7 +23,8 @@ public interface BateriaRepository extends JpaRepository<Bateria, Long>  {
 	@Query("SELECT p FROM Bateria p WHERE p.data BETWEEN CURRENT_DATE() AND CURRENT_DATE() +1 and p.kartodromo.id = :id ORDER BY p.data ASC")
 	List<Bateria> findByDateKartodromoId(Long id);
 
-	@Query("SELECT p FROM Bateria p WHERE p.data BETWEEN CURRENT_DATE() AND CURRENT_DATE() +1")
+	//@Query("SELECT p FROM Bateria p WHERE p.data BETWEEN CURRENT_DATE() AND CURRENT_DATE() +1")
+	@Query("SELECT p FROM Bateria p WHERE p.data = CURRENT_DATE()")
 	Page<Bateria> findByData(Pageable pageable);
 
 }

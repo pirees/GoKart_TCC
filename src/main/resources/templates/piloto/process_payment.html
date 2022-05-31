@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{basePagamento :: head}"></head>
+<div class="container">
+	<header th:replace="~{basePagamento :: header}"></header>
+</div>
+<body>
+<main>
+    <input type="hidden" id="mercado-pago-public-key" th:value="TEST-3d40f433-f405-48ae-aa0d-93735b8a3955" />
+    <!-- Shopping Cart -->
+    <section class="shopping-cart dark">
+        <div class="container container__cart">
+            <div class="block-heading">
+                <h2>Carrinho de Compras</h2>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                        <div class="items">
+                            <div class="product">
+                                <div class="info">
+                                    <div class="product-details">
+                                        <div class="row justify-content-md-center">
+                                            <div class="col-md-3">
+                                                <img class="img-fluid mx-auto d-block image" th:src="@{/images/Teste2.png}">
+                                            </div>
+                                            <div class="col-md-4 product-detail">
+                                                <h5>Produto</h5>
+                                                <div class="product-info">
+                                                    <p><b>Descrição: </b><span id="product-description">Corrida de Kart</span><br>
+														<b>Preço:</b> R$ <span  id="unit-price" th:text="${#numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></span></p>
+													    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 product-detail">
+                                                <label for="quantity"><h5>Quantidade</h5></label>
+                                                <input type="number" id="quantity" value="1" min="1" class="form-control" disabled readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-4">
+                        <div class="summary">
+                            <h3>Carrinho</h3>
+                            <div class="summary-item"><span class="text">Total</span><span class="price" id="cart-total"></span></div>
+                            <button class="btn btn-primary btn-lg btn-block" id="checkout-btn">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Payment -->
+    <section class="payment-form dark">
+        <div class="container__payment">
+            <div class="block-heading">
+                <h2>Pagamento com cartão de crédito</h2>
+            </div>
+            <div class="form-payment">
+                <div class="products">
+                    <h2 class="title">Resumo</h2>
+                    <div class="item">
+                        <span class="price" id="summary-price"></span>
+                        <p class="item-name">Reserva x <span id="summary-quantity"></span></p>
+                    </div>
+                    <div class="total">Total<span class="price" id="summary-total"></span></div>
+                </div>
+                <div class="payment-details">
+                    <form id="form-checkout" method="POST" th:action="@{/piloto/process_payment/{id}(id = ${bateria.id})}" th:object="${reserva}">
+                        <h3 class="title">Detalhes do Comprador</h3>
+                        <div class="row">
+                            <div class="form-group col">
+                                <input id="form-checkout__cardholderEmail" name="cardholderEmail" type="email" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-5">
+                                <select id="form-checkout__identificationType" name="identificationType" class="form-control"></select>
+                            </div>
+                            <div class="form-group col-sm-7">
+                                <input id="form-checkout__identificationNumber" name="docNumber" type="text" class="form-control"/>
+                            </div>
+                        </div>
+                        <br>
+                        <h3 class="title">Detalhes do Cartão</h3>
+                        <div class="row">
+                            <div class="form-group col-sm-8">
+                                <input id="form-checkout__cardholderName" name="cardholderName" type="text" class="form-control"/>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <div class="input-group expiration-date">
+                                    <input id="form-checkout__cardExpirationMonth" name="cardExpirationMonth" type="text" class="form-control"/>
+                                    <span class="date-separator">/</span>
+                                    <input id="form-checkout__cardExpirationYear" name="cardExpirationYear" type="text" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-8">
+                                <input id="form-checkout__cardNumber" name="cardNumber" type="text" class="form-control"/>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input id="form-checkout__securityCode" name="securityCode" type="text" class="form-control"/>
+                            </div>
+                            <div id="issuerInput" class="form-group col-sm-12 hidden">
+                                <select id="form-checkout__issuer" name="issuer" class="form-control"></select>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <select id="form-checkout__installments" name="installments" type="text" class="form-control"></select>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <input type="hidden" id="amount" />
+                                <input type="hidden" id="description" />
+                                <br>
+                                <a th:href="@{/piloto/process_payment/ + ${bateria.id}}"> 
+                                <button id="form-checkout__submit" type="submit" class="btn btn-primary btn-block">Pagar</button></a>
+                                <br>
+                                <p id="loading-message">Carregando, aguarde um instante</p>
+                                <br>
+                                <a id="go-back">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 10 10" class="chevron-left">
+                                        <path fill="#009EE3" fill-rule="nonzero"id="chevron_left" d="M7.05 1.4L6.2.552 1.756 4.997l4.449 4.448.849-.848-3.6-3.6z"></path>
+                                    </svg>
+                                    Voltar para o carrinho
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Result -->
+    <section class="shopping-cart dark">
+        <div class="container container__result">
+            <div class="block-heading">
+                <h2>Resultado do Pagamento</h2>
+                <p>Mercado Pago integration</p>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="items product info product-details">
+                            <div class="row justify-content-md-center">
+                                <div class="col-md-4 product-detail">
+                                    <div class="product-info">
+                                        <div id="fail-response">
+                                            <br/>
+                                            <img th:src="@{/img/fail.png}" width="350px">
+                                            <p class="text-center font-weight-bold">Erro, por favor entre em contato com o suporte</p>
+                                            <p id="error-message" class="text-center"></p>
+                                            <br/>
+                                        </div>
+
+                                        <div id="success-response">
+                                            <br/>
+                                            <p><b>ID: </b><span id="payment-id"></span></p>
+                                            <p><b>Status: </b><span id="payment-status"></span></p>
+                                            <p><b>Detalhes: </b><span id="payment-detail"></span></p>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<div class="container">
+  		<footer th:replace="~{basePiloto :: footer}" class="py-5"></footer>
+	</div>
+</body>
+</html>

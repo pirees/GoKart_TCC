@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+                                <button id="form-checkout__submit" type="submit" class="btn btn-primary btn-block">Pagar</button>
+
+<script>
+
+// Add the SDK credentials
+  const mp = new MercadoPago('APP_USR-57261694-29a1-4299-a7cd-c7b7f4ecca33', {
+        locale: 'en-US'
+  });
+  
+  // Initialize the checkout
+  mp.checkout({
+    preference: {
+        id: '0001'
+    },
+    render: {
+      container: '.cho-container', // Indicates the name of the class where the payment button will be displayed
+      label: 'Pagar', // Changes the button label (optional)
+    }
+});
+</script>
+</html>

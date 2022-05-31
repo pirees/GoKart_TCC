@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.goKart.goKart.excel.BateriaExcel;
 import com.goKart.goKart.model.Bateria;
 import com.goKart.goKart.model.Kartodromo;
+import com.goKart.goKart.model.Reserva;
 import com.goKart.goKart.repository.BateriaRepository;
 import com.goKart.goKart.repository.KartodromoRepository;
+import com.goKart.goKart.repository.ReservaRepository;
 
 @Controller
 public class BateriaController {
@@ -29,11 +31,15 @@ public class BateriaController {
 	private BateriaRepository bateriaRepository;
 	
 	private KartodromoRepository kartodromoRepository;
+	
+	private ReservaRepository reservaRepository;
 
-	public BateriaController(BateriaRepository bateriaRepository, KartodromoRepository kartodromoRepository) {
+	public BateriaController(BateriaRepository bateriaRepository, KartodromoRepository kartodromoRepository,
+			ReservaRepository reservaRepository) {
 		super();
 		this.bateriaRepository = bateriaRepository;
 		this.kartodromoRepository = kartodromoRepository;
+		this.reservaRepository = reservaRepository;
 	}
 
 	//LISTA TODAS AS BATERIAS DISPONÍVEIS
@@ -50,11 +56,19 @@ public class BateriaController {
 	public String listarBaterias(@PathVariable("id") Long id, Model model) {
 		
 		Bateria bateria = bateriaRepository.getById(id);
-			
+		
+		List<Reserva> reserva = reservaRepository.findPilotoByReserva(id);
+		
+		model.addAttribute("reserva", reserva);
+		
+		System.out.println(reserva +" " + bateria.getId());
+						
 		model.addAttribute("bateria", bateria);
-			
+
 		return "piloto/confirmarReserva";
 	}
+	
+
 	
 	@GetMapping("kartodromo/cadastroBateria")
 	public String formulario(Bateria bateria) {
@@ -72,7 +86,6 @@ public class BateriaController {
 		}
 				
 		bateria.setKartodromo(kartodromo);
-		//bateria.setVagasDisponiveis(bateria.getNrMaxPiloto());
 		
 		bateriaRepository.save(bateria);
 		
