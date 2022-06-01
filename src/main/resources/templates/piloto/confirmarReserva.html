@@ -66,25 +66,35 @@ div.segundo {
 			</div>
 			</form>
 		</div>
-		<div class= "col-4">
-		<br>
-		<h5 class="text-center">
-			<i>Piloto(s) confirmado(s) até o momento</i>
-		</h5>
-		<table class="table text-center">
-			<thead>
-				<tr>
-					<th scope="col">Nome</th>
-					<th scope="col">Nível</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="reserva : ${reserva}">
-					<td th:text="${reserva.piloto.nome}"></td>
-					<td th:text="${reserva.piloto.nivel}"></td>
-			</tbody>
-		</table>
+		
+		<div class="row mt-5">
+		
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<h5 class="text-center">
+					<i>Piloto(s) confirmado(s) até o momento</i>
+				</h5>
+				<table class="table text-center">
+					<thead>
+						<tr>
+							<th scope="col">Nome</th>
+							<th scope="col">Sobrenome</th>
+							<th scope="col">Nível</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="reserva : ${reserva}">
+							<td th:text="${reserva.piloto.nome}"></td>
+							<td th:text="${reserva.piloto.sobrenome}"></td>
+							<td th:text="${reserva.piloto.nivel}"></td>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-2"></div>
+		
 		</div>
+		
+		
 		<p>&nbsp;</p>
 		<h5 class="text-center">
 			<i>Informações do kartódromo</i>
