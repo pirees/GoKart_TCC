@@ -31,4 +31,13 @@ public class HomeController {
 	public String todosKartodromosIndex() {
 		return "/kartodromos";
 	}
+	
+	@RequestMapping("/goKartNovidades")
+	public String goKartNovidadesIndex() {
+		return "/goKartNovidades";
+	}
+	@RequestMapping("/termosCondicoes")
+	public String termosCondicoes() {
+		return "/termosCondicoes";
+	}
 }

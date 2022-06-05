@@ -25,10 +25,6 @@ div.segundo {
 			<h3 class="text-center">
 				<i>Faça a sua reserva agora mesmo</i>
 			</h3>
-			
-			
-			
-<!-- 			<form class="row g-3" method="POST" th:action="@{/piloto/confirmarReserva/{id}(id = ${bateria.id})}" th:object="${reservaDTO}"> -->
  				<form class="row g-3" method="POST" th:action="@{/piloto/process_payment/{id}(id = ${bateria.id})}" th:object="${reserva}">
 			
 			<div class="col-6">
@@ -60,17 +56,14 @@ div.segundo {
 				<div>
 					<font size=8> R$: <span th:text="${#numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></span></font>
 				</div>
-				<div >
-					<a th:href="@{/piloto/process_payment/{id}(id = ${bateria.id})}">
-						<button type="submit" class="btn btn-outline-dark btn-lg">Pagar</button>
-					</a>
-				</div>
 				<br>
-				<font size=3>*Apenas uma vaga por piloto</font>
+				<div >
+					<font size=3>Você já tem reserva para está bateria</font>
+				</div>
 			</div>
 			</form>
 		</div>
-		<br>
+		
 		<div class="row mt-5">
 		
 			<div class="col-md-2"></div>

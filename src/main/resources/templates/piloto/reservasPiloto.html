@@ -6,12 +6,13 @@
 			<header th:replace="~{basePiloto :: header}"></header>
 		</div>
 </head>
+
 <body>
 	<div class="container p-5">
 		<h3>Olá Racer, veja o histórico das suas corridas:</h3>
 	</div>
 	<div class="container p-1">
-		<table class="table table-striped text-center">
+		<table id="piloto" class="table table-striped text-center">
 			<thead>
 				<tr>
 					<th scope="col">Número Reserva</th>
@@ -34,7 +35,34 @@
 			</tbody>
 		</table>
 	</div>
+	<br>
+	<nav aria-label="Page navigation example">
+  		<ul class="pagination justify-content-center">
+		    <li class="page-item">
+		      <a class="page-link" href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+		    <li class="page-item"><a class="page-link" href="#">2</a></li>
+		    <li class="page-item"><a class="page-link " href="#">3</a></li>
+		    <li class="page-item">
+		      <a class="page-link" href="#" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		 </ul>
+	</nav>
 </body>
+<style>
+footer {
+   position: absolute;
+  bottom: 0;
+  width: 85%;
+  height: 50px;
+  
+}
+</style>
 <div class="container">
 	<footer th:replace="~{basePiloto :: footer}" class="py-5"></footer>
 </div>

@@ -7,6 +7,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,17 +68,24 @@ public class ReservaController {
 
 	// LISTA TODAS AS BATERIAS DISPONÍVEIS
 	@GetMapping("piloto/reservasPiloto")
-	public String listaReservas(Model model, Reserva reserva) {
+	public String listaReservas(@PageableDefault Pageable paginacao,Sort sort, Model model, Reserva reserva) {
 		
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		sort = Sort.by("id").ascending();
+		paginacao = PageRequest.of(0, 15, sort);
 				
-		List<Reserva> reservas = reservaRepository.findByEmail(email);
+		Page<Reserva> reservas = reservaRepository.findByEmail(email, paginacao);
 
 
 		model.addAttribute("reserva", reservas);
+		
 		return "piloto/reservasPiloto";
 		
+		//return this.reservaRepository.findByEmail(email, paginacao);
+		
 	}
+	
 
 
 	/*@PostMapping("piloto/confirmarReserva/{id}")

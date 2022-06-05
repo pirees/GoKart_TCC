@@ -5,9 +5,28 @@
 <div class="container">
 	<header th:replace="~{basePiloto :: header}"></header>
 </div>
+<style>
+#teste {
+   display:"flex";
+   align-items: "center";
+   flex-direction:"column";
+   justify-content: "center";  
+}
+</style>
 <body>
 	<div class="container">
-		<div class="row row-cols-1 row-cols-md-3 g-4">
+  	
+   	<div class="row">
+      <div class="col-sm-5 mb-3 mx-auto">
+      	<div class="d-flex " >
+         <input type="text" id="filtroCards" class="form-control p-2 bd-highlight" onkeyup="aplicaFiltroCards()" placeholder="Pesquise pelo nome do kartódromo...">
+         <i class="fa-solid fa-magnifying-glass p-3 bd-highlight"></i>
+    	</div>
+    </div>
+    </div>
+	
+		<div class="row row-cols-1 row-cols-md-3 g-4" id="containerCards">
+			
 			<div class="col" th:each="bateria : ${baterias}">
 				<div class="card h-100">
 					<div class="card-body">
@@ -42,13 +61,22 @@
 								<button type="button" class="btn btn-outline-dark">Reservar</button>
 							</a>
 						</div>
-					</div>
+					</div>	
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
+<style>
+footer {
+   position: absolute;
+  bottom: 0;
+  width: 85%;
+  height: 50px;
+  
+}
+</style>
 <div class="container">
-	  <footer th:replace="~{basePiloto :: footer}" class="py-5"></footer>
+	  <footer th:replace="~{basePiloto :: footer}"></footer>
 </div>
 </html>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -21,6 +22,7 @@ import com.goKart.goKart.excel.BateriaExcel;
 import com.goKart.goKart.model.Bateria;
 import com.goKart.goKart.model.Kartodromo;
 import com.goKart.goKart.model.Reserva;
+import com.goKart.goKart.model.StatusPagamento;
 import com.goKart.goKart.repository.BateriaRepository;
 import com.goKart.goKart.repository.KartodromoRepository;
 import com.goKart.goKart.repository.ReservaRepository;
@@ -53,17 +55,27 @@ public class BateriaController {
 	
 	//FAZ O GET DA BATERIA SELECIONADA NA PAGINA DO MENU PILOTO
 	@GetMapping("piloto/confirmarReserva/{id}")
-	public String listarBaterias(@PathVariable("id") Long id, Model model) {
+	public String listarBaterias(@PathVariable("id") Long id, Model model, StatusPagamento status) {
 		
 		Bateria bateria = bateriaRepository.getById(id);
 		
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		
 		List<Reserva> reserva = reservaRepository.findPilotoByReserva(id);
 		
-		model.addAttribute("reserva", reserva);
+		for (Reserva reservas : reserva) {
+			
+			if(reservas.getPiloto().getEmail().equals(email) && reservas.getStatus().equals(status.CONFIRMADO)) {
+				
+				model.addAttribute("bateria", bateria);
+				model.addAttribute("reserva", reserva);
+				
+				return "piloto/confirmarReservaPilotoPago";
+			} 
+		}
 		
-		System.out.println(reserva +" " + bateria.getId());
-						
 		model.addAttribute("bateria", bateria);
+		model.addAttribute("reserva", reserva);
 
 		return "piloto/confirmarReserva";
 	}
@@ -137,9 +149,7 @@ public class BateriaController {
 		bateria.setKartodromo(kartodromo);
 			
 		List<Bateria> baterias = bateriaRepository.findByDateKartodromoId(bateria.getKartodromo().getId());
-			
-		System.out.println(bateria.getKartodromo().getId());
-			
+						
 		model.addAttribute("baterias", baterias);
 				
 		return "kartodromo/menuKartodromo";
