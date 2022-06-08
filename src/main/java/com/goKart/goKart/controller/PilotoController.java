@@ -19,7 +19,6 @@ import com.goKart.goKart.repository.PerfilRepository;
 import com.goKart.goKart.repository.PilotoRepository;
 
 @Controller
-//@RequestMapping("piloto")
 public class PilotoController{
 	
 	private PilotoRepository pilotoRepository;
@@ -39,7 +38,6 @@ public class PilotoController{
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		Piloto piloto = pilotoRepository.findByEmail(email);
 
-		
 		model.addAttribute("piloto", piloto);
 		
 		return "piloto/atualizarPiloto";
@@ -55,13 +53,6 @@ public class PilotoController{
 
 		return new ModelAndView("redirect:/piloto/atualizarPiloto");
 	}
-	
-	/*@GetMapping("piloto/menuPiloto/{id}")
-	public String pegarId(@PathVariable Long id, PilotoDTO pilotoDTO) {
-		Optional<Piloto> piloto = pilotoRepository.findById(id);
-		return "piloto/menuPiloto";
-		
-	}*/
 
 	@GetMapping("piloto/cadastroPiloto")
 	public String formulario(Piloto piloto) {
