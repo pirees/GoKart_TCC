@@ -17,7 +17,7 @@ import com.goKart.goKart.repository.UsuarioRepository;
 @Component
 public class LoginSucesso extends SavedRequestAwareAuthenticationSuccessHandler {
 
-	private UsuarioRepository usuarioRepository;
+	private UsuarioRepository  usuarioRepository;
 
 	public LoginSucesso(UsuarioRepository usuarioRepository) {
 		super();
