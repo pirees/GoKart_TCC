@@ -6,28 +6,58 @@
 	<header th:replace="~{baseAdmin :: header}"></header>
 </div>
 <body>
+<div class="container p-1">
+	<h3>Se preferir, pode realizar o download dos dados.</h3>
+	<a th:href="@{todosPilotos/exports/csv}"> <i class="fa-solid fa-file-csv btn-lg btn-dark"></i></a>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</div>
 	<div class="container">
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-			<div class="col" th:each="piloto : ${pilotos}">
-				<div class="card h-100">
-					<div class="card-body">
-						<h5 class="card-title">
-							<span th:text="${piloto.nome}"></span>
-						</h5>
-						<div class="card-text">
-							<div>
-								E-mail <span th:text="${piloto.email}"></span>
-							</div>
-							<div>
-								Cidade: <span th:text="${piloto.cidade}"></span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<table id="example" class="table table-striped text-center">
+		<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Sobrenome</th>
+			<th>E-mail</th>
+			<th>Cidade</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="piloto : ${pilotos}">
+			<td th:text="${piloto.nome}"></td>
+			<td th:text="${piloto.sobrenome}"></td>
+			<td th:text="${piloto.email}"></td>
+			<td th:text="${piloto.cidade}"></td>
+		</tr>
+		</tbody>
+	</table>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script>
+	$(document).ready(function () {
+    $('#example').DataTable({
+    	language: {
+    		url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
+            decimal: ',',
+            thousands: '.',
+        },
+        columnDefs: [
+    	{
+        targets: -1,
+        className: 'dt-body-center'
+    	}]
+    });
+});
+</script>
+</div>
 </body>
+<style>
+footer {
+   position: absolute;
+  bottom: 0;
+  width: 85%;
+  height: 50px;
+}
+</style>
 <div class="container">
 	<footer th:replace="~{baseAdmin :: footer}" class="py-5"></footer>
 </div>

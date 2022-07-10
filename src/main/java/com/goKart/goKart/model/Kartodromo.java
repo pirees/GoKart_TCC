@@ -85,13 +85,5 @@ public class Kartodromo extends Usuario implements UserDetails  {
 	public boolean isEnabled() {
 		return true;
 	}
-	
-	public Kartodromo atualizarEmail (String email, KartodromoRepository kartodromoRepository) {
-		
-		Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
-		kartodromo.setEmail(this.getEmail());
-		kartodromoRepository.save(kartodromo);
-		return kartodromo;
-	}
 
 }

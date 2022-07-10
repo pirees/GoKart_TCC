@@ -2,6 +2,8 @@ package com.goKart.goKart.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -109,5 +112,15 @@ public class ReservaController {
 		
 		reservaExcel.export(response);
 	
+	}
+	@DeleteMapping("menuPiloto/reservasPiloto")
+	public String excluirReserva(Reserva reserva, LocalTime localTime){
+
+		if(reserva.getBateria().getHoraBateria().isBefore(localTime.minus(1, ChronoUnit.HOURS))){
+			reservaRepository.deleteById(reserva.getId());
+		}
+
+		return "menuPiloto/reservasPiloto";
+
 	}
 }

@@ -1,10 +1,16 @@
 package com.goKart.goKart.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.goKart.goKart.excel.ReservaExcel;
+import com.goKart.goKart.excel.TodosPilotosExcel;
+import com.goKart.goKart.model.Kartodromo;
+import com.goKart.goKart.model.Reserva;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -88,6 +94,17 @@ public class PilotoController{
 		model.addAttribute("pilotos", pilotos);
 		
 		return "admin/todosPilotos";
+	}
+
+	@GetMapping("admin/todosPilotos/exports/csv")
+	public void listarPilotosExport(HttpServletResponse response) throws IOException {
+
+		List<Piloto> pilotos = pilotoRepository.findAll();
+
+		TodosPilotosExcel todosPilotosExcel = new TodosPilotosExcel(pilotos);
+
+		todosPilotosExcel.export(response);
+
 	}
 	
 	

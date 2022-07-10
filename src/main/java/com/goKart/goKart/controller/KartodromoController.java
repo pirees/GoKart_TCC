@@ -1,17 +1,21 @@
 package com.goKart.goKart.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.goKart.goKart.excel.TodosKartodromosExcel;
+import com.goKart.goKart.excel.TodosPilotosExcel;
+import com.goKart.goKart.model.Piloto;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.goKart.goKart.model.Kartodromo;
@@ -41,25 +45,14 @@ public class KartodromoController{
 	}
 	
 	@GetMapping("kartodromo/meusDados")
-	public String listarDados(Model model) {	
+	public String listarDados(Model model, String email, Kartodromo kartodromo) {
 		
-		String email = SecurityContextHolder.getContext().getAuthentication().getName();
-		Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
-
+		email = SecurityContextHolder.getContext().getAuthentication().getName();
+		kartodromo = kartodromoRepository.findByEmail(email);
 		
 		model.addAttribute("kartodromo", kartodromo);
 
 		return "kartodromo/meusDados";
-	}
-	
-	@PostMapping("kartodromo/meusDados")
-	public ModelAndView atualizarEmail(String email, Kartodromo kartodromo) {
-		
-		email = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-		kartodromo.atualizarEmail(email, kartodromoRepository);
-
-		return new ModelAndView("redirect:/kartodromo/menuKartodromo");
 	}
 
 	@PostMapping ("admin/cadastroKartodromo")
@@ -92,5 +85,16 @@ public class KartodromoController{
 		model.addAttribute("kartodromos", kartodromos);
 		
 		return "admin/todosKartodromos";
+	}
+
+	@GetMapping("admin/todosKartodromos/exports/csv")
+	public void listarPilotosExport(HttpServletResponse response) throws IOException {
+
+		List<Kartodromo> kartodromos = kartodromoRepository.findAll();
+
+		TodosKartodromosExcel todosKartodromosExcel = new TodosKartodromosExcel(kartodromos);
+
+		todosKartodromosExcel.export(response);
+
 	}
 }

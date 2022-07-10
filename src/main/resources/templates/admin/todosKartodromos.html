@@ -1,34 +1,59 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="pt-br">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="pt-br">
 <head th:replace="~{baseAdmin :: head}"></head>
 <div class="container">
 	<header th:replace="~{baseAdmin :: header}"></header>
 </div>
 <body>
-	<div class="container">
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-			<div class="col" th:each="kartodromo : ${kartodromos}">
-				<div class="card h-100">
-					<div class="card-body">
-						<h5 class="card-title">
-							<span th:text="${kartodromo.nome}"></span>
-						</h5>
-						<div class="card-text">
-							<div>
-								E-mail <span th:text="${kartodromo.email}"></span>
-							</div>
-							<div>
-								Cidade: <span th:text="${kartodromo.cidade}"></span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="container p-1">
+	<h3>Se preferir, pode realizar o download dos dados.</h3>
+	<a th:href="@{todosKartodromos/exports/csv}"> <i class="fa-solid fa-file-csv btn-lg btn-dark"></i></a>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</div>
+<div class="container">
+<table id="example" class="table table-striped text-center">
+	<thead>
+	<tr>
+		<th>Nome</th>
+		<th>E-mail</th>
+		<th>Cidade</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr th:each="kartodromo : ${kartodromos}">
+		<td th:text="${kartodromo.nome}"></td>
+		<td th:text="${kartodromo.email}"></td>
+		<td th:text="${kartodromo.cidade}"></td>
+	</tr>
+	</tbody>
+</table>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script>
+	$(document).ready(function () {
+    $('#example').DataTable({
+    	language: {
+    		url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
+            decimal: ',',
+            thousands: '.',
+        },
+    });
+});
+</script>
+</div>
 </body>
+<style>
+footer {
+   position: absolute;
+  bottom: 0;
+  width: 85%;
+  height: 50px;
+
+}
+</style>
 <div class="container">
 	<footer th:replace="~{baseAdmin :: footer}" class="py-5"></footer>
 </div>
 </html>
+

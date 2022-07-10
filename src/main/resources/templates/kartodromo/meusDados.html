@@ -7,6 +7,8 @@
 </div>
 <body>
 	<div class="container p-5">
+		<h5>Para atualizar os seus dados, favor entrar em contato com o e-mail: contato@gokart.com.br</h5>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 			<div class="d-flex justify-content-between mb-3">
 				<form class="row g-3" method="POST" th:action="@{/kartodromo/meusDados}" th:object="${kartodromo}">
 					<div class="row p-2">
@@ -17,7 +19,7 @@
 		  				</div>
 		  				<div class="col">
 		    				<label for="email" class="form-label">E-mail</label>
-		    				<input type="email" class="form-control" th:errorclass="is-invalid" id="email" th:field="*{email}">
+		    				<input type="email" class="form-control" th:errorclass="is-invalid" id="email" th:field="*{email}" disabled readonly>
 		    				<span th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></span>
 		  				</div>
 		  				<div class="row p-2">
@@ -36,12 +38,6 @@
 						</div>
 				 		</div>
 		  			</div>
-		  			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-				 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				 	<a th:href="@{/kartodromo/menuKartodromo}">
-				    	<button type="submit" class="btn btn-outline-dark btn-lg">Atualizar Email</button>
-				    	</a>
-					</div>  						
 				</form>
 			</div>
 		</div>

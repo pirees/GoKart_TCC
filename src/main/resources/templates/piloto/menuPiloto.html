@@ -2,6 +2,11 @@
 <html xmlns:th="http://thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="pt-br">
 <head th:replace="~{basePiloto :: head}"></head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" rel="stylesheet"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.pt-BR.min.js"></script>
 <div class="container">
 	<header th:replace="~{basePiloto :: header}"></header>
 </div>
@@ -18,11 +23,18 @@
   	
    	<div class="row">
       <div class="col-sm-5 mb-3 mx-auto">
-      	<div class="d-flex " >
+      	<div class="d-flex">
          <input type="text" id="filtroCards" class="form-control p-2 bd-highlight" onkeyup="aplicaFiltroCards()" placeholder="Pesquise pelo nome do kartódromo...">
-         <i class="fa-solid fa-magnifying-glass p-3 bd-highlight"></i>
-    	</div>
-    </div>
+
+
+		  <input type="text" id="datepicker-inicial" class="form-control" placeholder="Data de início">
+		  <input type="text" id="datepicker-final" class="form-control" placeholder="Data final">
+			<div class="col-md-5 text-end">
+		  		<button type="button" class="btn btn-outline-dark"> <i class="fa-solid fa-magnifying-glass p-3 bd-highlight"></i></button>
+			</div>
+
+		</div>
+	  </div>
     </div>
 	
 		<div class="row row-cols-1 row-cols-md-3 g-4" id="containerCards">

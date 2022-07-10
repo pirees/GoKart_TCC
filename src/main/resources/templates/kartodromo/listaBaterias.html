@@ -6,18 +6,19 @@
 	<header th:replace="~{baseKartodromo :: header}"></header>
 </div>
 <body>
-	<div class="container p-5">
+	<div class="container p-3">
 		<h3>Baterias cadastradas até o momento</h3>
 		<a th:href="@{listaBaterias/exports/csv}"> <i class="fa-solid fa-file-csv btn-lg btn-dark"></i></a>
-		<table class="table table-striped text-center">
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+		<table id="example" class="table table-striped text-center">
 			<thead>
-				<tr>
-					<th scope="col">Data</th>
-					<th scope="col">Hora</th>
-					<th scope="col">Valor (R$)</th>
-					<th scope="col">Vagas preenchidas</th>
-					<th scope="col">Total (R$)</th>
-				</tr>
+			<tr>
+				<th>Data</th>
+				<th>Hora</th>
+				<th>Valor (R$)</th>
+				<th>Vagas Preenchidas</th>
+				<th>Total (R$)</th>
+			</tr>
 			</thead>
 			<tbody>
 				<tr th:each="bateria : ${baterias}">
@@ -29,6 +30,19 @@
 				</tr>
 			</tbody>
 		</table>
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+		<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+		<script>
+			$(document).ready(function () {
+   		    $('#example').DataTable({
+    			language: {
+    				url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
+            		decimal: ',',
+            		thousands: '.',
+        		},
+    		});
+			});
+		</script>
 	</div>
 </body>
 <style>	
