@@ -14,11 +14,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
 @Table(name="tb_bateria")
+@Data
 public class Bateria {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,66 +51,6 @@ public class Bateria {
 	@ManyToOne
 	@JoinColumn(name="kartodromo_id")
 	private Kartodromo kartodromo;
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public LocalDate getData() {
-		return data;
-	}
-	public void setData(LocalDate data) {
-		this.data = data;
-	}
-	public LocalTime getHoraBateria() {
-		return horaBateria;
-	}
-	public void setHoraBateria(LocalTime horaBateria) {
-		this.horaBateria = horaBateria;
-	}
-	public String getTracado() {
-		return tracado;
-	}
-	public void setTracado(String tracado) {
-		this.tracado = tracado;
-	}
-	public Kartodromo getKartodromo() {
-		return kartodromo;
-	}
-	public void setKartodromo(Kartodromo kartodromo) {
-		this.kartodromo = kartodromo;
-	}
-	
-	public Integer getVagasConfirmadas() {
-		return vagasConfirmadas;
-	}
-	public void setVagasConfirmadas(Integer vagasConfirmadas) {
-		this.vagasConfirmadas = vagasConfirmadas;
-	}
-	public Integer getNrMaxPiloto() {
-		return nrMaxPiloto;
-	}
-	public void setNrMaxPiloto(Integer nrMaxPiloto) {
-		this.nrMaxPiloto = nrMaxPiloto;
-	}
-	public BigDecimal getValorBateria() {
-		return valorBateria;
-	}
-	public void setValorBateria(BigDecimal valorBateria) {
-		this.valorBateria = valorBateria;
-	}
 
-	public String getDuracaoBateria() {
-		return duracaoBateria;
-	}
-	public void setDuracaoBateria(String duracaoBateria) {
-		this.duracaoBateria = duracaoBateria;
-	}
-	public Bateria() {
-		super();
-	}
 
 }

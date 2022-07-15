@@ -16,6 +16,9 @@
 						</h5>
 						<div class="card-text">
 							<div>
+								ID Bateria: <span th:text="${bateria.id}">Externo A</span>
+							</div>
+							<div>
 								Valor: <span th:text="${'R$' + #numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}">200,99</span>
 							</div>
 							<div>
@@ -35,6 +38,11 @@
 							</div>
 							<div>
 								Limite de pilotos: <span th:text="${bateria.nrMaxPiloto}">10</span>
+							</div>
+							<div class=" text-end">
+								<a th:href="@{/kartodromo/visualizarBateria/{id}(id = ${bateria.id})}">
+									<button type="button" class="btn btn-outline-dark">Detalhar</button>
+								</a>
 							</div>
 						</div>
 					</div>

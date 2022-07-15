@@ -6,12 +6,14 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.goKart.goKart.repository.KartodromoRepository;
 
 @Entity
+@Data
 public class Kartodromo extends Usuario implements UserDetails  {
 	
 	private static final long serialVersionUID = 1L;
@@ -24,31 +26,7 @@ public class Kartodromo extends Usuario implements UserDetails  {
 
 	@NotBlank(message = "Cidade não pode ficar em branco")
 	private String cidade;
-	
-	public Estado getEstado() {
-		return estado;
-	}
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-	public String getCNPJ() {
-		return CNPJ; 
-	}
-	public void setCNPJ(String cNPJ) {
-		CNPJ = cNPJ;
-	}
-	
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-	
-	public Kartodromo() {
-		super();
-	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.getPerfis();
@@ -63,9 +41,7 @@ public class Kartodromo extends Usuario implements UserDetails  {
 	public String getUsername() {
 		System.out.println(getId());
 		return this.getEmail();
-		
 	}
-
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;

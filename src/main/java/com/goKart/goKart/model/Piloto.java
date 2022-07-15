@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.goKart.goKart.repository.PilotoRepository;
 
 @Entity
+@Data
 public class Piloto extends Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -26,42 +28,6 @@ public class Piloto extends Usuario implements UserDetails {
 	
 	@NotBlank(message = "Sobrenome não pode ficar em branco")
 	private String sobrenome;
-
-	public Estado getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-
-	public Nivel getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(Nivel nivel) {
-		this.nivel = nivel;
-	}
-
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
-	
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public Piloto() {
-		super();
-	}
 	
 	public Piloto atualizarNivel (String email, PilotoRepository pilotoRepository) {
 		

@@ -168,5 +168,29 @@ public class BateriaController {
 
 		return "kartodromo/listarBateria/{id}";
 	}
+
+	@GetMapping("kartodromo/visualizarBateria/{id}")
+	public String visualizarBateriaKartodromo(@PathVariable("id") Long id, Model model) {
+
+		Bateria bateria = bateriaRepository.getById(id);
+
+		List<Reserva> reserva = reservaRepository.findPilotoByReserva(id);
+
+		for (Reserva reservas : reserva) {
+
+			if(reservas.getPiloto() != null) {
+
+				model.addAttribute("bateria", bateria);
+				model.addAttribute("reserva", reserva);
+
+				return "kartodromo/visualizarBateriaComReserva";
+			}
+		}
+
+		model.addAttribute("bateria", bateria);
+		model.addAttribute("reserva", reserva);
+
+		return "kartodromo/visualizarBateria";
+	}
 	
 }

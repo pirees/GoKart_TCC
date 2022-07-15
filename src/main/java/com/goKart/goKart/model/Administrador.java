@@ -5,24 +5,18 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
+@Data
 public class Administrador extends Usuario implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@NotBlank(message = "Sobrenome não pode ficar em branco")
 	private String sobrenome;
-	
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

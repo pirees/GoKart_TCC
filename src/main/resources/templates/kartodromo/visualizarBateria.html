@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  lang="pt-br">
+	<head th:replace="~{baseKartodromo :: head}"></head>
+		<div class="container">
+			<header th:replace="~{baseKartodromo :: header}"></header>
+		</div>
+	<body>
+		<div class="container p-5">
+			<h4>É possível editar a bateria caso não tenha nenhum piloto cadastrado até o momento</h4>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+			<div class="d-flex justify-content-between mb-3">
+					<form class="row g-3" method="GET" th:object="${bateria}">
+					<div class="row p-2">
+						<div class="col">
+		    				<label for="data" class="form-label">Data</label>
+		    				<input type="text" class="form-control" id="data"th:field="${bateria.data}" disabled readonly>
+		    				<small class="text-muted">E.x "DD/MM/YYYY"</small>
+		  				</div>
+		  				<div class="col">
+		    				<label for="horaBateria" class="form-label">Hora da Bateria</label>
+		    				<input type="time" class="form-control" id="horaBateria" th:field="${bateria.horaBateria}" disabled readonly>
+		  				</div>
+		  				<div class="col">
+		    				<label for="duracaoBateria" class="form-label">Duração da bateria (MIN)</label>
+		    				<input type="text" class="form-control" id="duracaoBateria" th:field="${bateria.duracaoBateria}">
+		    				<small class="text-muted">E.x "30"</small>
+		  				</div>
+		  				</div>
+		  				<div class="row p-1">
+		  				<div class="col">
+		    				<label for="tracado" class="form-label">Traçado</label>
+		    				<input type="text" class="form-control" id="tracado" th:field="${bateria.tracado}">
+		    				<small class="text-muted">E.x "Original"</small>
+		  				</div>
+		  				<div class="col">
+		    				<label for="valorBateria" class="form-label">Valor da Bateria (R$)</label>
+		    				<input  type="text" class="form-control"  id="valorBateria" th:field="${bateria.valorBateria}">
+		    				<small class="text-muted">E.x "90.00"</small>
+		  				</div>
+		  				<div class="col">
+				    		<label for="nrMaxPiloto" class="form-label">Números de Pilotos</label>
+				    		<input type="text" class="form-control" id="nrMaxPiloto" th:field="${bateria.nrMaxPiloto}">
+				    		<small class="text-muted">E.x "10"</small>
+						</div>
+
+		  			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+				 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				 	<a th:href="@{/kartodromo/menuKartodromo}">
+				    	<button type="submit" class="btn btn-outline-dark btn-lg">Atualizar</button>
+				    	</a>
+					</div>
+							<div class="row mt-5">
+
+								<div class="col-md-2"></div>
+								<div class="col-md-8">
+									<h5 class="text-center">
+										<i>Piloto(s) confirmado(s) até o momento</i>
+									</h5>
+									<table class="table text-center">
+										<thead>
+										<tr>
+											<th scope="col">Nome</th>
+											<th scope="col">Nível</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr th:each="reserva : ${reserva}">
+											<td th:text="${reserva.piloto.nome + ' ' + reserva.piloto.sobrenome}"></td>
+											<td th:text="${reserva.piloto.nivel}"></td>
+										</tbody>
+									</table>
+								</div>
+								<div class="col-md-2"></div>
+							</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+	<div class="container">
+	<footer th:replace="~{baseKartodromo :: footer}" class="py-5"></footer>
+</div>
+</html>

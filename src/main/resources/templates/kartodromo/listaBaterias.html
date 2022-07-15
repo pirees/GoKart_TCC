@@ -13,6 +13,7 @@
 		<table id="example" class="table table-striped text-center">
 			<thead>
 			<tr>
+				<th>ID Bateria</th>
 				<th>Data</th>
 				<th>Hora</th>
 				<th>Valor (R$)</th>
@@ -22,6 +23,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="bateria : ${baterias}">
+					<td th:text="${bateria.id}"></td>
 					<td th:text="${#temporals.format(bateria.data, 'dd/MM/yyyy')}"></td>
 					<td th:text="${bateria.horaBateria}"></td>
 					<td th:text="${#numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></td>
