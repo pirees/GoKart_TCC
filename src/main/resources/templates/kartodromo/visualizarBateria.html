@@ -8,19 +8,25 @@
 		</div>
 	<body>
 		<div class="container p-5">
-			<h4>É possível editar a bateria caso não tenha nenhum piloto cadastrado até o momento</h4>
-		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+			<h4>É possível editar ou deletar a bateria caso não tenha nenhum piloto cadastrado até o momento.</h4>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				<a th:data-confirm-delete="|Você gostaria de apagar a bateria ${bateria.id}?|"
+				   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
+				   th:href="@{/kartodromo/visualizarBateria/apagar/{id}(id=${bateria.id})}"
+				><button type = submit class="btn btn-outline-dark btn-lg"><i class="fa-solid fa-trash"></i></button></a>
+			</div>
+			<br>
 			<div class="d-flex justify-content-between mb-3">
-					<form class="row g-3" method="GET" th:object="${bateria}">
+					<form class="row g-3" method="POST" th:object="${bateria}">
 					<div class="row p-2">
 						<div class="col">
 		    				<label for="data" class="form-label">Data</label>
-		    				<input type="text" class="form-control" id="data"th:field="${bateria.data}" disabled readonly>
+		    				<input type="text" class="form-control" id="data"th:field="${bateria.data}">
 		    				<small class="text-muted">E.x "DD/MM/YYYY"</small>
 		  				</div>
 		  				<div class="col">
 		    				<label for="horaBateria" class="form-label">Hora da Bateria</label>
-		    				<input type="time" class="form-control" id="horaBateria" th:field="${bateria.horaBateria}" disabled readonly>
+		    				<input type="time" class="form-control" id="horaBateria" th:field="${bateria.horaBateria}">
 		  				</div>
 		  				<div class="col">
 		    				<label for="duracaoBateria" class="form-label">Duração da bateria (MIN)</label>
@@ -47,12 +53,11 @@
 
 		  			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 				 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				 	<a th:href="@{/kartodromo/menuKartodromo}">
-				    	<button type="submit" class="btn btn-outline-dark btn-lg">Atualizar</button>
-				    	</a>
+						<a th:href="@{kartodromo/menuKartodromo}">
+				    		<button type="submit" class="btn btn-outline-dark btn-lg">Atualizar</button></a>
+
 					</div>
 							<div class="row mt-5">
-
 								<div class="col-md-2"></div>
 								<div class="col-md-8">
 									<h5 class="text-center">

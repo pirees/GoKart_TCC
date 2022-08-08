@@ -6,6 +6,9 @@
 	<header th:replace="~{baseKartodromo :: header}"></header>
 </div>
 <body>
+	<div th:if="${message}" class="alert alert-success" role="alert">
+		<p th:text="${message}">success message</p>
+	</div>
 	<div class="container p-3">
 		<h3>Aqui é possível verificar todos os pilotos que já correram no kartódromo</h3>
 		<a th:href="@{relatorio/exports/csv}"> <i class="fa-solid fa-file-csv btn-lg btn-dark"></i></a>

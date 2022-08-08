@@ -4,18 +4,18 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.goKart.goKart.repository.BateriaRepository;
+import com.goKart.goKart.repository.KartodromoRepository;
+import com.goKart.goKart.repository.PilotoRepository;
+import com.opencsv.bean.CsvBindByName;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Entity
@@ -23,11 +23,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Data
 public class Bateria {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull(message = "Data não pode ficar em branco")
 	@DateTimeFormat (pattern="dd/MM/yyyy")
+	@CsvBindByName(column = "data")
 	private LocalDate data;
 	
 	@NotNull(message = "Hora da bateria não pode ficar em branco")
@@ -47,10 +49,25 @@ public class Bateria {
 	private String duracaoBateria;
 
 	private Integer vagasConfirmadas = 0;
+
+	@Transient
+	private MultipartFile file;
 	
 	@ManyToOne
 	@JoinColumn(name="kartodromo_id")
 	private Kartodromo kartodromo;
+	public Bateria atualizarBateria(Long id, BateriaRepository bateriaRepository) {
 
+		Bateria bateria = bateriaRepository.getById(id);
+		//bateria.setData(this.getData());
+		//bateria.setHoraBateria(this.horaBateria);
+		bateria.setDuracaoBateria(this.getDuracaoBateria());
+		bateria.setTracado(this.tracado);
+		bateria.setNrMaxPiloto(this.nrMaxPiloto);
+		bateria.setValorBateria(this.getValorBateria());
+		bateriaRepository.save(bateria);
+
+		return bateria;
+	}
 
 }

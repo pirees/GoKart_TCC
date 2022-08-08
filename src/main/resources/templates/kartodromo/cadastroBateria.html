@@ -8,25 +8,24 @@
 		</div>
 	<body>
 		<div class="container p-5">
-		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 			<div class="d-flex justify-content-between mb-3">
-				<form class="row g-3" method="POST" th:action="@{/kartodromo/cadastroBateria}" th:object="${bateria}">
+				<form class="row g-3" method="POST" th:action="@{/kartodromo/cadastroBateria}" th:object="${bateria}" enctype="multipart/form-data">
 					<div class="row p-2">
 						<div class="col">
 		    				<label for="data" class="form-label">Data</label>
 		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="data"th:field="*{data}">
-		    				<span th:if="${#fields.hasErrors('data')}" class="text-danger" th:errors="*{data}"></span> 
+		    				<span th:if="${#fields.hasErrors('data')}" class="text-danger" th:errors="*{data}"></span>
 		    				<small class="text-muted">E.x "DD/MM/YYYY"</small>
 		  				</div>
 		  				<div class="col">
 		    				<label for="horaBateria" class="form-label">Hora da Bateria</label>
 		    				<input type="time" class="form-control" th:errorclass="is-invalid" id="horaBateria" th:field="*{horaBateria}">
-		    				<span th:if="${#fields.hasErrors('horaBateria')}" class="text-danger" th:errors="*{horaBateria}"></span> 
+		    				<span th:if="${#fields.hasErrors('horaBateria')}" class="text-danger" th:errors="*{horaBateria}"></span>
 		  				</div>
 		  				<div class="col">
 		    				<label for="duracaoBateria" class="form-label">Duração da bateria (MIN)</label>
 		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="duracaoBateria" th:field="*{duracaoBateria}">
-		    				<span th:if="${#fields.hasErrors('duracaoBateria')}" class="text-danger" th:errors="*{duracaoBateria}"></span> 
+		    				<span th:if="${#fields.hasErrors('duracaoBateria')}" class="text-danger" th:errors="*{duracaoBateria}"></span>
 		    				<small class="text-muted">E.x "30"</small>
 		  				</div>
 		  				</div>
@@ -34,28 +33,28 @@
 		  				<div class="col">
 		    				<label for="tracado" class="form-label">Traçado</label>
 		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="tracado" th:field="*{tracado}">
-		    				<span th:if="${#fields.hasErrors('tracado')}" class="text-danger" th:errors="*{tracado}"></span> 
+		    				<span th:if="${#fields.hasErrors('tracado')}" class="text-danger" th:errors="*{tracado}"></span>
 		    				<small class="text-muted">E.x "Original"</small>
 		  				</div>
 		  				<div class="col">
 		    				<label for="valorBateria" class="form-label">Valor da Bateria (R$)</label>
 		    				<input  type="text" class="form-control" th:errorclass="is-invalid" id="valorBateria" th:field="*{valorBateria}">
-		    				<span th:if="${#fields.hasErrors('valorBateria')}" class="text-danger" th:errors="*{valorBateria}"></span> 
+		    				<span th:if="${#fields.hasErrors('valorBateria')}" class="text-danger" th:errors="*{valorBateria}"></span>
 		    				<small class="text-muted">E.x "90.00"</small>
 		  				</div>
 		  				<div class="col">
 				    		<label for="nrMaxPiloto" class="form-label">Números de Pilotos</label>
 				    		<input type="text" class="form-control" th:errorclass="is-invalid" id="nrMaxPiloto" th:field="*{nrMaxPiloto}">
-				    		<span th:if="${#fields.hasErrors('nrMaxPiloto')}" class="text-danger" th:errors="*{nrMaxPiloto}"></span> 
+				    		<span th:if="${#fields.hasErrors('nrMaxPiloto')}" class="text-danger" th:errors="*{nrMaxPiloto}"></span>
 				    		<small class="text-muted">E.x "10"</small>
 						</div>
-		  			
-		  			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-				 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				 	<a th:href="@{/kartodromo/menuKartodromo}">
-				    	<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
-				    	</a>
-					</div>  
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+						<label class="form-label">Deseja cadastrar as baterias em massa via arquivo <strong>.csv? </strong><a th:href="@{/kartodromo/cadastroBateriaExcel}"> Clique aqui</a></label>
+		  				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+				 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				    			<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
+				    		</a>
+						</div>
 					</div>						
 				</form>
 			</div>
