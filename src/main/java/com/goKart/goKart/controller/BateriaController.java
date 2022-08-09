@@ -75,10 +75,20 @@ public class BateriaController {
 
             if (reservas.getPiloto().getEmail().equals(email) && reservas.getStatus().equals(status.CONFIRMADO)) {
 
-                model.addAttribute("bateria", bateria);
-                model.addAttribute("reserva", reserva);
+                if(reservas.getBateria().getData().isAfter(LocalDate.now())){
 
-                return "piloto/confirmarReservaPilotoPago";
+                    model.addAttribute("bateria", bateria);
+                    model.addAttribute("reserva", reserva);
+
+                    return "piloto/confirmarReservaPilotoPagoCancelar";
+
+                } else{
+
+                    model.addAttribute("bateria", bateria);
+                    model.addAttribute("reserva", reserva);
+
+                    return "piloto/confirmarReservaPilotoPago";
+                }
             }
         }
 
@@ -162,14 +172,7 @@ public class BateriaController {
 
         List<Bateria> bateriaList = bateriaRepository.findByDateKartodromoId(bateria.getKartodromo().getId());
 
-        for(Bateria baterias : bateriaList){
-            if(baterias.getData().isEqual(LocalDate.now())){
-
-                model.addAttribute("baterias", baterias);
-
-            }
-        }
-
+        model.addAttribute("baterias", bateriaList);
         return "kartodromo/menuKartodromo";
 
     }
