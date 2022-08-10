@@ -19,6 +19,7 @@
 				<th>Valor (R$)</th>
 				<th>Vagas Preenchidas</th>
 				<th>Total (R$)</th>
+				<th>Detalhar</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -29,6 +30,9 @@
 					<td th:text="${#numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></td>
 					<td th:text="${bateria.vagasConfirmadas}"></td>
 					<td th:text="${#numbers.formatDecimal(bateria.vagasConfirmadas * bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></td>
+					<td> <a th:href="@{/kartodromo/visualizarBateria/{id}(id = ${bateria.id})}"><button type="button" class="btn-outline-dark">Ver</button></a></td>
+
+
 				</tr>
 			</tbody>
 		</table>
