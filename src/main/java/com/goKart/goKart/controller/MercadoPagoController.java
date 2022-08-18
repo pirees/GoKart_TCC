@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.validation.Valid;
 
+import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +55,9 @@ public class MercadoPagoController {
 	
 	@Autowired
 	private ReservaController reservaController;
+
+	@Autowired
+	private EnviaEmailService enviaEmailService;
 	
 
 	public PaymentResponseDTO processPayment(CardPaymentDTO cardPaymentDTO) {
@@ -114,6 +118,8 @@ public class MercadoPagoController {
     		reserva.setDataReserva(LocalDate.now());
             
             reservaRepository.save(reserva);
+
+			enviaEmailService.enviarPagamentoNaoConf(reserva.getPiloto(), reserva);
             
         }else {
         	   
@@ -125,7 +131,9 @@ public class MercadoPagoController {
     		
     		reservaController.atulizarVagasDisponiveis(reserva);
             
-            reservaRepository.save(reserva);	
+            reservaRepository.save(reserva);
+
+			enviaEmailService.enviarPagamentoConf(reserva.getPiloto(), reserva);
         }
                
         return ResponseEntity.status(HttpStatus.CREATED).body(payment);

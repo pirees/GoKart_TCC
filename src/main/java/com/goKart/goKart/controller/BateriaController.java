@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.goKart.goKart.model.*;
+import com.goKart.goKart.service.EnviaEmailService;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
@@ -26,7 +27,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import com.goKart.goKart.excel.BateriaExcel;
 import com.goKart.goKart.repository.BateriaRepository;
 import com.goKart.goKart.repository.KartodromoRepository;
@@ -44,22 +44,27 @@ public class BateriaController {
 
     private ReservaRepository reservaRepository;
 
+    private EnviaEmailService enviaEmailService;
+
     public BateriaController(BateriaRepository bateriaRepository, KartodromoRepository kartodromoRepository,
-                             ReservaRepository reservaRepository) {
+                             ReservaRepository reservaRepository, EnviaEmailService enviaEmailService) {
         super();
         this.bateriaRepository = bateriaRepository;
         this.kartodromoRepository = kartodromoRepository;
         this.reservaRepository = reservaRepository;
+        this.enviaEmailService = enviaEmailService;
     }
 
     //LISTA TODAS AS BATERIAS DISPONÍVEIS
     @GetMapping("piloto/menuPiloto")
-    public String listarBaterias(@PageableDefault(direction = Direction.ASC, size = 10) Model model, Pageable pageable) {
+    public String listarBaterias(@PageableDefault(direction = Direction.ASC, size = 10) Model model, Pageable pageable, Piloto piloto) {
         Page<Bateria> baterias = bateriaRepository.findByData(pageable);
         model.addAttribute("baterias", baterias);
 
         return "piloto/menuPiloto";
     }
+
+
 
     //FAZ O GET DA BATERIA SELECIONADA NA PAGINA DO MENU PILOTO
     @GetMapping("piloto/confirmarReserva/{id}")
