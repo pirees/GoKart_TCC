@@ -8,12 +8,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.goKart.goKart.model.Bateria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,19 +20,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import com.goKart.goKart.dto.PaymentResponseDTO;
 import com.goKart.goKart.excel.ReservaExcel;
-import com.goKart.goKart.model.Bateria;
 import com.goKart.goKart.model.Kartodromo;
-import com.goKart.goKart.model.Piloto;
 import com.goKart.goKart.model.Reserva;
-import com.goKart.goKart.model.StatusPagamento;
 import com.goKart.goKart.repository.BateriaRepository;
 import com.goKart.goKart.repository.KartodromoRepository;
 import com.goKart.goKart.repository.PilotoRepository;
 import com.goKart.goKart.repository.ReservaRepository;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ReservaController {
@@ -69,17 +64,14 @@ public class ReservaController {
 		model.addAttribute("reserva", reservas);
 		
 		return "piloto/reservasPiloto";
-		
-		//return this.reservaRepository.findByEmail(email, paginacao);
-		
+
 	}
 	
 	public Reserva atulizarVagasDisponiveis(Reserva reserva) {
-					
+
 		if(reserva.getBateria().getVagasConfirmadas() < reserva.getBateria().getNrMaxPiloto()) {
-			reserva.getBateria().setVagasConfirmadas(reserva.getBateria().getVagasConfirmadas() + reserva.getNrReserva());
+			reserva.getBateria().setVagasConfirmadas(reserva.getBateria().getVagasConfirmadas() + 1);
 		}
-		
 		return reserva;
 	}
 	
@@ -119,8 +111,28 @@ public class ReservaController {
 		if(reserva.getBateria().getHoraBateria().isBefore(localTime.minus(1, ChronoUnit.HOURS))){
 			reservaRepository.deleteById(reserva.getId());
 		}
-
 		return "menuPiloto/reservasPiloto";
+	}
 
+	@GetMapping("piloto/cancelarReserva/{id}")
+	public String listaReservasPiloto(@PathVariable("id") Long id, Model model){
+		Reserva reserva = reservaRepository.getById(id);
+
+		if(reserva.getBateria().getData().isAfter(LocalDate.now())) {
+			model.addAttribute("reserva", reserva);
+
+			return "piloto/cancelarReserva";
+		}
+
+		model.addAttribute("reserva", reserva);
+		return "piloto/listaBateriaId";
+	}
+
+	@GetMapping("piloto/cancelarReserva/apagar/{id}")
+	public ModelAndView apagarReserva(@PathVariable("id") Long id, Reserva reserva) {
+		reserva = reservaRepository.getById(id);
+		reserva.getBateria().setVagasConfirmadas(reserva.getBateria().getVagasConfirmadas() - 1);
+		reservaRepository.delete(reserva);
+		return new ModelAndView("redirect:/piloto/menuPiloto");
 	}
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="pt-br">
+<head th:replace="~{basePiloto :: head}">
+  <div class="container">
+    <header th:replace="~{basePiloto :: header}"></header>
+  </div>
+</head>
+<body>
+<div class="container" >
+  <div class="row">
+    <p>&nbsp;</p>
+    <h3 class="text-center">
+      <i>Veja os detalhes da sua reserva</i>
+    </h3>
+    <form class="row g-3" method="GET" th:object="${reserva}">
+      <div class="col-6">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <h5 class="text-center">
+              <i>Piloto(s) da corrida</i>
+            </h5>
+            <table class="table text-center">
+              <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Nível</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="reserva : ${reserva}">
+                <td th:text="${reserva.piloto.nome + ' ' + reserva.piloto.sobrenome}"></td>
+                <td th:text="${reserva.piloto.nivel}"></td>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      <div class="segundo col-6">
+        <div>
+          <font size=5>Kartodromo: <span
+                  th:text="${reserva.kartodromo.nome}"></span></font>
+        </div>
+        <div>
+          <font size=5> Traçado: <span th:text="${reserva.bateria.tracado}"></span></font>
+        </div>
+        <div>
+          <font size=5> Data: <span th:text="${#temporals.format(reserva.bateria.data, 'dd/MM/yyyy')}"></span></font>
+        </div>
+        <div>
+          <font size=5> Horário: <span th:text="${reserva.bateria.horaBateria}"></span></font>
+        </div>
+        <div>
+          <font size=5> Duração: <span th:text="${reserva.bateria.duracaoBateria + ' minutos'}"></span></font>
+        </div>
+        <div>
+          <font size=8> R$: <span th:text="${#numbers.formatDecimal(reserva.bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></span></font>
+        </div>
+        <br>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+<div class="container">
+  <footer th:replace="~{basePiloto :: footer}" class="py-5"></footer>
+</div>
+</html>

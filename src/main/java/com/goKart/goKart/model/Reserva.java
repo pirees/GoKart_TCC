@@ -21,7 +21,7 @@ public class Reserva {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Integer nrReserva = 1;
+	private Integer nrReserva;
 	
 	private StatusPagamento status;
 	

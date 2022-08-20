@@ -294,5 +294,4 @@ public class BateriaController {
             return false;
         }
     }
-
 }

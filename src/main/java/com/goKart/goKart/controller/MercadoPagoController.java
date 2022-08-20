@@ -119,7 +119,7 @@ public class MercadoPagoController {
             
             reservaRepository.save(reserva);
 
-			enviaEmailService.enviarPagamentoNaoConf(reserva.getPiloto(), reserva);
+			//enviaEmailService.enviarPagamentoNaoConf(reserva.getPiloto(), reserva);
             
         }else {
         	   
@@ -128,12 +128,12 @@ public class MercadoPagoController {
     		reserva.setPiloto(piloto);
     		reserva.setKartodromo(reserva.getBateria().getKartodromo());
     		reserva.setDataReserva(LocalDate.now());
-    		
+
     		reservaController.atulizarVagasDisponiveis(reserva);
             
             reservaRepository.save(reserva);
 
-			enviaEmailService.enviarPagamentoConf(reserva.getPiloto(), reserva);
+			//enviaEmailService.enviarPagamentoConf(reserva.getPiloto(), reserva);
         }
                
         return ResponseEntity.status(HttpStatus.CREATED).body(payment);

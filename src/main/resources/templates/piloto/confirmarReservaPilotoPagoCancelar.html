@@ -23,9 +23,9 @@ div.segundo {
 		<div class="row">
 			<p>&nbsp;</p>
 			<h3 class="text-center">
-				<i>Faça a sua reserva agora mesmo</i>
+				<i>Sua reserva já está garantida para essa corrida</i>
 			</h3>
- 				<form class="row g-3" method="POST" th:action="@{/piloto/process_payment/{id}(id = ${bateria.id})}" th:object="${reserva}">
+ 				<form class="row g-3" method="GET" th:object="${reserva}">
 			
 			<div class="col-6">
 				<img class="img-fluid" th:src="@{/images/Teste2.png}" width="400" />
@@ -58,20 +58,18 @@ div.segundo {
 				</div>
 				<br>
 				<div >
-					<font size=3>Você já tem reserva para está bateria</font>
-				</div>
-				<br>
-				<div>
-					<a th:href="@{/piloto/process_payment/{id}(id = ${bateria.id})}">
-						<button type="submit" class="btn btn-outline-dark btn-lg">Cancelar Reserva</button>
-					</a>
+					<font size=3>*O cancelamento pode ser realizado 24 horas antes do horário da bateria, será estornador 90% do valor.</font>
 				</div>
 			</div>
 			</form>
+			<div class="col-6"></div>
+			<div class="segundo col-6">
+				<a th:href="@{/piloto/reservasPiloto}">
+					<button type="submit" class="btn btn-outline-dark btn-lg">Minhas reservas</button>
+				</a>
+			</div>
 		</div>
-		
 		<div class="row mt-5">
-		
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<h5 class="text-center">
@@ -89,7 +87,9 @@ div.segundo {
 							<td th:text="${reserva.piloto.nome + ' ' + reserva.piloto.sobrenome}"></td>
 							<td th:text="${reserva.piloto.nivel}"></td>
 					</tbody>
+
 				</table>
+
 			</div>
 			<div class="col-md-2"></div>
 		</div>		
