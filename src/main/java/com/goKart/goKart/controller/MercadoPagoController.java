@@ -128,6 +128,7 @@ public class MercadoPagoController {
     		reserva.setPiloto(piloto);
     		reserva.setKartodromo(reserva.getBateria().getKartodromo());
     		reserva.setDataReserva(LocalDate.now());
+			reserva.setNrReserva(1);
 
     		reservaController.atulizarVagasDisponiveis(reserva);
             

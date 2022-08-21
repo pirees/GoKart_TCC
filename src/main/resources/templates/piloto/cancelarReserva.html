@@ -13,7 +13,7 @@
     <h3 class="text-center">
       <i>Veja os detalhes da sua reserva</i>
     </h3>
-    <form class="row g-3" method="GET" th:object="${reserva}">
+    <form class="row g-3" method="POST" th:action="@{/piloto/cancelarReserva/apagar/{id}(id = ${reserva.id})}" th:object="${reserva}">
       <div class="col-6">
           <div class="col-md-2"></div>
           <div class="col-md-8">
@@ -57,7 +57,7 @@
           <font size=8> R$: <span th:text="${#numbers.formatDecimal(reserva.bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></span></font>
         </div>
         <div>
-          <font size=3>*O cancelamento pode ser realizado 24 horas antes do horário da bateria,será estornador 90% do valor.</font>
+          <font size=3>*O cancelamento pode ser realizado 24 horas antes do horário da bateria, será estornador 90% do valor.</font>
           <br>
         </div>
         <br>

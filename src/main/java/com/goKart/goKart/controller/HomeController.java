@@ -40,4 +40,9 @@ public class HomeController {
 	public String termosCondicoes() {
 		return "/termosCondicoes";
 	}
+
+	@RequestMapping("/pendenciaCadastro")
+	public String pendenciaCadastro() {
+		return "/pendenciaCadastro";
+	}
 }

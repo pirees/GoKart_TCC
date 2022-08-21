@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 
+import com.goKart.goKart.model.Kartodromo;
+import com.goKart.goKart.model.Reserva;
+import com.goKart.goKart.repository.KartodromoRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,11 +28,14 @@ public class AdministradorController {
 	
 	private UsuarioController usuarioController;
 
+	private KartodromoRepository kartodromoRepository;
+
 	public AdministradorController(AdministradorRepository administradorRepository, PerfilRepository perfilRepository,
-			UsuarioController usuarioController) {
+			UsuarioController usuarioController, KartodromoRepository kartodromoRepository) {
 		this.administradorRepository = administradorRepository;
 		this.perfilRepository = perfilRepository;
 		this.usuarioController = usuarioController;
+		this.kartodromoRepository = kartodromoRepository;
 	}
 
 	@GetMapping("admin/cadastroAdmin")
@@ -58,6 +65,16 @@ public class AdministradorController {
 		administradorRepository.save(administrador);
 		
 		return "admin/cadastroAdmin";
+	}
+
+	@GetMapping("admin/pendencias")
+	public String visualiarPendencias(Model model){
+		List<Kartodromo> kartodromo = kartodromoRepository.findByPendencia();
+
+		model.addAttribute("kartodromo", kartodromo);
+
+		return "admin/pendencias";
+
 	}
 	
 	

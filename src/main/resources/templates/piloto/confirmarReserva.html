@@ -73,7 +73,7 @@ div.segundo {
 		</div>
 		<br>
 		<div class="row mt-5">
-		
+
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<h5 class="text-center">
@@ -84,12 +84,14 @@ div.segundo {
 						<tr>
 							<th scope="col">Nome</th>
 							<th scope="col">Nível</th>
+							<th scope="col">Status Pagamento</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="reserva : ${reserva}">
+						<tr th:each="reserva : ${reserva}"  >
 							<td th:text="${reserva.piloto.nome + ' ' + reserva.piloto.sobrenome}"></td>
 							<td th:text="${reserva.piloto.nivel}"></td>
+							<td th:text="${reserva.status}"></td>
 					</tbody>
 				</table>
 			</div>

@@ -24,17 +24,15 @@
 		</a>
 		<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 			<li><a th:href="@{/admin/menuAdmin}" class="nav-link px-2 link-dark">Menu</a></li>
-			<li><a th:href="@{/admin/cadastroKartodromo}" class="nav-link px-2 link-dark">Novo Kartódromo</a></li>
 			<li><a th:href="@{/admin/cadastroAdmin}" class="nav-link px-2 link-dark">Novo Administrador</a></li>	
 			<li><a th:href="@{/admin/todosKartodromos}" class="nav-link px-2 link-dark">Kartódromos</a></li>
 			<li><a th:href="@{/admin/todosPilotos}" class="nav-link px-2 link-dark">Pilotos</a></li>
+			<li><a th:href="@{/admin/pendencias}" class="nav-link px-2 link-dark">Pendências</a></li>
 		</ul>
 		<div class="col-md-3 text-end">
 			<a th:href="@{/logout}">
 			<button type="button" class="btn btn-outline-dark">Sair</button></a>
-
 		</div>
-		
 	</header>
 <footer th:fragment="footer" class="py-5">
 	<div class="d-flex justify-content-between py-4 my-4 border-top">

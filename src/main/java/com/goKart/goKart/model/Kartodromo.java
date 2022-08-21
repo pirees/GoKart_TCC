@@ -27,6 +27,16 @@ public class Kartodromo extends Usuario implements UserDetails  {
 	@NotBlank(message = "Cidade não pode ficar em branco")
 	private String cidade;
 
+	@NotBlank(message = "CEP não pode ficar em branco")
+	private String CEP;
+
+	@NotBlank(message = "Logradouro não pode ficar em branco")
+	private String logradouro;
+
+	private String complemento;
+
+	private StatusUsuario statusUsuario;
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.getPerfis();

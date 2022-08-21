@@ -29,7 +29,7 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long>  {
 	@Query("select p from Reserva p where p.kartodromo.id = :id GROUP BY p.piloto.id ORDER BY p.dataReserva ASC")
 	List<Reserva> findDataReservaKartodromoById(Long id);
 
-	@Query(value = "SELECT * FROM tb_reserva where tb_reserva.bateria_id = :id group by tb_reserva.piloto_id", nativeQuery = true)
+	@Query(value = "SELECT * FROM tb_reserva where tb_reserva.bateria_id = :id and tb_reserva.status = 0 group by tb_reserva.piloto_id", nativeQuery = true)
 	List<Reserva> findPilotoByReserva(Long id);
 
 }

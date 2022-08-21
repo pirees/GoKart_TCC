@@ -77,11 +77,8 @@ public class BateriaController {
         List<Reserva> reserva = reservaRepository.findPilotoByReserva(id);
 
         for (Reserva reservas : reserva) {
-
             if (reservas.getPiloto().getEmail().equals(email) && reservas.getStatus().equals(status.CONFIRMADO)) {
-
                 if(reservas.getBateria().getData().isAfter(LocalDate.now())){
-
                     model.addAttribute("bateria", bateria);
                     model.addAttribute("reserva", reserva);
 

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="pt-br">
+<head th:replace="~{baseCadastroPiloto :: head}"></head>
+<div class="container">
+	<header th:replace="~{baseCadastroPiloto :: header}"></header>
+</div>
+<body>
+	<div class="container p-5">
+			<div class="d-flex justify-content-between mb-3">
+				<form class="row g-3" method="POST" th:action="@{/cadastroKartodromo}" th:object="${kartodromo}">
+					<div class="row p-3">
+						<div class="col">
+		    				<label for="nome" class="form-label">Nome</label>
+		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="nome" th:field="*{nome}">
+		    				<span th:if="${#fields.hasErrors('nome')}" class="text-danger" th:errors="*{nome}"></span> 
+		  				</div>
+						<div class="col">
+							<label for="CNPJ" class="form-label">CNPJ</label>
+							<input type="text" class="form-control" th:errorclass="is-invalid" id="nrMaxPiloto" th:field="*{CNPJ}">
+							<span th:if="${#fields.hasErrors('CNPJ')}" class="text-danger" th:errors="*{CNPJ}"></span>
+							<small class="text-muted">E.x "99.999.999/9999-99"</small>
+						</div>
+						<div class="col">
+							<label for="Logradouro" class="form-label">Logradouro</label>
+							<input type="text" class="form-control" th:errorclass="is-invalid" id="Logradouro" th:field="*{Logradouro}">
+							<span th:if="${#fields.hasErrors('Logradouro')}" class="text-danger" th:errors="*{CEP}"></span>
+							<small class="text-muted">E.x "Avenida das Araucárias, 213"</small>
+						</div>
+		  				<div class="row p-3">
+						<div class="col">
+							<label for="CEP" class="form-label">CEP</label>
+							<input type="text" class="form-control" th:errorclass="is-invalid" id="cep" th:field="*{CEP}">
+							<span th:if="${#fields.hasErrors('CEP')}" class="text-danger" th:errors="*{CEP}"></span>
+							<small class="text-muted">E.x "99.999-999"</small>
+						</div>
+
+						<div class="col">
+							<label for="Complemento" class="form-label">Complemento</label>
+							<input type="text" class="form-control" th:errorclass="is-invalid" id="Complemento" th:field="*{Complemento}">
+							<span th:if="${#fields.hasErrors('Complemento')}" class="text-danger" th:errors="*{Complemento}"></span>
+						</div>
+						<div class="col">
+				    		<label for="Cidade" class="form-label">Cidade</label>
+				    		<input type="text" class="form-control" th:errorclass="is-invalid" id="cidade" th:field="*{cidade}">
+				    		<span th:if="${#fields.hasErrors('cidade')}" class="text-danger" th:errors="*{cidade}"></span> 
+						</div>
+		  				<div class="col">
+				    		<label class="form-label">Estado</label>
+				    		<select class="form-select" th:errorclass="is-invalid" name ="estado">
+				      		<option selected>Escolha...</option>
+				     		<option th:each="estado : ${T(com.goKart.goKart.model.Estado).values()}" 
+						    	  	th:value="${estado}"
+							      	th:text="${estado}"> </option>
+				    		</select>
+				 		</div>
+						</div>
+						<div class="row p-2">
+							<div class="col">
+								<label for="email" class="form-label">E-mail</label>
+								<input type="email" class="form-control" th:errorclass="is-invalid" id="email" th:field="*{email}">
+								<span th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></span>
+							</div>
+							<div class="col">
+								<label for="senha" class="form-label">Senha</label>
+								<input type="password" class="form-control" th:errorclass="is-invalid" id="senha" th:field="*{senha}">
+								<span th:if="${#fields.hasErrors('senha')}" class="text-danger" th:errors="*{senha}"></span>
+							</div>
+				 		</div>
+		  			</div>
+					<div class="row p-2">
+						<h5>Importe a logo do Kartódromo:</h5>
+						<br>
+						<input type="file" class="form-control" id="customFile"/>
+					</div>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+				 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				 	<a th:href="@{/pendenciaCadastro}">
+				    	<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
+				    	</a>
+					</div>  						
+				</form>
+			</div>
+		</div>
+</body>
+<div class="container">
+	<footer th:replace="~{basePiloto :: footer}" class="py-5"></footer>
+</div>
+</html>

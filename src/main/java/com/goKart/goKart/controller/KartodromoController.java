@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import com.goKart.goKart.excel.TodosKartodromosExcel;
 import com.goKart.goKart.excel.TodosPilotosExcel;
 import com.goKart.goKart.model.Piloto;
+import com.goKart.goKart.model.StatusUsuario;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -39,9 +40,9 @@ public class KartodromoController{
 		this.usuarioController = usuarioController;
 	}
 
-	@GetMapping("admin/cadastroKartodromo")
+	@GetMapping("/cadastroKartodromo")
 	public String formulario(Kartodromo kartodromo) {	
-		return "admin/cadastroKartodromo";
+		return "/cadastroKartodromo";
 	}
 	
 	@GetMapping("kartodromo/meusDados")
@@ -55,11 +56,11 @@ public class KartodromoController{
 		return "kartodromo/meusDados";
 	}
 
-	@PostMapping ("admin/cadastroKartodromo")
+	@PostMapping ("/cadastroKartodromo")
 	public String salvarKartodromo(@Valid Kartodromo kartodromo,BindingResult resultado, String email) throws Exception{
 		
 		if(resultado.hasErrors()) {			
-			return "admin/cadastroKartodromo";
+			return "/cadastroKartodromo";
 		}
 		
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -70,12 +71,13 @@ public class KartodromoController{
 		perfis.add(perfil);	
 		kartodromo.setPerfis(perfis);
 		kartodromo.setSenha(encodedPassword);
+		kartodromo.setStatusUsuario(StatusUsuario.PENDENTE);
 		
 		usuarioController.verificaCadastro(email);
 		
 		kartodromoRepository.save(kartodromo);
 		
-		return "redirect:/admin/menuAdmin";
+		return "redirect:/pendenciaCadastro";
 	}
 	
 	@GetMapping("admin/todosKartodromos")

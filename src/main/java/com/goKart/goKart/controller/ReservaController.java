@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.goKart.goKart.model.Bateria;
+import com.goKart.goKart.model.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,12 +22,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.goKart.goKart.excel.ReservaExcel;
-import com.goKart.goKart.model.Kartodromo;
-import com.goKart.goKart.model.Reserva;
 import com.goKart.goKart.repository.BateriaRepository;
 import com.goKart.goKart.repository.KartodromoRepository;
 import com.goKart.goKart.repository.PilotoRepository;
 import com.goKart.goKart.repository.ReservaRepository;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -119,9 +118,12 @@ public class ReservaController {
 		Reserva reserva = reservaRepository.getById(id);
 
 		if(reserva.getBateria().getData().isAfter(LocalDate.now())) {
-			model.addAttribute("reserva", reserva);
+			if(reserva.getStatus().equals(StatusPagamento.CONFIRMADO)){
 
-			return "piloto/cancelarReserva";
+				model.addAttribute("reserva", reserva);
+
+				return "piloto/cancelarReserva";
+			}
 		}
 
 		model.addAttribute("reserva", reserva);
@@ -129,10 +131,17 @@ public class ReservaController {
 	}
 
 	@GetMapping("piloto/cancelarReserva/apagar/{id}")
-	public ModelAndView apagarReserva(@PathVariable("id") Long id, Reserva reserva) {
+	public String apagarReserva(@PathVariable("id") Long id, Reserva reserva) {
 		reserva = reservaRepository.getById(id);
+
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Piloto piloto = pilotoRepository.findByEmail(email);
+
+		reserva.setPiloto(piloto);
+		reserva.setKartodromo(reserva.getBateria().getKartodromo());
 		reserva.getBateria().setVagasConfirmadas(reserva.getBateria().getVagasConfirmadas() - 1);
-		reservaRepository.delete(reserva);
-		return new ModelAndView("redirect:/piloto/menuPiloto");
+		reserva.setStatus(StatusPagamento.DEVOLVIDO);
+		reservaRepository.save(reserva);
+		return "redirect:/piloto/menuPiloto";
 	}
 }

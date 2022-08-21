@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="pt-br">
+<head th:replace="~{baseAdmin :: head}"></head>
+<div class="container">
+    <header th:replace="~{baseAdmin :: header}"></header>
+</div>
+<body>
+<div class="container">
+    <table id="example" class="table table-striped text-center">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>CNPJ</th>
+            <th>Estado</th>
+            <th>Cidade</th>
+            <th>Situação</th>
+            <th>Aprovar</th>
+            <th>Rejeitar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="kartodromo : ${kartodromo}">
+            <td th:text="${kartodromo.nome}"></td>
+            <td th:text="${kartodromo.email}"></td>
+            <td th:text="${kartodromo.CNPJ}"></td>
+            <td th:text="${kartodromo.estado}"></td>
+            <td th:text="${kartodromo.cidade}"></td>
+            <td th:text="${kartodromo.statusUsuario}"></td>
+            <td> <a><button type="button" class="btn-outline-dark">APRO</button></a></td>
+            <td> <a><button type="button" class="btn-outline-dark">REJ</button></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+	$(document).ready(function () {
+    $('#example').DataTable({
+    	language: {
+    		url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
+            decimal: ',',
+            thousands: '.',
+        },
+    });
+});
+</script>
+</div>
+</body>
+<div class="container">
+    <footer th:replace="~{baseAdmin :: footer}" class="py-5"></footer>
+</div>
+</html>
+
