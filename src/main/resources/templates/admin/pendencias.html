@@ -28,8 +28,8 @@
             <td th:text="${kartodromo.estado}"></td>
             <td th:text="${kartodromo.cidade}"></td>
             <td th:text="${kartodromo.statusUsuario}"></td>
-            <td> <a><button type="button" class="btn-outline-dark">APRO</button></a></td>
-            <td> <a><button type="button" class="btn-outline-dark">REJ</button></a></td>
+            <td> <a th:href="@{/admin/pendencias/aprovar/{id}(id=${kartodromo.id})}"><button type = submit class="btn btn-outline-dark"><i class="fa-regular fa-circle-check"></i></button></a></td>
+            <td> <a th:href="@{/admin/pendencias/reprovar/{id}(id=${kartodromo.id})}"><button type = submit class="btn btn-outline-dark"><i class="fa-solid fa-xmark"></i></button></a></td>
         </tr>
         </tbody>
     </table>

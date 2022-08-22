@@ -5,7 +5,7 @@ import lombok.Data;
 public enum StatusUsuario {
 
     APROVADO("Aprovado"),
-    NAPROVADO("Não aprovado"),
+    REPROVADO("Reprovado"),
     PENDENTE("Pendente");
 
     private String StatusUsuario;

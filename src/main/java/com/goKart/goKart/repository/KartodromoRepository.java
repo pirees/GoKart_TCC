@@ -15,6 +15,6 @@ public interface KartodromoRepository extends JpaRepository<Kartodromo, Long>  {
 
 	Kartodromo findByEmail(String email);
 
-    @Query(value = "SELECT * FROM tb_usuario where tb_usuario.status_usuario = 2", nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_usuario where status_usuario = 2 or status_usuario = 1", nativeQuery = true)
     List<Kartodromo> findByPendencia();
 }
