@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.goKart.goKart.model.Kartodromo;
@@ -57,7 +58,7 @@ public class KartodromoController{
 	}
 
 	@PostMapping ("/cadastroKartodromo")
-	public String salvarKartodromo(@Valid Kartodromo kartodromo,BindingResult resultado, String email) throws Exception{
+	public String salvarKartodromo(@Valid Kartodromo kartodromo, BindingResult resultado, String email, @RequestParam("fileKartodromo") MultipartFile file) throws Exception{
 		
 		if(resultado.hasErrors()) {			
 			return "/cadastroKartodromo";
@@ -72,6 +73,7 @@ public class KartodromoController{
 		kartodromo.setPerfis(perfis);
 		kartodromo.setSenha(encodedPassword);
 		kartodromo.setStatusUsuario(StatusUsuario.PENDENTE);
+		kartodromo.setImagem(file.getBytes());
 		
 		usuarioController.verificaCadastro(email);
 		
@@ -98,5 +100,11 @@ public class KartodromoController{
 
 		todosKartodromosExcel.export(response);
 
+	}
+	@GetMapping("imagem/{idkartodromo}")
+	@ResponseBody
+	public byte[] exibirImagem(@PathVariable("idkartodromo") Long id){
+		Kartodromo kartodromo = this.kartodromoRepository.getById(id);
+		return kartodromo.getImagem();
 	}
 }

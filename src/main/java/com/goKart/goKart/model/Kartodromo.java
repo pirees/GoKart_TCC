@@ -3,6 +3,7 @@ package com.goKart.goKart.model;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -36,6 +37,9 @@ public class Kartodromo extends Usuario implements UserDetails  {
 	private String complemento;
 
 	private StatusUsuario statusUsuario;
+
+	@Lob
+	private byte[] imagem;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -72,4 +76,7 @@ public class Kartodromo extends Usuario implements UserDetails  {
 		return true;
 	}
 
+	public boolean getStatusUsuario(StatusUsuario pendente) {
+		return false;
+	}
 }

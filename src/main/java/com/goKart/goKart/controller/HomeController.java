@@ -6,17 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	/*@Autowired
-	private PilotoRepository pilotoReposiroty;
-	
-	@GetMapping("/home")
-	public String home() {
-		List<Pedido> pedidos = pedidoRepository.findAll();
-		model.addAttribute("pedidos", pedidos);
-		
-		return "home";
-	}*/
-	
 	@RequestMapping("/login")
 	public String login() {
 		return "/login";

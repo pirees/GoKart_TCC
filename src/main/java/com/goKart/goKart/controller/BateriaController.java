@@ -35,6 +35,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import static com.goKart.goKart.model.StatusUsuario.PENDENTE;
+
 @Controller
 public class BateriaController {
 
@@ -165,7 +167,7 @@ public class BateriaController {
 
     //LISTA TODAS AS BATERIAS DISPONÍVEIS
     @GetMapping("kartodromo/menuKartodromo")
-    public String listarMenuKartodromo(Model model, Bateria bateria) {
+    public String listarMenuKartodromo(Model model, Bateria bateria, StatusUsuario statusUsuario) {
 
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
@@ -173,6 +175,10 @@ public class BateriaController {
         bateria.setKartodromo(kartodromo);
 
         List<Bateria> bateriaList = bateriaRepository.findByDateKartodromoId(bateria.getKartodromo().getId());
+
+        if(kartodromo.getStatusUsuario().equals(PENDENTE)){
+            return "/pendenciaCadastro";
+        }
 
         model.addAttribute("baterias", bateriaList);
         return "kartodromo/menuKartodromo";
