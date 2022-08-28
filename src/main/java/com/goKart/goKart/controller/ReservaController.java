@@ -117,7 +117,7 @@ public class ReservaController {
 	public String listaReservasPiloto(@PathVariable("id") Long id, Model model){
 		Reserva reserva = reservaRepository.getById(id);
 
-		if(reserva.getBateria().getData().isAfter(LocalDate.now())) {
+		if(reserva.getBateria().getData().isAfter(LocalDate.now()) && reserva.getBateria().getHoraBateria().isAfter(LocalTime.now())) {
 			if(reserva.getStatus().equals(StatusPagamento.CONFIRMADO)){
 
 				model.addAttribute("reserva", reserva);

@@ -44,8 +44,7 @@ $(function () {
         todayBtn: "linked",
         clearBtn: true,
         multidate: false,
-        todayHighlight: true,
-        startDate: "today"
+        todayHighlight: true
     });
     var checkin = $('#datepicker-inicial').datepicker({
         format: "dd/mm/yyyy",

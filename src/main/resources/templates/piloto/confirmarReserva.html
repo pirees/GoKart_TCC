@@ -54,6 +54,10 @@ div.segundo {
 						th:text="${bateria.nrMaxPiloto}"></span></font>
 				</div>
 				<div>
+					<font size=5> Cidade: <span
+							th:text="${bateria.kartodromo.cidade}"></span></font>
+				</div>
+				<div>
 					<font size=8> R$: <span th:text="${#numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></span></font>
 				</div>
 				<br>

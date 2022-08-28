@@ -28,7 +28,7 @@ div.segundo {
  				<form class="row g-3" method="GET" th:object="${reserva}">
 			
 			<div class="col-6">
-				<img class="img-fluid" th:src="@{/images/Teste2.png}" width="400" />
+				<img alt="Image" th:src="|/imagem/${bateria.kartodromo.id}|" width="400" />
 			</div>
 			<div class="segundo col-6">
 				<div>

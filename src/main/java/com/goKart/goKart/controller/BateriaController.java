@@ -59,14 +59,27 @@ public class BateriaController {
 
     //LISTA TODAS AS BATERIAS DISPONÍVEIS
     @GetMapping("piloto/menuPiloto")
-    public String listarBaterias(@PageableDefault(direction = Direction.ASC, size = 10) Model model, Pageable pageable, Piloto piloto) {
+    public ModelAndView listarBaterias(@PageableDefault(direction = Direction.ASC, size = 10) ModelAndView model, Pageable pageable, Piloto piloto) {
         Page<Bateria> baterias = bateriaRepository.findByData(pageable);
-        model.addAttribute("baterias", baterias);
+        model.addObject("bateria", baterias);
 
-        return "piloto/menuPiloto";
+        return model;
     }
 
+    @PostMapping("***/pesquisarKartodromo")
+    public ModelAndView pesquisarPorNomeKartodromo(@RequestParam(value = "nomepesquisa") String nomepesquisa, LocalDate datapesquisa){
+        ModelAndView modelAndView = new ModelAndView("piloto/menuPiloto");
+        List<Bateria> baterias = bateriaRepository.findByKartodromoNome(nomepesquisa,datapesquisa);
 
+        if(baterias.isEmpty()){
+            ModelAndView model = new ModelAndView("piloto/menuPilotoSemBusca");
+            return model;
+        }
+
+        modelAndView.addObject("bateria", baterias);
+
+        return modelAndView;
+    }
 
     //FAZ O GET DA BATERIA SELECIONADA NA PAGINA DO MENU PILOTO
     @GetMapping("piloto/confirmarReserva/{id}")
@@ -91,7 +104,7 @@ public class BateriaController {
                     model.addAttribute("bateria", bateria);
                     model.addAttribute("reserva", reserva);
 
-                    return "piloto/confirmarReservaPilotoPago";
+                    return "piloto/confirmarReservaPilotoPagoCancelar";
                 }
             }
         }
@@ -167,22 +180,45 @@ public class BateriaController {
 
     //LISTA TODAS AS BATERIAS DISPONÍVEIS
     @GetMapping("kartodromo/menuKartodromo")
-    public String listarMenuKartodromo(Model model, Bateria bateria, StatusUsuario statusUsuario) {
+    public ModelAndView listarMenuKartodromo(ModelAndView model, Bateria baterias) {
 
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
 
-        bateria.setKartodromo(kartodromo);
+        baterias.setKartodromo(kartodromo);
 
-        List<Bateria> bateriaList = bateriaRepository.findByDateKartodromoId(bateria.getKartodromo().getId());
+        List<Bateria> bateria = bateriaRepository.findByDateKartodromoId(baterias.getKartodromo().getId());
 
         if(kartodromo.getStatusUsuario().equals(PENDENTE)){
-            return "/pendenciaCadastro";
+            ModelAndView modelAndView = new ModelAndView("/pendenciaCadastro");
+            return modelAndView;
         }
 
-        model.addAttribute("baterias", bateriaList);
-        return "kartodromo/menuKartodromo";
+        model.addObject("bateria", bateria);
+        return model;
 
+    }
+
+    @PostMapping("***/pesquisarMenuKartodromo")
+    public ModelAndView pesquisarPorNomeMenuKartodromo(@RequestParam(value = "datapesquisa")LocalDate datapesquisa, Long id, Bateria baterias, String email){
+
+        ModelAndView modelAndView = new ModelAndView("kartodromo/menuKartodromo");
+
+        email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
+
+        baterias.setKartodromo(kartodromo);
+
+        List<Bateria> bateria = bateriaRepository.findByKartodromoNomeMenuKartodromo(baterias.getKartodromo().getId(), datapesquisa);
+
+        if(bateria.isEmpty()){
+            ModelAndView model = new ModelAndView("kartodromo/menuKartodromoSemBusca");
+            return model;
+        }
+
+        modelAndView.addObject("bateria", bateria);
+
+        return modelAndView;
     }
 
     @GetMapping("kartodromo/visualizarBateria/{id}")
