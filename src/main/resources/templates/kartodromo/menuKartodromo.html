@@ -15,13 +15,15 @@
 		<div class="mb-5 mt-3 justify-content-start">
 			<form th:action="@{pesquisarMenuKartodromo}" method="post">
 				<div class="row" >
-					<div class="col">
+					<div class="col-4"></div>
+					<div class="col-3">
 						<input th:name="datapesquisa" type="text" id="datepicker-final" class="form-control"
 							   placeholder="Data">
 					</div>
-					<div class="col">
+					<div class="col-3">
 						<input type="submit" class="btn btn-outline-dark" value="Buscar">
 					</div>
+					<div class="col-3"></div>
 				</div>
 			</form>
 		</div>
