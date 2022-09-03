@@ -52,6 +52,9 @@
                     </h5>
                     <div class="card-text">
                         <div>
+                            Bateria: <span th:text="${bateria.id}"></span>
+                        </div>
+                        <div>
                             Valor: <span
                                 th:text="${'R$' + #numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}">200,99</span>
                         </div>

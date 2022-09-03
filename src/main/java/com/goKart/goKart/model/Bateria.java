@@ -15,6 +15,7 @@ import com.goKart.goKart.repository.PilotoRepository;
 import com.opencsv.bean.CsvBindByName;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -43,6 +44,7 @@ public class Bateria {
 	private String tracado;
 	
 	@NotNull(message = "Valor não pode ficar em branco")
+	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal valorBateria;
 	
 	@NotBlank(message = "Duração da bateria não pode ficar em branco")

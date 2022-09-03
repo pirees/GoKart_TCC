@@ -3,6 +3,7 @@ package com.goKart.goKart.controller;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +23,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,8 +61,8 @@ public class BateriaController {
 
     //LISTA TODAS AS BATERIAS DISPONÍVEIS
     @GetMapping("piloto/menuPiloto")
-    public ModelAndView listarBaterias(@PageableDefault(direction = Direction.ASC, size = 10) ModelAndView model, Pageable pageable, Piloto piloto) {
-        Page<Bateria> baterias = bateriaRepository.findByData(pageable);
+    public ModelAndView listarBaterias(ModelAndView model, Pageable pageable, Piloto piloto) {
+        List<Bateria> baterias = bateriaRepository.findAllByOrderByDataAsc();
         model.addObject("bateria", baterias);
 
         return model;
@@ -99,13 +101,13 @@ public class BateriaController {
 
                     return "piloto/confirmarReservaPilotoPagoCancelar";
 
-                } else{
+                } /*else{
 
                     model.addAttribute("bateria", bateria);
                     model.addAttribute("reserva", reserva);
 
                     return "piloto/confirmarReservaPilotoPagoCancelar";
-                }
+                }*/
             }
         }
 
@@ -128,7 +130,9 @@ public class BateriaController {
     }
 
     @PostMapping("kartodromo/cadastroBateria")
-    public String salvarBateria(@Valid Bateria bateria, BindingResult resultado) {
+    public String salvarBateria(@Valid Bateria bateria, BindingResult resultado, RedirectAttributes redirectAttributes) {
+
+        Boolean isFlag = verificaBateriaExiste(bateria);
 
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
@@ -138,10 +142,34 @@ public class BateriaController {
         }
 
         bateria.setKartodromo(kartodromo);
-
-        bateriaRepository.save(bateria);
-
+        if(!isFlag){
+            redirectAttributes.addFlashAttribute("errormessage", "Já existe bateria cadastrada no mesmo dia ou horário.");
+            return "redirect:/kartodromo/cadastroBateria";
+        }else{
+            bateriaRepository.save(bateria);
+            redirectAttributes.addFlashAttribute("sucessmessage", "Bateria salva com sucesso");
+        }
         return "redirect:/kartodromo/menuKartodromo";
+    }
+
+    public Boolean verificaBateriaExiste(Bateria bateria){
+
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
+
+        bateria.setKartodromo(kartodromo);
+
+        List<Bateria> bateriaList = bateriaRepository.findAll();
+
+        for(Bateria baterias: bateriaList){
+            if(baterias.getData().isEqual(bateria.getData()) && baterias.getKartodromo().getId().equals(bateria.getKartodromo().getId())){
+                if(baterias.getHoraBateria().equals(bateria.getHoraBateria()) && baterias.getHoraBateria().getMinute() == bateria.getHoraBateria().getMinute()){
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     //LISTA TODAS AS BATERIAS DISPONÍVEIS
@@ -246,17 +274,25 @@ public class BateriaController {
     }
 
     @PostMapping("kartodromo/visualizarBateria/{id}")
-    public String atualizarBateria(@PathVariable("id") Long id, @Valid Bateria bateria, BindingResult bindingResult) {
+    public String atualizarBateria(@PathVariable("id") Long id, @Valid Bateria bateria, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        Boolean isFlag = verificaBateriaExiste(bateria);
 
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
 
+        String resultado = bateria.getValorBateria().toString();
         List<Bateria> bateriaList = bateriaRepository.findAll();
 
         for (Bateria baterias : bateriaList) {
             if (baterias.getHoraBateria() == bateria.getHoraBateria() || baterias.getHoraBateria().getMinute() == bateria.getHoraBateria().getMinute()) {
-                bateria.setKartodromo(kartodromo);
-                bateriaRepository.save(bateria);
+                if(!isFlag){
+                    redirectAttributes.addFlashAttribute("errormessage", "Já existe bateria cadastrada no mesmo dia ou horário.");
+                    return "redirect:/kartodromo/visualizarBateria/{id}";
+                }else{
+                    bateria.setKartodromo(kartodromo);
+                    bateriaRepository.save(bateria);
+                }
             }
         }
         if (bindingResult.hasErrors()) {

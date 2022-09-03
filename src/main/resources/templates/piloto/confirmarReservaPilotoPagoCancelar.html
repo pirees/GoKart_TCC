@@ -80,14 +80,12 @@ div.segundo {
 						<tr>
 							<th scope="col">Nome</th>
 							<th scope="col">Nível</th>
-							<th scope="col">Status Pagamento</th>
 						</tr>
 					</thead>
 					<tbody>
 							<tr th:each="reserva : ${reserva}">
 							<td th:text="${reserva.piloto.nome + ' ' + reserva.piloto.sobrenome}"></td>
 							<td th:text="${reserva.piloto.nivel}"></td>
-							<td th:text="${reserva.status}"></td>
 					</tbody>
 
 				</table>
@@ -100,15 +98,18 @@ div.segundo {
 			<i>Informações do kartódromo</i>
 		</h5>
 		<br>
-		<p><font size="4">Localização </font></p>
- 		<p><font size="3">Av das Araucárias, 3803</font></p>
-  		<p><font size="3">Módulo 01 - Galpão B</font></p>
-  		<p><font size="3">CEP 83707-067 - Thomaz Coelho</font></p>
-  		<p><font size="3">Araucária - PR</font></p>
-  		<br>
-  		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.983457467097!2d-49.36449718437011!3d-25.53892794345982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dcfd45274d986d%3A0x835bd2061563fb71!2sUNIFACEAR%20-%20Campus%20Arauc%C3%A1ria!5e0!3m2!1spt-BR!2sbr!4v1654349292317!5m2!1spt-BR!2sbr" 
-  			width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-  		</iframe>
+		<form class="row g-3" method="GET" th:object="${bateria}">
+			<br>
+			<p>Endereço: <span th:text="${bateria.kartodromo.logradouro}"></span></p>
+			<p>Complemento: <span th:text="${bateria.kartodromo.complemento}"></span></p>
+			<p>CEP: <span th:text="${bateria.kartodromo.CEP}"></span></p>
+			<p>Cidade: <span th:text="${bateria.kartodromo.cidade + '-' + bateria.kartodromo.estado}"></span></p>
+			<p>Contato: <span th:text="${bateria.kartodromo.email}"></span></p>
+			<br>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.983457467097!2d-49.36449718437011!3d-25.53892794345982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dcfd45274d986d%3A0x835bd2061563fb71!2sUNIFACEAR%20-%20Campus%20Arauc%C3%A1ria!5e0!3m2!1spt-BR!2sbr!4v1654349292317!5m2!1spt-BR!2sbr"
+					width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+			</iframe>
+		</form>
 	</div>
 </body>
 <div class="container">

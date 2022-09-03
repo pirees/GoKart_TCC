@@ -38,8 +38,8 @@
 		  				</div>
 		  				<div class="col">
 		    				<label for="valorBateria" class="form-label">Valor da Bateria (R$)</label>
-		    				<input  type="text" class="form-control"  id="valorBateria" th:field="${bateria.valorBateria}">
-		    				<small class="text-muted">E.x "90.00"</small>
+		    				<input  type="text" class="form-control"  id="valorBateria" th:value="${#numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}">
+		    				<small class="text-muted">E.x "90,00"</small>
 		  				</div>
 		  				<div class="col">
 				    		<label for="nrMaxPiloto" class="form-label">Números de Pilotos</label>

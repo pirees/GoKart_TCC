@@ -5,6 +5,8 @@
 <div class="container">
 	<header th:replace="~{baseCadastroPiloto :: header}"></header>
 </div>
+<script type="text/javascript" th:src="@{/js/jquery.mask.js}" defer></script>
+<script type="text/javascript" th:src="@{/js/mascara.js}"></script>
 <body>
 	<div class="container p-5">
 			<div class="d-flex justify-content-between mb-3">
@@ -16,8 +18,8 @@
 		    				<span th:if="${#fields.hasErrors('nome')}" class="text-danger" th:errors="*{nome}"></span> 
 		  				</div>
 						<div class="col">
-							<label for="CNPJ" class="form-label">CNPJ</label>
-							<input type="text" class="form-control" th:errorclass="is-invalid" id="nrMaxPiloto" th:field="*{CNPJ}">
+							<label for="cnpj" class="form-label">CNPJ</label>
+							<input type="text" class="form-control" th:errorclass="is-invalid" id="cnpj" th:field="*{CNPJ}">
 							<span th:if="${#fields.hasErrors('CNPJ')}" class="text-danger" th:errors="*{CNPJ}"></span>
 							<small class="text-muted">E.x "99.999.999/9999-99"</small>
 						</div>
@@ -29,7 +31,7 @@
 						</div>
 		  				<div class="row p-3">
 						<div class="col">
-							<label for="CEP" class="form-label">CEP</label>
+							<label for="cep" class="form-label">CEP</label>
 							<input type="text" class="form-control" th:errorclass="is-invalid" id="cep" th:field="*{CEP}">
 							<span th:if="${#fields.hasErrors('CEP')}" class="text-danger" th:errors="*{CEP}"></span>
 							<small class="text-muted">E.x "99.999-999"</small>

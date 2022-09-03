@@ -6,8 +6,22 @@
 		<div class="container">
 			<header th:replace="~{baseKartodromo :: header}"></header>
 		</div>
+	<script type="text/javascript" th:src="@{/js/jquery.mask.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/mascara.js}"></script>
 	<body>
 		<div class="container p-5">
+			<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${sucessmessage}">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong th:text="${sucessmessage}"></strong>
+			</div>
+			<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${errormessage}">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong th:text="${errormessage}"></strong>
+			</div>
 			<div class="d-flex justify-content-between mb-3">
 				<form class="row g-3" method="POST" th:action="@{/kartodromo/cadastroBateria}" th:object="${bateria}" enctype="multipart/form-data">
 					<div class="row p-2">
@@ -24,7 +38,7 @@
 		  				</div>
 		  				<div class="col">
 		    				<label for="duracaoBateria" class="form-label">Duração da bateria (MIN)</label>
-		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="duracaoBateria" th:field="*{duracaoBateria}">
+		    				<input type="number" class="form-control" th:errorclass="is-invalid" id="duracaoBateria" th:field="*{duracaoBateria}">
 		    				<span th:if="${#fields.hasErrors('duracaoBateria')}" class="text-danger" th:errors="*{duracaoBateria}"></span>
 		    				<small class="text-muted">E.x "30"</small>
 		  				</div>
@@ -38,13 +52,13 @@
 		  				</div>
 		  				<div class="col">
 		    				<label for="valorBateria" class="form-label">Valor da Bateria (R$)</label>
-		    				<input  type="text" class="form-control" th:errorclass="is-invalid" id="valorBateria" th:field="*{valorBateria}">
+		    				<input type="text" class="form-control" th:errorclass="is-invalid" id="valorBateria" th:field="*{valorBateria}">
 		    				<span th:if="${#fields.hasErrors('valorBateria')}" class="text-danger" th:errors="*{valorBateria}"></span>
-		    				<small class="text-muted">E.x "90.00"</small>
+		    				<small class="text-muted">E.x "90,00"</small>
 		  				</div>
 		  				<div class="col">
 				    		<label for="nrMaxPiloto" class="form-label">Números de Pilotos</label>
-				    		<input type="text" class="form-control" th:errorclass="is-invalid" id="nrMaxPiloto" th:field="*{nrMaxPiloto}">
+				    		<input type="number" class="form-control" th:errorclass="is-invalid" id="nrMaxPiloto" th:field="*{nrMaxPiloto}">
 				    		<span th:if="${#fields.hasErrors('nrMaxPiloto')}" class="text-danger" th:errors="*{nrMaxPiloto}"></span>
 				    		<small class="text-muted">E.x "10"</small>
 						</div>
@@ -68,7 +82,7 @@ footer {
   height: 50px;
   
 }
-</style>	
+</style>
 	<div class="container">
 	<footer th:replace="~{baseKartodromo :: footer}" class="py-5"></footer>
 </div>

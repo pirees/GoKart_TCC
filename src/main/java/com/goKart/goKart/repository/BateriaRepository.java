@@ -26,8 +26,9 @@ public interface BateriaRepository extends JpaRepository<Bateria, Long>  {
 	List<Bateria> findByDateKartodromoId(Long id);
 
 	//@Query("SELECT p FROM Bateria p WHERE p.data BETWEEN CURRENT_DATE() AND CURRENT_DATE() +7")
-	@Query("SELECT p FROM Bateria p WHERE p.data > CURDATE() OR p.data = CURDATE()")
-	Page<Bateria> findByData(Pageable pageable);
+	@Query("SELECT p FROM Bateria p WHERE p.data > CURDATE() OR p.data = CURDATE() and p.horaBateria > CURTIME() ORDER BY p.data ASC")
+	//Page<Bateria> findByData(Pageable pageable);
+	List<Bateria> findAllByOrderByDataAsc();
 
 	@Query(value = "SELECT b FROM Bateria b INNER JOIN b.kartodromo k WHERE k.nome like %?1% and b.data = ?2")
 	List<Bateria> findByKartodromoNome(@Param("nomepesquisa") String nomepesquisa,
