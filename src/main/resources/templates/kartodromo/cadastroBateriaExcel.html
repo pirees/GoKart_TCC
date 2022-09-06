@@ -9,15 +9,11 @@
 	<body>
 		<div class="container p-3">
 			<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${sucessmessage}">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				<strong th:text="${sucessmessage}"></strong>
 			</div>
 			<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${errormessage}">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				<strong th:text="${errormessage}"></strong>
 			</div>
 		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>

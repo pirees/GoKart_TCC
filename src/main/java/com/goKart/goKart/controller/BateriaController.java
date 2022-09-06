@@ -3,7 +3,6 @@ package com.goKart.goKart.controller;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -19,11 +18,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.format.annotation.NumberFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -132,8 +127,7 @@ public class BateriaController {
     @PostMapping("kartodromo/cadastroBateria")
     public String salvarBateria(@Valid Bateria bateria, BindingResult resultado, RedirectAttributes redirectAttributes) {
 
-        Boolean isFlag = verificaBateriaExiste(bateria);
-
+        boolean isFlag = verificaBateriaExiste(bateria);
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
 
@@ -310,28 +304,28 @@ public class BateriaController {
         return new ModelAndView("redirect:/kartodromo/menuKartodromo");
     }
 
-    @PostMapping("/import/csv")
+    /*@PostMapping("/import/csv")
     public String cadastrarBateriaCSV(@ModelAttribute Bateria bateria, RedirectAttributes redirectAttributes) {
-        Boolean isFlag = salvarArquivo(bateria.getFile());
+        boolean isFlag = salvarArquivo(bateria.getFile());
 
-        if (isFlag){
+        if (!isFlag){
             redirectAttributes.addFlashAttribute("sucessmessage", "Bateria(s) salva(s) com sucesso");
         }else{
             redirectAttributes.addFlashAttribute("errormessage", "File not upload Successfuly");
         }
         return "redirect:/kartodromo/cadastroBateriaExcel";
-    }
+    }*/
 
-    public boolean salvarArquivo(MultipartFile file){
+    public boolean salvarArquivo(MultipartFile file, RedirectAttributes redirectAttributes){
         boolean isFlag = false;
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         if(extension.equalsIgnoreCase("csv")){
-            isFlag = lerDataDeCSV(file);
+            isFlag = Boolean.parseBoolean(lerDataDeCSV(file, redirectAttributes));
         }
         return true;
     }
-
-    private boolean lerDataDeCSV(MultipartFile file) {
+    @PostMapping("/import/csv")
+    public String lerDataDeCSV(MultipartFile file, RedirectAttributes redirectAttributes){
         try{
             InputStreamReader inputStreamReader = new InputStreamReader(file.getInputStream());
             CSVReader csvReader = new CSVReaderBuilder(inputStreamReader).build();
@@ -340,7 +334,6 @@ public class BateriaController {
 
             while ((campos = csvReader.readNext()) != null){
                 Bateria bateria = new Bateria();
-
                 String email = SecurityContextHolder.getContext().getAuthentication().getName();
                 Kartodromo kartodromo = kartodromoRepository.findByEmail(email);
 
@@ -359,14 +352,19 @@ public class BateriaController {
                 bateria.setKartodromo(kartodromo);
 
                 baterias.add(bateria);
-                bateriaRepository.saveAll(baterias);
+
+                boolean isFlag = verificaBateriaExiste(bateria);
+
+                if (isFlag){
+                    redirectAttributes.addFlashAttribute("sucessmessage", "Bateria(s) salva(s) com sucesso");
+                    bateriaRepository.save(bateria);
+                }else{
+                    redirectAttributes.addFlashAttribute("errormessage", "Consulte a página de relatório pois a importação teve erro em alguma bateria.");
+                }
             }
-
-            return true;
-
         } catch (IOException | CsvValidationException e) {
-
-            return false;
+            return "redirect:/kartodromo/cadastroBateriaExcel";
         }
+        return "redirect:/kartodromo/cadastroBateriaExcel";
     }
 }
