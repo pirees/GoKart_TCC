@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.goKart.goKart.repository.AdministradorRepository;
 import com.goKart.goKart.repository.PerfilRepository;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AdministradorController {
@@ -43,7 +44,7 @@ public class AdministradorController {
 	}
 	
 	@PostMapping ("admin/cadastroAdmin")
-	public String salvarAdm(@Valid Administrador administrador, BindingResult resultado, String email) throws Exception{
+	public String salvarAdm(@Valid Administrador administrador, BindingResult resultado, String email, RedirectAttributes redirectAttributes) throws Exception{
 		
 		if(resultado.hasErrors()) {
 			return "admin/cadastroAdmin";
@@ -57,12 +58,14 @@ public class AdministradorController {
 		perfis.add(perfil);				
 		administrador.setPerfis(perfis);
 		administrador.setSenha(encodedPassword);
-		
-		
-		usuarioController.verificaCadastro(email);
-		
-		administradorRepository.save(administrador);
-		
+
+		if(usuarioController.verificaCadastro(email)){
+			redirectAttributes.addFlashAttribute("errormessage", "E-mail já cadastrado no sistema.");
+			return "redirect:/cadastroAdmin";
+		}else{
+			administradorRepository.save(administrador);
+		}
+
 		return "admin/cadastroAdmin";
 	}
 

@@ -24,6 +24,7 @@ import com.goKart.goKart.model.Kartodromo;
 import com.goKart.goKart.model.Perfil;
 import com.goKart.goKart.repository.KartodromoRepository;
 import com.goKart.goKart.repository.PerfilRepository;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class KartodromoController{
@@ -58,12 +59,12 @@ public class KartodromoController{
 	}
 
 	@PostMapping ("/cadastroKartodromo")
-	public String salvarKartodromo(@Valid Kartodromo kartodromo, BindingResult resultado, String email, @RequestParam("fileKartodromo") MultipartFile file) throws Exception{
-		
-		if(resultado.hasErrors()) {			
+	public String salvarKartodromo(@Valid Kartodromo kartodromo, BindingResult resultado, String email, @RequestParam("fileKartodromo") MultipartFile file, RedirectAttributes redirectAttributes) throws Exception{
+
+		if(resultado.hasErrors()){
 			return "/cadastroKartodromo";
 		}
-		
+
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(kartodromo.getSenha());
 		
@@ -74,11 +75,13 @@ public class KartodromoController{
 		kartodromo.setSenha(encodedPassword);
 		kartodromo.setStatusUsuario(StatusUsuario.PENDENTE);
 		kartodromo.setImagem(file.getBytes());
-		
-		usuarioController.verificaCadastro(email);
-		
-		kartodromoRepository.save(kartodromo);
-		
+
+		if(usuarioController.verificaCadastro(email)){
+			redirectAttributes.addFlashAttribute("errormessage", "E-mail já cadastrado no sistema.");
+			return "redirect:/cadastroKartodromo";
+		} else{
+			kartodromoRepository.save(kartodromo);
+		}
 		return "redirect:/pendenciaCadastro";
 	}
 	

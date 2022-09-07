@@ -23,6 +23,7 @@ import com.goKart.goKart.model.Perfil;
 import com.goKart.goKart.model.Piloto;
 import com.goKart.goKart.repository.PerfilRepository;
 import com.goKart.goKart.repository.PilotoRepository;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class PilotoController{
@@ -66,7 +67,7 @@ public class PilotoController{
 	}
 	
 	@PostMapping ("piloto/cadastroPiloto")
-	public String salvarPiloto(@Valid Piloto piloto, BindingResult resultado, String email) throws Exception{
+	public String salvarPiloto(@Valid Piloto piloto, BindingResult resultado, String email, RedirectAttributes redirectAttributes) throws Exception{
 		
 		if(resultado.hasErrors()) {
 			return "piloto/cadastroPiloto";
@@ -80,10 +81,13 @@ public class PilotoController{
 		perfis.add(perfil);				
 		piloto.setPerfis(perfis);
 		piloto.setSenha(encodedPassword);
-		
-		usuarioController.verificaCadastro(email);
-		pilotoRepository.save(piloto);
-		
+
+		if(usuarioController.verificaCadastro(email)){
+			redirectAttributes.addFlashAttribute("errormessage", "E-mail já cadastrado no sistema.");
+			return "redirect:/piloto/cadastroPiloto";
+		}else{
+			pilotoRepository.save(piloto);
+		}
 		return "redirect:/login";
 	}
 	
