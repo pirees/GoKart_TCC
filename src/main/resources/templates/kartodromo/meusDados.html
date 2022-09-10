@@ -1,46 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="pt-br">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="pt-br">
 <head th:replace="~{baseKartodromo :: head}"></head>
 <div class="container">
-	<header th:replace="~{baseKartodromo :: header}"></header>
+    <header th:replace="~{baseKartodromo :: header}"></header>
 </div>
 <body>
-	<div class="container p-5">
-		<h5>Para atualizar os seus dados, favor entrar em contato com o e-mail: contato@gokart.com.br</h5>
-		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-			<div class="d-flex justify-content-between mb-3">
-				<form class="row g-3" method="POST" th:action="@{/kartodromo/meusDados}" th:object="${kartodromo}">
-					<div class="row p-2">
-						<div class="col">
-		    				<label for="nome" class="form-label">Nome</label>
-		    				<input type="text"  class="form-control" th:field="${kartodromo.nome}" disabled readonly>
-		    				<span ></span> 
-		  				</div>
-		  				<div class="col">
-		    				<label for="email" class="form-label">E-mail</label>
-		    				<input type="email" class="form-control" th:errorclass="is-invalid" id="email" th:field="*{email}" disabled readonly>
-		    				<span th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></span>
-		  				</div>
-		  				<div class="row p-2">
-		  				<div class="col">
-				    		<label for="CNPJ" class="form-label">CNPJ</label>
-				    		<input type="text" class="form-control" id="CNPJ" th:field="*{CNPJ}"disabled readonly>
-				    		<small class="text-muted">E.x "99.999.999/9999-99"</small>
-						</div>
-						<div class="col">
-				    		<label for="inputCity" class="form-label">Cidade</label>
-				    		<input type="text" class="form-control" id="cidade" th:field="*{cidade}" disabled readonly>
-						</div>
-		  				<div class="col">
-				    		<label for="inputCity" class="form-label">Estado</label>
-				    		<input type="text" class="form-control" id="cidade" th:field="*{estado}" disabled readonly>
-						</div>
-				 		</div>
-		  			</div>
-				</form>
-			</div>
-		</div>
+<div class="container p-5">
+    <h5>Para atualizar os seus dados, favor entrar em contato com o e-mail: contato@gokart.com.br</h5>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <div class="d-flex justify-content-between mb-3">
+        <form class="row g-3" method="POST" th:action="@{/kartodromo/meusDados}" th:object="${kartodromo}">
+            <div class="row p-2">
+                <div class="col">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" th:field="${kartodromo.nome}" disabled readonly>
+                    <span></span>
+                </div>
+                <div class="col">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" th:errorclass="is-invalid" id="email" th:field="*{email}" disabled readonly>
+                    <span th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></span>
+                </div>
+                <div class="row p-2">
+                    <div class="col">
+                        <label for="Logradouro" class="form-label">Logradouro</label>
+                        <input type="text" class="form-control" th:errorclass="is-invalid" id="Logradouro" th:field="*{Logradouro}" disabled readonly>
+                        <span th:if="${#fields.hasErrors('Logradouro')}" class="text-danger" th:errors="*{CEP}"></span>
+                    </div>
+                    <div class="col">
+                        <label for="cep" class="form-label">CEP</label>
+                        <input type="text" class="form-control" th:errorclass="is-invalid" id="cep" th:field="*{CEP}" disabled readonly>
+                        <span th:if="${#fields.hasErrors('CEP')}" class="text-danger" th:errors="*{CEP}"></span>
+                    </div>
+
+                    <div class="col">
+                        <label for="Complemento" class="form-label">Complemento</label>
+                        <input type="text" class="form-control" th:errorclass="is-invalid" id="Complemento" th:field="*{Complemento}" disabled readonly>
+                        <span th:if="${#fields.hasErrors('Complemento')}" class="text-danger"
+                              th:errors="*{Complemento}"></span>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col">
+                        <label for="cidade" class="form-label">Cidade</label>
+                        <input type="text" class="form-control" id="cidade" th:field="*{cidade}" disabled readonly>
+                    </div>
+                    <div class="col">
+                        <label for="estado" class="form-label">Estado</label>
+                        <input type="text" class="form-control" id="estado" th:field="*{estado}" disabled readonly>
+                    </div>
+                    <div class="col">
+                        <label for="CNPJ" class="form-label">CNPJ</label>
+                        <input type="text" class="form-control" id="CNPJ" th:field="*{CNPJ}" disabled readonly>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 <style>	
 footer {
@@ -52,6 +70,6 @@ footer {
 }
 </style>
 <div class="container">
-	<footer th:replace="~{baseKartodromo :: footer}" class="py-5"></footer>
+    <footer th:replace="~{baseKartodromo :: footer}" class="py-5"></footer>
 </div>
 </html>

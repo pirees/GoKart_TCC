@@ -11,6 +11,7 @@ import com.goKart.goKart.excel.TodosKartodromosExcel;
 import com.goKart.goKart.excel.TodosPilotosExcel;
 import com.goKart.goKart.model.Piloto;
 import com.goKart.goKart.model.StatusUsuario;
+import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -34,12 +35,15 @@ public class KartodromoController{
 	private PerfilRepository perfilRepository;
 	
 	private UsuarioController usuarioController;
+
+	private EnviaEmailService enviaEmailService;
 	
 	public KartodromoController(KartodromoRepository kartodromoRepository, PerfilRepository perfilRepository,
-			UsuarioController usuarioController) {
+			UsuarioController usuarioController, EnviaEmailService enviaEmailService) {
 		this.kartodromoRepository = kartodromoRepository;
 		this.perfilRepository = perfilRepository;
 		this.usuarioController = usuarioController;
+		this.enviaEmailService = enviaEmailService;
 	}
 
 	@GetMapping("/cadastroKartodromo")
@@ -81,6 +85,7 @@ public class KartodromoController{
 			return "redirect:/cadastroKartodromo";
 		} else{
 			kartodromoRepository.save(kartodromo);
+			enviaEmailService.enviarcadastroKartodromoPendente(kartodromo);
 		}
 		return "redirect:/pendenciaCadastro";
 	}

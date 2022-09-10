@@ -43,15 +43,13 @@ public class BateriaController {
 
     private ReservaRepository reservaRepository;
 
-    private EnviaEmailService enviaEmailService;
 
     public BateriaController(BateriaRepository bateriaRepository, KartodromoRepository kartodromoRepository,
-                             ReservaRepository reservaRepository, EnviaEmailService enviaEmailService) {
+                             ReservaRepository reservaRepository) {
         super();
         this.bateriaRepository = bateriaRepository;
         this.kartodromoRepository = kartodromoRepository;
         this.reservaRepository = reservaRepository;
-        this.enviaEmailService = enviaEmailService;
     }
 
     //LISTA TODAS AS BATERIAS DISPONÍVEIS
@@ -66,7 +64,15 @@ public class BateriaController {
     @PostMapping("***/pesquisarKartodromo")
     public ModelAndView pesquisarPorNomeKartodromo(@RequestParam(value = "nomepesquisa") String nomepesquisa, LocalDate datapesquisa){
         ModelAndView modelAndView = new ModelAndView("piloto/menuPiloto");
-        List<Bateria> baterias = bateriaRepository.findByKartodromoNome(nomepesquisa,datapesquisa);
+
+        if(!nomepesquisa.isEmpty() && datapesquisa == null){
+            List<Bateria> baterias = bateriaRepository.findByKartodromoNome(nomepesquisa);
+
+            modelAndView.addObject("bateria", baterias);
+
+            return modelAndView;
+        }
+        List<Bateria> baterias = bateriaRepository.findByKartodromoNomeData(nomepesquisa,datapesquisa);
 
         if(baterias.isEmpty()){
             ModelAndView model = new ModelAndView("piloto/menuPilotoSemBusca");
@@ -80,29 +86,28 @@ public class BateriaController {
 
     //FAZ O GET DA BATERIA SELECIONADA NA PAGINA DO MENU PILOTO
     @GetMapping("piloto/confirmarReserva/{id}")
-    public String listarBaterias(@PathVariable("id") Long id, Model model, StatusPagamento status) {
+    public String listarBaterias(@PathVariable("id") Long id, String email, Model model) {
 
         Bateria bateria = bateriaRepository.getById(id);
 
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        email = SecurityContextHolder.getContext().getAuthentication().getName();
 
         List<Reserva> reserva = reservaRepository.findPilotoByReserva(id);
 
         for (Reserva reservas : reserva) {
-            if (reservas.getPiloto().getEmail().equals(email) && reservas.getStatus().equals(status.CONFIRMADO)) {
-                if(reservas.getBateria().getData().isAfter(LocalDate.now())){
-                    model.addAttribute("bateria", bateria);
-                    model.addAttribute("reserva", reserva);
+            if (reservas.getPiloto().getEmail().equals(email) && reservas.getStatus().equals(StatusPagamento.CONFIRMADO)) {
 
-                    return "piloto/confirmarReservaPilotoPagoCancelar";
+                model.addAttribute("bateria", bateria);
+                model.addAttribute("reserva", reserva);
 
-                } /*else{
+                return "piloto/confirmarReservaPilotoPagoCancelar";
 
-                    model.addAttribute("bateria", bateria);
-                    model.addAttribute("reserva", reserva);
+            } else if(reservas.getBateria().getVagasConfirmadas().equals(reservas.getBateria().getNrMaxPiloto())){
 
-                    return "piloto/confirmarReservaPilotoPagoCancelar";
-                }*/
+                model.addAttribute("bateria", bateria);
+                model.addAttribute("reserva", reserva);
+
+                return "piloto/confirmarReservaBateriaCheia";
             }
         }
 
@@ -176,8 +181,6 @@ public class BateriaController {
         bateria.setKartodromo(kartodromo);
 
         List<Bateria> baterias = bateriaRepository.findByKartodromoId(bateria.getKartodromo().getId());
-
-        System.out.println(bateria.getKartodromo().getId());
 
         model.addAttribute("baterias", baterias);
 

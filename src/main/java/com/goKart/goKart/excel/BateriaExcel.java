@@ -54,11 +54,12 @@ public class BateriaExcel {
 		font.setBold(false);
         font.setFontHeight(12);
         style.setFont(font);
-        criaCelula(row, 0, "Data", style);
-        criaCelula(row, 1, "Horario", style);
-        criaCelula(row, 2, "Valor UN", style);
-        criaCelula(row, 3, "Vagas Confirmadas", style);
-        criaCelula(row, 4, "Valor Total", style);
+		criaCelula(row, 0, "ID", style);
+        criaCelula(row, 1, "Data", style);
+        criaCelula(row, 2, "Horario", style);
+        criaCelula(row, 3, "Valor UN", style);
+        criaCelula(row, 4, "Vagas Confirmadas", style);
+        criaCelula(row, 5, "Valor Total", style);
         
 	}
 	
@@ -80,7 +81,8 @@ public class BateriaExcel {
 			BigDecimal vagaConfirmadaBig = new BigDecimal(newInteger);
 			
 			BigDecimal resultado = bateria.getValorBateria().multiply(vagaConfirmadaBig);
-			
+
+			criaCelula(row, columnCount++, bateria.getId(), style);
 			criaCelula(row, columnCount++, bateria.getData().format(formatter), style);
 			criaCelula(row, columnCount++, bateria.getHoraBateria().toString(), style);
 			criaCelula(row, columnCount++, bateria.getValorBateria().toString(), style);

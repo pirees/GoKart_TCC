@@ -31,8 +31,11 @@ public interface BateriaRepository extends JpaRepository<Bateria, Long>  {
 	List<Bateria> findAllByOrderByDataAsc();
 
 	@Query(value = "SELECT b FROM Bateria b INNER JOIN b.kartodromo k WHERE k.nome like %?1% and b.data = ?2")
-	List<Bateria> findByKartodromoNome(@Param("nomepesquisa") String nomepesquisa,
+	List<Bateria> findByKartodromoNomeData(@Param("nomepesquisa") String nomepesquisa,
 									   @Param("datapesquisa") LocalDate datapesquisa);
+
+	@Query(value = "SELECT b FROM Bateria b INNER JOIN b.kartodromo k WHERE k.nome like %?1% and b.data > CURDATE() OR b.data = CURDATE()")
+	List<Bateria> findByKartodromoNome(@Param("nomepesquisa") String nomepesquisa);
 
 	@Query(value = "SELECT b FROM Bateria b INNER JOIN b.kartodromo k where k.id = ?1 and b.data = ?2")
 	List<Bateria> findByKartodromoNomeMenuKartodromo(Long id, LocalDate datapesquisa);

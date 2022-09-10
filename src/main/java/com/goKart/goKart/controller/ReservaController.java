@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.goKart.goKart.model.*;
+import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -40,13 +41,16 @@ public class ReservaController {
 	
 	private KartodromoRepository kartodromoRepository;
 
+	private EnviaEmailService enviaEmailService;
+
 	public ReservaController(ReservaRepository reservaRepository, PilotoRepository pilotoRepository,
-			BateriaRepository bateriaRepository, KartodromoRepository kartodromoRepository) {
+							 BateriaRepository bateriaRepository, KartodromoRepository kartodromoRepository, EnviaEmailService enviaEmailService) {
 		super();
 		this.reservaRepository = reservaRepository;
 		this.pilotoRepository = pilotoRepository;
 		this.bateriaRepository = bateriaRepository;
 		this.kartodromoRepository = kartodromoRepository;
+		this.enviaEmailService = enviaEmailService;
 	}
 
 	// LISTA TODAS AS BATERIAS DISPONÍVEIS
@@ -117,7 +121,7 @@ public class ReservaController {
 	public String listaReservasPiloto(@PathVariable("id") Long id, Model model){
 		Reserva reserva = reservaRepository.getById(id);
 
-		if(reserva.getBateria().getData().isAfter(LocalDate.now()) && reserva.getBateria().getHoraBateria().isAfter(LocalTime.now())) {
+		if(reserva.getBateria().getData().isAfter(LocalDate.now())) {
 			if(reserva.getStatus().equals(StatusPagamento.CONFIRMADO)){
 
 				model.addAttribute("reserva", reserva);
@@ -142,6 +146,9 @@ public class ReservaController {
 		reserva.getBateria().setVagasConfirmadas(reserva.getBateria().getVagasConfirmadas() - 1);
 		reserva.setStatus(StatusPagamento.DEVOLVIDO);
 		reservaRepository.save(reserva);
+
+		enviaEmailService.enviarReservaCanceladaPiloto(piloto, reserva);
+
 		return "redirect:/piloto/menuPiloto";
 	}
 }

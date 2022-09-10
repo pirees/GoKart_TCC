@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.validation.Valid;
 
+import com.goKart.goKart.model.*;
 import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.goKart.goKart.dto.CardPaymentDTO;
 import com.goKart.goKart.dto.PaymentResponseDTO;
 import com.goKart.goKart.exception.MercadoPagoException;
-import com.goKart.goKart.model.Bateria;
-import com.goKart.goKart.model.Piloto;
-import com.goKart.goKart.model.Reserva;
-import com.goKart.goKart.model.StatusPagamento;
 import com.goKart.goKart.repository.BateriaRepository;
 import com.goKart.goKart.repository.PilotoRepository;
 import com.goKart.goKart.repository.ReservaRepository;
@@ -58,7 +55,6 @@ public class MercadoPagoController {
 
 	@Autowired
 	private EnviaEmailService enviaEmailService;
-	
 
 	public PaymentResponseDTO processPayment(CardPaymentDTO cardPaymentDTO) {
 		 try {
@@ -103,7 +99,7 @@ public class MercadoPagoController {
 	@PostMapping("piloto/process_payment/{id}")
     public ResponseEntity<PaymentResponseDTO>  processPaymentTest(@PathVariable Long id, @RequestBody @Valid CardPaymentDTO cardPaymentDTO, Reserva reserva){
         PaymentResponseDTO payment = processPayment(cardPaymentDTO);
-        
+
         Bateria bateria = bateriaRepository.getById(id);
         
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -119,7 +115,7 @@ public class MercadoPagoController {
             
             reservaRepository.save(reserva);
 
-			//enviaEmailService.enviarPagamentoNaoConf(reserva.getPiloto(), reserva);
+			enviaEmailService.enviarPagamentoNaoConf(reserva.getPiloto(), reserva);
             
         }else {
         	   
@@ -134,7 +130,9 @@ public class MercadoPagoController {
             
             reservaRepository.save(reserva);
 
-			//enviaEmailService.enviarPagamentoConf(reserva.getPiloto(), reserva);
+			enviaEmailService.enviarReservaConfiKartodromo(reserva.getKartodromo(), reserva, reserva.getBateria());
+			enviaEmailService.enviarPagamentoConfiPiloto(reserva.getPiloto(), reserva);
+
         }
                
         return ResponseEntity.status(HttpStatus.CREATED).body(payment);

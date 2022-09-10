@@ -11,6 +11,7 @@ import com.goKart.goKart.excel.ReservaExcel;
 import com.goKart.goKart.excel.TodosPilotosExcel;
 import com.goKart.goKart.model.Kartodromo;
 import com.goKart.goKart.model.Reserva;
+import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -33,11 +34,14 @@ public class PilotoController{
 	private PerfilRepository perfilRepository;
 	
 	private UsuarioController usuarioController;
+
+	private EnviaEmailService enviaEmailService;
 	
-	public PilotoController(PilotoRepository pilotoRepository, PerfilRepository perfilRepository, UsuarioController usuarioController) {
+	public PilotoController(PilotoRepository pilotoRepository, PerfilRepository perfilRepository, UsuarioController usuarioController, EnviaEmailService enviaEmailService) {
 		this.pilotoRepository = pilotoRepository;
 		this.perfilRepository = perfilRepository;
 		this.usuarioController = usuarioController;
+		this.enviaEmailService = enviaEmailService;
 	}
 
 	@GetMapping("piloto/atualizarPiloto")
@@ -87,6 +91,7 @@ public class PilotoController{
 			return "redirect:/piloto/cadastroPiloto";
 		}else{
 			pilotoRepository.save(piloto);
+			enviaEmailService.enviarCadastroSucesso(piloto);
 		}
 		return "redirect:/login";
 	}

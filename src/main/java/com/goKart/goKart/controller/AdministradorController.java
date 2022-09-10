@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import com.goKart.goKart.model.*;
 import com.goKart.goKart.repository.KartodromoRepository;
+import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,12 +31,15 @@ public class AdministradorController {
 
 	private KartodromoRepository kartodromoRepository;
 
+	private EnviaEmailService enviaEmailService;
+
 	public AdministradorController(AdministradorRepository administradorRepository, PerfilRepository perfilRepository,
-			UsuarioController usuarioController, KartodromoRepository kartodromoRepository) {
+			UsuarioController usuarioController, KartodromoRepository kartodromoRepository, EnviaEmailService enviaEmailService) {
 		this.administradorRepository = administradorRepository;
 		this.perfilRepository = perfilRepository;
 		this.usuarioController = usuarioController;
 		this.kartodromoRepository = kartodromoRepository;
+		this.enviaEmailService = enviaEmailService;
 	}
 
 	@GetMapping("admin/cadastroAdmin")
@@ -83,6 +87,8 @@ public class AdministradorController {
 		kartodromo = kartodromoRepository.getById(id);
 		kartodromo.setStatusUsuario(StatusUsuario.APROVADO);
 		kartodromoRepository.save(kartodromo);
+		enviaEmailService.enviarcadastroKartodromoAprovado(kartodromo);
+
 		return new ModelAndView("redirect:/admin/pendencias");
 	}
 

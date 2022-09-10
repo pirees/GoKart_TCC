@@ -62,20 +62,12 @@ div.segundo {
 				</div>
 				<br>
 				<div>
-					<font size=3>*Todo o equipamento de segurança para o piloto, será fornecido pelo kartódromo caso o piloto não possua.</font>
+					<font size=3>*Bateria já está com o limite de pilotos permitido.</font>
 				</div>
 				<br>
 				<div>
-					<font size=3>*O cancelamento pode ser realizado 1 dia útil antes da data da bateria, será estornador 90% do valor.</font>
-				</div>
-				<br>
-				<div>
-					<font size=3>*Apenas uma vaga por piloto.</font>
-				</div>
-				<br>
-				<div>
-					<a th:href="@{/piloto/process_payment/{id}(id = ${bateria.id})}">
-						<button type="submit" class="btn btn-outline-dark btn-lg">Pagar</button>
+					<a>
+						<button type="submit" class="btn btn-outline-dark btn-lg disabled">Pagar</button>
 					</a>
 				</div>
 			</div>
