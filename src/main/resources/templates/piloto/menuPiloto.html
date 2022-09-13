@@ -77,7 +77,7 @@
                             Limite de pilotos: <span th:text="${bateria.nrMaxPiloto}">10</span>
                         </div>
                         <div>
-                            Cidade: <span th:text="${bateria.kartodromo.cidade}">10</span>
+                            Cidade: <span th:text="${bateria.kartodromo.cidade + ' - ' + bateria.kartodromo.estado}">10</span>
                         </div>
                     </div>
                     <div class=" text-end">

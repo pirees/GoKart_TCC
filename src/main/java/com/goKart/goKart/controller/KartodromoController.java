@@ -115,4 +115,14 @@ public class KartodromoController{
 		Kartodromo kartodromo = this.kartodromoRepository.getById(id);
 		return kartodromo.getImagem();
 	}
+
+	@GetMapping("piloto/kartodromos")
+	public String listarKartodromosPiloto(Model model) {
+		List<Kartodromo> kartodromo = kartodromoRepository.findAll();
+
+		model.addAttribute("kartodromo", kartodromo);
+
+		return "piloto/kartodromos";
+	}
+
 }

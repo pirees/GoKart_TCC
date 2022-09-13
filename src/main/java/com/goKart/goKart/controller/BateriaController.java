@@ -161,7 +161,7 @@ public class BateriaController {
         List<Bateria> bateriaList = bateriaRepository.findAll();
 
         for(Bateria baterias: bateriaList){
-            if(baterias.getData().isEqual(bateria.getData()) && baterias.getKartodromo().getId().equals(bateria.getKartodromo().getId())){
+            if(baterias.getData().isEqual(bateria.getData()) && baterias.getKartodromo().getId().equals(bateria.getKartodromo().getId()) && !baterias.getId().equals(bateria.getId()) && baterias.getTracado().equals(bateria.getTracado())){
                 if(baterias.getHoraBateria().equals(bateria.getHoraBateria()) && baterias.getHoraBateria().getMinute() == bateria.getHoraBateria().getMinute()){
                     return false;
                 }
@@ -282,14 +282,12 @@ public class BateriaController {
         List<Bateria> bateriaList = bateriaRepository.findAll();
 
         for (Bateria baterias : bateriaList) {
-            if (baterias.getHoraBateria() == bateria.getHoraBateria() || baterias.getHoraBateria().getMinute() == bateria.getHoraBateria().getMinute()) {
-                if(!isFlag){
-                    redirectAttributes.addFlashAttribute("errormessage", "Já existe bateria cadastrada no mesmo dia ou horário.");
-                    return "redirect:/kartodromo/visualizarBateria/{id}";
-                }else{
-                    bateria.setKartodromo(kartodromo);
-                    bateriaRepository.save(bateria);
-                }
+            if(!isFlag){
+                redirectAttributes.addFlashAttribute("errormessage", "Já existe bateria cadastrada no mesmo dia ou horário.");
+                return "redirect:/kartodromo/visualizarBateria/{id}";
+            }else{
+                bateria.setKartodromo(kartodromo);
+                bateriaRepository.save(bateria);
             }
         }
         if (bindingResult.hasErrors()) {

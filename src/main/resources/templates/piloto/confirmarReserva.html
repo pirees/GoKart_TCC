@@ -54,23 +54,7 @@ div.segundo {
 						th:text="${bateria.nrMaxPiloto}"></span></font>
 				</div>
 				<div>
-					<font size=5> Cidade: <span
-							th:text="${bateria.kartodromo.cidade}"></span></font>
-				</div>
-				<div>
 					<font size=8> R$: <span th:text="${#numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></span></font>
-				</div>
-				<br>
-				<div>
-					<font size=3>*Todo o equipamento de segurança para o piloto, será fornecido pelo kartódromo caso o piloto não possua.</font>
-				</div>
-				<br>
-				<div>
-					<font size=3>*O cancelamento pode ser realizado 1 dia útil antes da data da bateria, será estornador 90% do valor.</font>
-				</div>
-				<br>
-				<div>
-					<font size=3>*Apenas uma vaga por piloto.</font>
 				</div>
 				<br>
 				<div>
@@ -83,9 +67,7 @@ div.segundo {
 		</div>
 		<br>
 		<div class="row mt-5">
-
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-5">
 				<h5 class="text-center">
 					<i>Piloto(s) confirmado(s) até o momento</i>
 				</h5>
@@ -103,8 +85,25 @@ div.segundo {
 					</tbody>
 				</table>
 			</div>
-			<div class="col-md-2"></div>
-		</div>		
+			<div class="col-md-1"></div>
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<h5 class="text-center">
+					<i>Informações do kártodromo</i>
+				</h5>
+				<div class="text-start">
+					<font size=3>*Todo o equipamento de segurança para o piloto, será fornecido pelo kartódromo caso o piloto não possua.</font>
+				</div>
+				<br>
+				<div class="text-start">
+					<font size=3>*O cancelamento pode ser realizado 1 dia útil antes da data da bateria, será estornador 90% do valor.</font>
+				</div>
+				<br>
+				<div class="text-start">
+					<font size=3>*Apenas uma vaga por piloto.</font>
+				</div>
+			</div>
+		</div>
 		<p>&nbsp;</p>
 		<h5 class="text-center">
 			<i>Informações do kartódromo</i>

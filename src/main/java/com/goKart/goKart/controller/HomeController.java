@@ -9,11 +9,6 @@ public class HomeController {
 	@RequestMapping("/login")
 	public String login() {
 		return "/login";
-	}	
-	
-	@RequestMapping("/piloto/kartodromos")
-	public String todosKartodromos() {
-		return "/piloto/kartodromos";
 	}
 	
 	@RequestMapping("/kartodromos")
