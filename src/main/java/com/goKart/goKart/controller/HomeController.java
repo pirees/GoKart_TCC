@@ -10,12 +10,7 @@ public class HomeController {
 	public String login() {
 		return "/login";
 	}
-	
-	@RequestMapping("/kartodromos")
-	public String todosKartodromosIndex() {
-		return "/kartodromos";
-	}
-	
+
 	@RequestMapping("/goKartNovidades")
 	public String goKartNovidadesIndex() {
 		return "/goKartNovidades";

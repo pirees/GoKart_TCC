@@ -6,7 +6,6 @@
 		</div>
 	</head>
 <body>
-
   	<div class="container px-4 py-5" id="featured-3">
     <h2 class="pb-2 border-bottom">Kartódromos licenciados</h2>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
@@ -14,8 +13,8 @@
     os kartódromos da região de Curitiba e região metropolitana.</font></p>
     <font size = 4>A seguir segue a lista dos kartódromos cadastrados até o momento para você curtir com sua familia e amigos.</font>
   </div>
-  <div class="container px-4 py-2">
-      <tr th:each="kartodromo : ${kartodromo}" >
+  <tr th:each="kartodromo : ${kartodromo}">
+    <div class="container px-4 py-2">
           <h3 class="pb-2 border-bottom text-center"th:text="${kartodromo.nome}"></h3>
           <br>
           <p><i><font size="4">Localização </font></i></p>
@@ -25,8 +24,12 @@
           <p>Cidade: <font size="3" th:text="${kartodromo.cidade + ' - ' + kartodromo.estado}"></font></p>
           <p>Contato: <font size="3" th:text="${kartodromo.email}"></font></p>
           <br>
-      </tr>
-  </div>
+    </div>
+    <div class="container px-4 py-2 col-md-1"></div>
+    <div class="container px-4 py-2 col-md-6">
+        <p><img alt="Image" th:src="|/imagem/${kartodromo.id}|" width="250" /></p>
+    </div>
+  </tr>
 </body>
 <div class="container">
   <footer th:replace="~{basePiloto :: footer}" class="py-5"></footer>

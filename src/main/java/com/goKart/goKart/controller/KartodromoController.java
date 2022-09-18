@@ -125,4 +125,13 @@ public class KartodromoController{
 		return "piloto/kartodromos";
 	}
 
+	@GetMapping("/kartodromos")
+	public String listarKartodromosInicial(Model model) {
+		List<Kartodromo> kartodromo = kartodromoRepository.findAll();
+
+		model.addAttribute("kartodromo", kartodromo);
+
+		return "/kartodromos";
+	}
+
 }
