@@ -34,5 +34,4 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long>  {
 
 	@Query(value = "select * from tb_reserva where tb_reserva.id = :id", nativeQuery = true)
 	List<Reserva> findByIdReserva(Long id);
-
 }

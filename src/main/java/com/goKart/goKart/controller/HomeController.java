@@ -11,6 +11,11 @@ public class HomeController {
 		return "/login";
 	}
 
+	@RequestMapping("/resetSenha")
+	public String resetSenha() {
+		return "/resetSenha";
+	}
+
 	@RequestMapping("/goKartNovidades")
 	public String goKartNovidadesIndex() {
 		return "/goKartNovidades";

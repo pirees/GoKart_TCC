@@ -17,22 +17,7 @@
       <div class="col-6">
           <div class="col-md-2"></div>
           <div class="col-md-8">
-            <h5 class="text-center">
-              <i>Piloto(s) da corrida</i>
-            </h5>
-            <table class="table text-center">
-              <thead>
-              <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Nível</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr th:each="reserva : ${reserva}">
-                <td th:text="${reserva.piloto.nome + ' ' + reserva.piloto.sobrenome}"></td>
-                <td th:text="${reserva.piloto.nivel}"></td>
-              </tbody>
-            </table>
+            <img th:src="@{/images/bandeiraQuadriculada.png}" class="img-fluid">
           </div>
           <div class="col-md-2"></div>
         </div>

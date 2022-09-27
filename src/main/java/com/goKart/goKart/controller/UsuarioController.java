@@ -2,6 +2,7 @@ package com.goKart.goKart.controller;
 
 import java.util.List;
 
+import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ErrorHandler;
@@ -18,9 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UsuarioController{
 	
 	private UsuarioRepository usuarioRepository;
+	private EnviaEmailService enviaEmailService;
 	
-	public UsuarioController(UsuarioRepository usuarioRepository){
+	public UsuarioController(UsuarioRepository usuarioRepository, EnviaEmailService enviaEmailService)
+	{
 	 this.usuarioRepository = usuarioRepository;
+	 this.enviaEmailService = enviaEmailService;
 	}
 
 	public Boolean verificaCadastro(String email){
@@ -33,5 +37,12 @@ public class UsuarioController{
 			}
 		}
 		return false;
+	}
+
+	public String enviaEmailRedefinirSenha(Usuario usuario){
+
+		enviaEmailService.enviarUsuarioRedefinirSenha(usuario);
+
+		return "/";
 	}
 }

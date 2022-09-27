@@ -1,9 +1,6 @@
 package com.goKart.goKart.service;
 
-import com.goKart.goKart.model.Bateria;
-import com.goKart.goKart.model.Kartodromo;
-import com.goKart.goKart.model.Piloto;
-import com.goKart.goKart.model.Reserva;
+import com.goKart.goKart.model.*;
 import com.goKart.goKart.repository.PilotoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
@@ -148,11 +145,29 @@ public class EnviaEmailService {
 
         SimpleMailMessage mensagem = new SimpleMailMessage();
         mensagem.setTo(kartodromo.getEmail());
-        mensagem.setSubject("Cadastro aprovado | GoKart");
+        mensagem.setSubject("Redefinição de senha | GoKart");
         mensagem.setText("Olá, seu cadastro foi aprovado pelo nosso time."
                 + "\n"
                 + "\n"
                 + "Qualquer dúvida, pode nos enviar e-mail pelo contato@gokart.com"
+                + "\n"
+                + "\n"
+                + "Atenciosamente,"
+                + "\n"
+                + "GoKart");
+
+        javaMailSender.send(mensagem);
+    }
+
+    public void enviarUsuarioRedefinirSenha(Usuario usuario) {
+
+        SimpleMailMessage mensagem = new SimpleMailMessage();
+        mensagem.setTo(usuario.getEmail());
+        mensagem.setSubject("Cadastro aprovado | GoKart");
+        mensagem.setText("Olá, segue o link para a sua nova senha."
+                + "\n"
+                + "\n"
+                + "https://localhost:8443/novaSenha"
                 + "\n"
                 + "\n"
                 + "Atenciosamente,"

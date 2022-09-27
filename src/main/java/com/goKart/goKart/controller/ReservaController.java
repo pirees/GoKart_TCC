@@ -8,7 +8,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.goKart.goKart.dto.FaturarDTO;
 import com.goKart.goKart.model.*;
+import com.goKart.goKart.repository.*;
 import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,12 +25,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.goKart.goKart.excel.ReservaExcel;
-import com.goKart.goKart.repository.BateriaRepository;
-import com.goKart.goKart.repository.KartodromoRepository;
-import com.goKart.goKart.repository.PilotoRepository;
-import com.goKart.goKart.repository.ReservaRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ReservaController {
@@ -38,19 +34,22 @@ public class ReservaController {
 	private PilotoRepository pilotoRepository;
 	
 	private BateriaRepository bateriaRepository;
+
+	private CustomQueryRepository customQueryRepository;
 	
 	private KartodromoRepository kartodromoRepository;
 
 	private EnviaEmailService enviaEmailService;
 
 	public ReservaController(ReservaRepository reservaRepository, PilotoRepository pilotoRepository,
-							 BateriaRepository bateriaRepository, KartodromoRepository kartodromoRepository, EnviaEmailService enviaEmailService) {
+							 BateriaRepository bateriaRepository, KartodromoRepository kartodromoRepository, EnviaEmailService enviaEmailService, CustomQueryRepository customQueryRepository) {
 		super();
 		this.reservaRepository = reservaRepository;
 		this.pilotoRepository = pilotoRepository;
 		this.bateriaRepository = bateriaRepository;
 		this.kartodromoRepository = kartodromoRepository;
 		this.enviaEmailService = enviaEmailService;
+		this.customQueryRepository = customQueryRepository;
 	}
 
 	// LISTA TODAS AS BATERIAS DISPONÍVEIS
@@ -88,9 +87,19 @@ public class ReservaController {
 		
 		List<Reserva> reservas = reservaRepository.findDataReservaKartodromoById(reserva.getKartodromo().getId());
 				
-		model.addAttribute("reservas", reservas);
+		model.addAttribute("reserva", reservas);
 		
 		return "kartodromo/relatorio";
+	}
+
+	@GetMapping("admin/faturamento")
+	public String visualizarFaturamento(Model model) {
+
+		List<FaturarDTO> faturarDTOs = customQueryRepository.listarKartodromosFaturar();
+
+		model.addAttribute("faturamentos", faturarDTOs);
+
+		return "admin/faturamento";
 	}
 	
 	@GetMapping("kartodromo/relatorio/exports/csv")

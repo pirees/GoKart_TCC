@@ -100,6 +100,5 @@ public class AdministradorController {
 		return new ModelAndView("redirect:/admin/pendencias");
 	}
 	
-	
 
 }
