@@ -1,6 +1,8 @@
 package com.goKart.goKart.model;
 
+import com.goKart.goKart.repository.PilotoRepository;
 import lombok.Data;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import javax.persistence.Entity;

@@ -2,15 +2,15 @@ package com.goKart.goKart.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import com.goKart.goKart.excel.ReservaExcel;
 import com.goKart.goKart.excel.TodosPilotosExcel;
-import com.goKart.goKart.model.Kartodromo;
-import com.goKart.goKart.model.Reserva;
+import com.goKart.goKart.model.*;
 import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,8 +20,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import com.goKart.goKart.model.Perfil;
-import com.goKart.goKart.model.Piloto;
 import com.goKart.goKart.repository.PerfilRepository;
 import com.goKart.goKart.repository.PilotoRepository;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -56,11 +54,12 @@ public class PilotoController{
 	}
 	
 	@PostMapping("piloto/atualizarPiloto")
-	public ModelAndView atualizarNivel(String email, Piloto piloto) {
-		
+	public ModelAndView atualizarNivel(HttpServletRequest request, String email, Piloto piloto, Nivel nivel) {
 		email = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-		piloto.atualizarNivel(email, pilotoRepository);
+		piloto = pilotoRepository.findByEmail(email);
+
+		piloto.setNivel(nivel);
+		pilotoRepository.save(piloto);
 
 		return new ModelAndView("redirect:/piloto/atualizarPiloto");
 	}
@@ -115,6 +114,4 @@ public class PilotoController{
 		todosPilotosExcel.export(response);
 
 	}
-	
-	
 }

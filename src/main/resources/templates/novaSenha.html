@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  lang="pt-br">
+<head th:replace="~{baseCadastroPiloto :: head}"></head>
+<div class="container">
+	<header th:replace="~{baseCadastroPiloto :: header}"></header>
+</div>
+<script src="js/validator.min.js"></script>
+	<body class="text-center">
+	 <p></p>
+		<main class="form-signin">
+			<div class="container p-2">
+				<div class="row justify-content-center">
+					<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${errormessage}">
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						<strong th:text="${errormessage}"></strong>
+					</div>
+					<h5>Insira o seu e-mail para que seja enviado o próximo passo para redefinir sua senha.</h5>
+					<form class="col-sm-10 col-md-5 col-lg-4"  th:action="@{/novaSenha}" method="post" th:object="${usuario}">
+						<br>
+						<div class="container">
+						<div class="form-floating mb-3">
+							<input type="email" name="username" class="form-control" id="floatingInput" placeholder="name@example.com" required autofocus>
+							<label for="floatingInput">E-mail</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+							<label for="floatingPassword">Senha</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="password" name="passwordRepeat" class="form-control" id="passwordRepeat" placeholder="Password Again"required>
+							<label for="floatingPassword">Senha novamente</label>
+						</div>
+						<div th:if="${param.error}">
+							<p class="text-danger">E-mail ou senha inválidos</p>
+						</div>
+							<br>
+							<button class="w-100 btn btn-lg btn-dark" type="submit">Enviar</button>
+							<p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+						</div>
+						<p class="mt-3">
+							Ainda não é cadastrado? <a th:href="@{/piloto/cadastroPiloto}"> Clique aqui</a> para se cadastrar.
+					</form>
+				</div>
+  			</div>
+		</main>
+  </body>
+	<div class="container">
+		<footer th:replace="~{basePiloto :: footer}" class="py-5"></footer>
+	</div>
+</html>

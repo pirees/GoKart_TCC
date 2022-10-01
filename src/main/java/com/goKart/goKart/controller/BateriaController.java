@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.goKart.goKart.model.*;
-import com.goKart.goKart.service.EnviaEmailService;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
@@ -304,18 +303,6 @@ public class BateriaController {
         bateriaRepository.delete(bateria);
         return new ModelAndView("redirect:/kartodromo/menuKartodromo");
     }
-
-    /*@PostMapping("/import/csv")
-    public String cadastrarBateriaCSV(@ModelAttribute Bateria bateria, RedirectAttributes redirectAttributes) {
-        boolean isFlag = salvarArquivo(bateria.getFile());
-
-        if (!isFlag){
-            redirectAttributes.addFlashAttribute("sucessmessage", "Bateria(s) salva(s) com sucesso");
-        }else{
-            redirectAttributes.addFlashAttribute("errormessage", "File not upload Successfuly");
-        }
-        return "redirect:/kartodromo/cadastroBateriaExcel";
-    }*/
 
     public boolean salvarArquivo(MultipartFile file, RedirectAttributes redirectAttributes){
         boolean isFlag = false;

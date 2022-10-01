@@ -1,30 +1,30 @@
 package com.goKart.goKart.controller;
 
-import java.util.List;
-
-import com.goKart.goKart.service.EnviaEmailService;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.ErrorHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-
 import com.goKart.goKart.model.Usuario;
 import com.goKart.goKart.repository.UsuarioRepository;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import com.goKart.goKart.service.EnviaEmailService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 @Controller
-@RequestMapping("usuario")
+//@RequestMapping("usuario")
+@Component
 public class UsuarioController{
 	
 	private UsuarioRepository usuarioRepository;
 	private EnviaEmailService enviaEmailService;
-	
-	public UsuarioController(UsuarioRepository usuarioRepository, EnviaEmailService enviaEmailService)
-	{
-	 this.usuarioRepository = usuarioRepository;
-	 this.enviaEmailService = enviaEmailService;
+
+	public UsuarioController(UsuarioRepository usuarioRepository, EnviaEmailService enviaEmailService) {
+		this.usuarioRepository = usuarioRepository;
+		this.enviaEmailService = enviaEmailService;
 	}
 
 	public Boolean verificaCadastro(String email){
@@ -38,11 +38,55 @@ public class UsuarioController{
 		}
 		return false;
 	}
+	@GetMapping("/trocarSenha")
+	public String resetSenha(String username) {
+		return "/trocarSenha";
+	}
 
-	public String enviaEmailRedefinirSenha(Usuario usuario){
+	@PostMapping("/trocarSenha")
+	public ModelAndView enviaEmailRedefinirSenha(HttpServletRequest request, RedirectAttributes redirectAttributes){
 
-		enviaEmailService.enviarUsuarioRedefinirSenha(usuario);
+		String email = request.getParameter("username");
 
-		return "/";
+		Usuario usuario = usuarioRepository.findByEmail(email);
+
+		if(verificaCadastro(email)){
+			usuario.setEmail(email);
+			enviaEmailService.enviarUsuarioRedefinirSenha(usuario);
+		}else{
+			redirectAttributes.addFlashAttribute("errormessage", "E-mail não cadastrado no sistema.");
+			return new ModelAndView("redirect:/trocarSenha");
+		}
+		return new ModelAndView("redirect:/");
+	}
+
+	@GetMapping("/novaSenha")
+	public String novaSenha(String username, String password, String passwordRepeat) {
+		return "/novaSenha";
+	}
+
+	@PostMapping("/novaSenha")
+	public ModelAndView novaSenhaPiloto(String email, HttpServletRequest request, String password, String passwordRepeat, RedirectAttributes redirectAttributes) {
+
+		email = request.getParameter("username");
+		password = request.getParameter("password");
+		passwordRepeat = request.getParameter("passwordRepeat");
+
+		Usuario usuario = usuarioRepository.findByEmail(email);
+
+		if(password.equals(passwordRepeat)){
+
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String encodedPassword = passwordEncoder.encode(password);
+			usuario.setSenha(encodedPassword);
+			usuarioRepository.save(usuario);
+			enviaEmailService.enviarUsuarioSenhaTrocada(usuario);
+
+		}else{
+			redirectAttributes.addFlashAttribute("errormessage", "As senhas estão diferentes.");
+			return new ModelAndView("redirect:/novaSenha");
+		}
+
+		return new ModelAndView("redirect:/login");
 	}
 }

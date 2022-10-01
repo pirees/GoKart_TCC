@@ -145,7 +145,7 @@ public class EnviaEmailService {
 
         SimpleMailMessage mensagem = new SimpleMailMessage();
         mensagem.setTo(kartodromo.getEmail());
-        mensagem.setSubject("Redefinição de senha | GoKart");
+        mensagem.setSubject("Cadastro aprovado | GoKart");
         mensagem.setText("Olá, seu cadastro foi aprovado pelo nosso time."
                 + "\n"
                 + "\n"
@@ -163,11 +163,29 @@ public class EnviaEmailService {
 
         SimpleMailMessage mensagem = new SimpleMailMessage();
         mensagem.setTo(usuario.getEmail());
-        mensagem.setSubject("Cadastro aprovado | GoKart");
+        mensagem.setSubject("Redefinição de senha | GoKart");
         mensagem.setText("Olá, segue o link para a sua nova senha."
                 + "\n"
                 + "\n"
                 + "https://localhost:8443/novaSenha"
+                + "\n"
+                + "\n"
+                + "Atenciosamente,"
+                + "\n"
+                + "GoKart");
+
+        javaMailSender.send(mensagem);
+    }
+
+    public void enviarUsuarioSenhaTrocada(Usuario usuario) {
+
+        SimpleMailMessage mensagem = new SimpleMailMessage();
+        mensagem.setTo(usuario.getEmail());
+        mensagem.setSubject("Senha nova | GoKart");
+        mensagem.setText("Olá, sua senha foi atualizada com sucesso."
+                + "\n"
+                + "\n"
+                + "Se você não trocou a sua senha, entre em contato com o nosso suporte."
                 + "\n"
                 + "\n"
                 + "Atenciosamente,"

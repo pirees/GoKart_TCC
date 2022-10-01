@@ -2,19 +2,22 @@
 <html xmlns:th="http://thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  lang="pt-br">
-	<head>
-		<meta charset="UTF-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-		<link rel="icon" type="imagem/png" href="/images/helmet.png"/>
-		<title>GoKart - Redefinir senha </title>
-	</head>
+<head th:replace="~{baseCadastroPiloto :: head}"></head>
+<div class="container">
+	<header th:replace="~{baseCadastroPiloto :: header}"></header>
+</div>
+<script src="js/validator.min.js"></script>
 	<body class="text-center">
 	 <p></p>
 		<main class="form-signin">
-		<div class="row justify-content-center">
+			<div class="container p-2">
+				<div class="row justify-content-center">
+					<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${errormessage}">
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						<strong th:text="${errormessage}"></strong>
+					</div>
 			<h5>Insira o seu e-mail para que seja enviado o próximo passo para redefinir sua senha.</h5>
-			<form class="col-sm-10 col-md-5 col-lg-4"  th:action="@{/login}" method="post">
+			<form class="col-sm-10 col-md-5 col-lg-4"  th:action="@{/trocarSenha}" method="post" th:object="${piloto}">
 				<br>
     			<div class="container">
     			<div class="form-floating mb-3">
@@ -32,6 +35,10 @@
     				Ainda não é cadastrado? <a th:href="@{/piloto/cadastroPiloto}"> Clique aqui</a> para se cadastrar.
   			</form>
   			</div>
+			</div>
 		</main>
   </body>
+	<div class="container">
+		<footer th:replace="~{basePiloto :: footer}" class="py-5"></footer>
+	</div>
 </html>
