@@ -24,12 +24,12 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr th:each="reserva : ${reservas}">
-				<td th:text="${reserva.piloto.nome}"></td>
-				<td th:text="${reserva.piloto.sobrenome}"></td>
-				<td th:text="${reserva.piloto.email}"></td>
-				<td th:text="${reserva.piloto.cidade}"></td>
-				<td th:text="${#temporals.format(reserva.dataReserva, 'dd/MM/yyyy')}"></td>
+			<tr th:each="reservas : ${reservas}">
+				<td th:text="${reservas.piloto.nome}"></td>
+				<td th:text="${reservas.piloto.sobrenome}"></td>
+				<td th:text="${reservas.piloto.email}"></td>
+				<td th:text="${reservas.piloto.cidade}"></td>
+				<td th:text="${#temporals.format(reservas.dataReserva, 'dd/MM/yyyy')}"></td>
 			</tr>
 			</tbody>
 		</table>

@@ -67,7 +67,7 @@ public class EnviaEmailService {
         SimpleMailMessage mensagem = new SimpleMailMessage();
         mensagem.setTo(piloto.getEmail());
         mensagem.setSubject("Reserva confirmada com sucesso | GoKart");
-        mensagem.setText("Olá, sua reserva do número " + reserva.getId() + " foi autorizada com sucesso."
+        mensagem.setText("Olá, sua bateria do número " + reserva.getId() + " foi autorizada com sucesso."
                         + "\n"
                         + "\n"
                         + "Atenciosamente,"

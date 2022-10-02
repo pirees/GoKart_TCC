@@ -18,7 +18,7 @@ public class PayerDTO {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = "spring@gmail.com";
     }
 
     public PayerIdentificationDTO getIdentification() {

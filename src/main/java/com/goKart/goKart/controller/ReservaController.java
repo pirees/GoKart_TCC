@@ -30,23 +30,19 @@ import com.goKart.goKart.excel.ReservaExcel;
 public class ReservaController {
 
 	private ReservaRepository reservaRepository;
-	
+
 	private PilotoRepository pilotoRepository;
-	
-	private BateriaRepository bateriaRepository;
 
 	private CustomQueryRepository customQueryRepository;
-	
+
 	private KartodromoRepository kartodromoRepository;
 
 	private EnviaEmailService enviaEmailService;
 
-	public ReservaController(ReservaRepository reservaRepository, PilotoRepository pilotoRepository,
-							 BateriaRepository bateriaRepository, KartodromoRepository kartodromoRepository, EnviaEmailService enviaEmailService, CustomQueryRepository customQueryRepository) {
+	public ReservaController(ReservaRepository reservaRepository, PilotoRepository pilotoRepository, KartodromoRepository kartodromoRepository, EnviaEmailService enviaEmailService, CustomQueryRepository customQueryRepository) {
 		super();
 		this.reservaRepository = reservaRepository;
 		this.pilotoRepository = pilotoRepository;
-		this.bateriaRepository = bateriaRepository;
 		this.kartodromoRepository = kartodromoRepository;
 		this.enviaEmailService = enviaEmailService;
 		this.customQueryRepository = customQueryRepository;
@@ -87,7 +83,7 @@ public class ReservaController {
 		
 		List<Reserva> reservas = reservaRepository.findDataReservaKartodromoById(reserva.getKartodromo().getId());
 				
-		model.addAttribute("reserva", reservas);
+		model.addAttribute("reservas", reservas);
 		
 		return "kartodromo/relatorio";
 	}
