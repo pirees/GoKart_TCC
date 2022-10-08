@@ -13,7 +13,7 @@
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			<strong th:text="${errormessage}"></strong>
 		</div>
-			<div class="d-flex justify-content-between mb-3">
+			<div class="d-flex justify-content-center mb-3">
 				<form class="row g-3" method="POST" th:action="@{/cadastroKartodromo}" th:object="${kartodromo}" enctype="multipart/form-data">
 					<div class="row p-3">
 						<div class="col">
@@ -33,7 +33,8 @@
 							<span th:if="${#fields.hasErrors('Logradouro')}" class="text-danger" th:errors="*{CEP}"></span>
 							<small class="text-muted">E.x "Avenida das Araucárias, 213"</small>
 						</div>
-		  				<div class="row p-3">
+					</div>
+					<div class="row p-3">
 						<div class="col">
 							<label for="cep" class="form-label">CEP</label>
 							<input type="text" class="form-control" th:errorclass="is-invalid" id="cep" th:field="*{CEP}">
@@ -60,7 +61,7 @@
 							      	th:text="${estado}"> </option>
 				    		</select>
 				 		</div>
-						</div>
+					</div>
 						<div class="row p-2">
 							<div class="col">
 								<label for="email" class="form-label">E-mail</label>
@@ -73,17 +74,18 @@
 								<span th:if="${#fields.hasErrors('senha')}" class="text-danger" th:errors="*{senha}"></span>
 							</div>
 				 		</div>
-		  			</div>
-					<div class="row p-2">
-						<label for="imagem"> Selecione a sua logo</label>
-						<input type="file" class="form-control" id="imagem" name="fileKartodromo"/>
-					</div>
+						<div class="row p-2">
+							<div class="col mb-5">
+								<label for="imagem"> Selecione a sua logo (.png)</label>
+								<input type="file" class="form-control" id="imagem" name="fileKartodromo" accept=".png"/>
+							</div>
+							<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+								<a th:href="@{/pendenciaCadastro}">
+									<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
+								</a>
+							</div>
+						</div>
 					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-				 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				 	<a th:href="@{/pendenciaCadastro}">
-				    	<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
-				    	</a>
-					</div>  						
 				</form>
 			</div>
 		</div>

@@ -13,7 +13,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				<strong th:text="${errormessage}"></strong>
 			</div>
-			<div class="d-flex justify-content-between mb-3">
+			<div class="d-flex justify-content-center mb-3">
 				<form class="row g-3" method="POST" th:action="@{/piloto/cadastroPiloto}" th:object="${piloto}">
 					<div class="row p-2">
 						<div class="col">
@@ -29,7 +29,7 @@
 		  			</div>
 		  			<div class="row p-2">
 						<div class="col">
-				    		<label for="inputCity" class="form-label">Cidade</label>
+				    		<label for="cidade" class="form-label">Cidade</label>
 				    		<input type="text" class="form-control" th:errorclass="is-invalid" id="cidade" th:field="*{cidade}">
 				    		<span th:if="${#fields.hasErrors('cidade')}" class="text-danger" th:errors="*{cidade}"></span> 
 						</div>
@@ -51,38 +51,39 @@
 							   	   th:text="${nivel}"></option>
 					    	</select>
 						 </div>
-						 <div class="row p-2">
+					</div>
+					<div class="row p-2">
 		 	 			<div class="col">
 		    				<label for="inputEmail4" class="form-label">Email</label>
 		    				<input type="email" class="form-control" th:errorclass="is-invalid" id="inputEmail4" th:field="*{email}">
 		    				<span th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></span> 
 		  				</div>	  		
-		  				<div class="col-md-4">
+		  				<div class="col-md-4 mb-5">
 		    				<label for="inputPassword4" class="form-label">Senha</label>
 		    				<input type="password" class="form-control" th:errorclass="is-invalid" id="inputPassword4" th:field="*{senha}">
 		    				<span th:if="${#fields.hasErrors('senha')}" class="text-danger" th:errors="*{senha}"></span> 
 		  				</div>
-		  			</div>
-				 	</div>
-					 <div class="form-group">
-    					<div class="checkbox">
-      						<label>
-        						<input type="checkbox" data-error="Você deve marcar este campo!" required> Aceito as condições do site, leia as condições de uso do <a th:href="@{/termosCondicoes}">GoKart</a>.
-      						</label>
-      						<div class="help-block with-errors"></div>
-    					</div>
-						 <div class="checkbox">
-							 <label>
-								 <input type="checkbox" data-error="Você deve marcar este campo!" required> Confirmo que sou maior de 16 anos de idade.
-							 </label>
-							 <div class="help-block with-errors"></div>
-						 </div>
-  					</div>
-					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				 	<a th:href="@{/login}">
-				    	<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
-				    	</a>
-					</div>  						
+						<div class="form-group">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" data-error="Você deve marcar este campo!" required> Aceito as condições do site, leia as condições de uso do <a th:href="@{/termosCondicoes}">GoKart</a>.
+								</label>
+								<div class="help-block with-errors"></div>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" data-error="Você deve marcar este campo!" required> Confirmo que sou maior de 16 anos de idade.
+								</label>
+								<div class="help-block with-errors"></div>
+							</div>
+							<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+								<a th:href="@{/login}">
+									<button type="submit" class="btn btn-outline-dark btn-lg">Enviar</button>
+								</a>
+							</div>
+						</div>
+					</div>
+
 				</form>
 			</div>
 			<form>
