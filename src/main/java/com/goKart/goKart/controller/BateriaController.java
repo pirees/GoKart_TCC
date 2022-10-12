@@ -347,7 +347,7 @@ public class BateriaController {
                     redirectAttributes.addFlashAttribute("sucessmessage", "Bateria(s) salva(s) com sucesso");
                     bateriaRepository.save(bateria);
                 }else{
-                    redirectAttributes.addFlashAttribute("errormessage", "Consulte a página de relatório pois a importação teve erro em alguma bateria.");
+                    redirectAttributes.addFlashAttribute("errormessage", "Verifique seu arquivo, já existe bateria cadastrada com a data e hora desejada.");
                 }
             }
         } catch (IOException | CsvValidationException e) {
