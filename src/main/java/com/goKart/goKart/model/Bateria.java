@@ -57,18 +57,4 @@ public class Bateria {
 	@JoinColumn(name="kartodromo_id")
 	private Kartodromo kartodromo;
 
-	public Bateria atualizarBateria(Long id, BateriaRepository bateriaRepository) {
-
-		Bateria bateria = bateriaRepository.getById(id);
-		//bateria.setData(this.getData());
-		//bateria.setHoraBateria(this.horaBateria);
-		bateria.setDuracaoBateria(this.getDuracaoBateria());
-		bateria.setTracado(this.tracado);
-		bateria.setNrMaxPiloto(this.nrMaxPiloto);
-		bateria.setValorBateria(this.getValorBateria());
-		bateriaRepository.save(bateria);
-
-		return bateria;
-	}
-
 }
