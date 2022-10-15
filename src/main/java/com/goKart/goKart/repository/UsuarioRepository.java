@@ -2,7 +2,6 @@ package com.goKart.goKart.repository;
 
 import java.util.List;
 
-import com.goKart.goKart.model.Perfil;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

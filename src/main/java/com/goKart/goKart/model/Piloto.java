@@ -2,17 +2,13 @@ package com.goKart.goKart.model;
 
 import java.util.Collection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.goKart.goKart.repository.PilotoRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 @Data

@@ -1,7 +1,7 @@
 package com.goKart.goKart.excel;
 
-import com.goKart.goKart.model.Bateria;
 import com.goKart.goKart.model.Piloto;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -11,9 +11,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
-import java.math.BigDecimal;
+
 import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 
 public class TodosPilotosExcel {

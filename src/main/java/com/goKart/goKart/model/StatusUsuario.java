@@ -1,7 +1,5 @@
 package com.goKart.goKart.model;
 
-import lombok.Data;
-
 public enum StatusUsuario {
 
     APROVADO("Aprovado"),

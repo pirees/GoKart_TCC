@@ -8,10 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.goKart.goKart.repository.KartodromoRepository;
 
 @Entity
 @Data

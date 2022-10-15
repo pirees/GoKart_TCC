@@ -4,20 +4,18 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.goKart.goKart.repository.BateriaRepository;
-import com.goKart.goKart.repository.KartodromoRepository;
-import com.goKart.goKart.repository.PilotoRepository;
 import com.opencsv.bean.CsvBindByName;
 import lombok.Data;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.goKart.goKart.repository.BateriaRepository;
 
 @Entity
 @Table(name="tb_bateria")
@@ -58,6 +56,7 @@ public class Bateria {
 	@ManyToOne
 	@JoinColumn(name="kartodromo_id")
 	private Kartodromo kartodromo;
+
 	public Bateria atualizarBateria(Long id, BateriaRepository bateriaRepository) {
 
 		Bateria bateria = bateriaRepository.getById(id);

@@ -2,16 +2,12 @@ package com.goKart.goKart.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import com.goKart.goKart.excel.TodosPilotosExcel;
-import com.goKart.goKart.model.*;
-import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,9 +16,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.goKart.goKart.excel.TodosPilotosExcel;
+import com.goKart.goKart.model.Nivel;
+import com.goKart.goKart.model.Perfil;
+import com.goKart.goKart.model.Piloto;
+import com.goKart.goKart.service.EnviaEmailService;
 import com.goKart.goKart.repository.PerfilRepository;
 import com.goKart.goKart.repository.PilotoRepository;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class PilotoController{

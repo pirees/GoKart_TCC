@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

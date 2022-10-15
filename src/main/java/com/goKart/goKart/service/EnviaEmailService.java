@@ -2,7 +2,7 @@ package com.goKart.goKart.service;
 
 import com.goKart.goKart.model.*;
 import com.goKart.goKart.repository.PilotoRepository;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;

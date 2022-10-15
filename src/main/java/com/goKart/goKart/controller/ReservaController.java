@@ -8,10 +8,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.goKart.goKart.dto.FaturarDTO;
-import com.goKart.goKart.model.*;
-import com.goKart.goKart.repository.*;
-import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +19,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.goKart.goKart.dto.FaturarDTO;
+import com.goKart.goKart.service.EnviaEmailService;
+import com.goKart.goKart.repository.CustomQueryRepository;
+import com.goKart.goKart.repository.KartodromoRepository;
+import com.goKart.goKart.repository.PilotoRepository;
+import com.goKart.goKart.repository.ReservaRepository;
+import com.goKart.goKart.model.Kartodromo;
+import com.goKart.goKart.model.Piloto;
+import com.goKart.goKart.model.Reserva;
+import com.goKart.goKart.model.StatusPagamento;
 
 import com.goKart.goKart.excel.ReservaExcel;
 

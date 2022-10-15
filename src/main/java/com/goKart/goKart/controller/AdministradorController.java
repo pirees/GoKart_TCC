@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 
-import com.goKart.goKart.model.*;
-import com.goKart.goKart.repository.KartodromoRepository;
-import com.goKart.goKart.service.EnviaEmailService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +11,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import com.goKart.goKart.repository.AdministradorRepository;
-import com.goKart.goKart.repository.PerfilRepository;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.goKart.goKart.model.Administrador;
+import com.goKart.goKart.model.Perfil;
+import com.goKart.goKart.model.Kartodromo;
+import com.goKart.goKart.model.StatusUsuario;
+import com.goKart.goKart.repository.AdministradorRepository;
+import com.goKart.goKart.repository.PerfilRepository;
+import com.goKart.goKart.repository.KartodromoRepository;
+import com.goKart.goKart.service.EnviaEmailService;
 
 @Controller
 public class AdministradorController {

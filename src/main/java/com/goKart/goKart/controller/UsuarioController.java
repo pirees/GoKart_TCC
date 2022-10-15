@@ -1,8 +1,9 @@
 package com.goKart.goKart.controller;
 
-import com.goKart.goKart.model.Usuario;
-import com.goKart.goKart.repository.UsuarioRepository;
-import com.goKart.goKart.service.EnviaEmailService;
+import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import com.goKart.goKart.model.Usuario;
+import com.goKart.goKart.repository.UsuarioRepository;
+import com.goKart.goKart.service.EnviaEmailService;
 
 @Controller
-//@RequestMapping("usuario")
 @Component
 public class UsuarioController{
 	
