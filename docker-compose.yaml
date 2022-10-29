@@ -1,0 +1,41 @@
+version: "3.3"
+
+networks:
+  api-network:
+    driver: bridge
+
+services:
+  gokart:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: leonardopires15/gokart_tcc
+    container_name: gokart_tcc
+    environment:
+      MYSQL_HOST: database
+    ports:
+      - '8443:8443'
+    networks:
+      - api-network
+    volumes:
+      - ./src/main/resources/bootsecurity.p12
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8
+    ports:
+      - '3306:3306'
+    container_name: database
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: goKarttest
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 2s
+      retries: 5
+    networks:
+      - api-network
+
+

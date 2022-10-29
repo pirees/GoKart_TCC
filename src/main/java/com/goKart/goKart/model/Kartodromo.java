@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
+import org.hibernate.validator.constraints.br.CNPJ;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -20,7 +21,8 @@ public class Kartodromo extends Usuario implements UserDetails  {
 
 	@NotNull (message = "Estado não pode ficar em branco")
 	private Estado estado;
-	
+
+	@org.hibernate.validator.constraints.br.CNPJ
 	@NotBlank(message = "CNPJ não pode ficar em branco")
 	private String CNPJ;
 
