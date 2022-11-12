@@ -46,7 +46,7 @@ public class EnviaEmailService {
         SimpleMailMessage mensagem = new SimpleMailMessage();
         mensagem.setTo(piloto.getEmail());
         mensagem.setSubject("Pagamento não autorizado | GoKart");
-        mensagem.setText("Olá, sua reserva do número " + reserva.getId() + "não foi autorizada pelo seu cartão de crédito."
+        mensagem.setText("Olá, sua reserva do número " + reserva.getId() + " não foi autorizada pelo seu cartão de crédito."
                         + "\n"
                         + "\n"
                         + "Favor tentar novamente ou entrar em contato conosco via e-mail contato@gokart.com.br"

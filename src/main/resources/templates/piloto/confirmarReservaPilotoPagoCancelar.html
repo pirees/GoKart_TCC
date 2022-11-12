@@ -57,14 +57,13 @@ div.segundo {
 					<font size=8> R$: <span th:text="${#numbers.formatDecimal(bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></span></font>
 				</div>
 				<br>
+				<div>
+					<a th:href="@{/piloto/reservasPiloto}">
+						<button type="submit" class="btn btn-outline-dark btn-lg">Minhas reservas</button>
+					</a>
+				</div>
 			</div>
 			</form>
-			<div class="col-6"></div>
-			<div class="segundo col-6">
-				<a th:href="@{/piloto/reservasPiloto}">
-					<button type="submit" class="btn btn-outline-dark btn-lg">Minhas reservas</button>
-				</a>
-			</div>
 		</div>
 		<div class="row mt-5">
 			<div class="col-md-5">
