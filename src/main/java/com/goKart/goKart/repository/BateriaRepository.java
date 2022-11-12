@@ -18,7 +18,7 @@ public interface BateriaRepository extends JpaRepository<Bateria, Long>  {
 	@Query("select p from Bateria p where p.kartodromo.id = :id")
 	List<Bateria> findByKartodromoId(Long id);
 
-	@Query("SELECT p FROM Bateria p WHERE p.data > CURDATE() and p.kartodromo.id = :id")
+	@Query("SELECT p FROM Bateria p WHERE p.data > CURDATE() and p.kartodromo.id = :id ORDER BY p.data ASC")
 	List<Bateria> findByDateKartodromoId(Long id);
 
 	@Query("SELECT p FROM Bateria p WHERE p.data > CURDATE() OR p.data = CURDATE() and p.horaBateria > CURTIME() ORDER BY p.data ASC")
@@ -28,7 +28,7 @@ public interface BateriaRepository extends JpaRepository<Bateria, Long>  {
 	List<Bateria> findByKartodromoNomeData(@Param("nomepesquisa") String nomepesquisa,
 										   @Param("datapesquisa") LocalDate datapesquisa);
 
-	@Query(value = "SELECT b FROM Bateria b INNER JOIN b.kartodromo k WHERE k.nome like %?1% and b.data > CURDATE() OR b.data = CURDATE()")
+	@Query(value = "SELECT b FROM Bateria b INNER JOIN b.kartodromo k WHERE k.nome like %?1% and b.data > CURDATE() OR b.data = CURDATE() ORDER BY b.data ASC")
 	List<Bateria> findByKartodromoNome(@Param("nomepesquisa") String nomepesquisa);
 
 	@Query(value = "SELECT b FROM Bateria b INNER JOIN b.kartodromo k where k.id = ?1 and b.data = ?2")
