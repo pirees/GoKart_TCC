@@ -6,44 +6,39 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css"
 	  rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="/css/footer.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.pt-BR.min.js"></script>
 <div class="container">
 	<header th:replace="~{basePiloto :: header}"></header>
 </div>
 <body>
 	<div class="container">
-		<div class="mb-5 mt-3 justify-content-start">
-			<form th:action="@{pesquisarKartodromo}" method="post">
-				<div class="row" >
-					<div class="col-2"></div>
-					<div class="col-3">
-						<input th:name="nomepesquisa" class="form-control"
-							   placeholder="Kartódromo">
+		<div class="row">
+			<div class="mb-5 mt-3 justify-content-start">
+				<form th:action="@{pesquisarKartodromo}" method="post">
+					<div class="row" >
+						<div class="col-2"></div>
+						<div class="col-3">
+							<input th:name="nomepesquisa" class="form-control"
+								   placeholder="Kartódromo">
+						</div>
+						<div class="col-3">
+							<input th:name="datapesquisa" type="text" id="datepicker-inicial" class="form-control"
+								   placeholder="Data">
+						</div>
+						<div class="col-2"><input type="submit" class="btn btn-outline-dark" value="Buscar"></div>
+						<div class="col-2"></div>
 					</div>
-					<div class="col-3">
-						<input th:name="datapesquisa" type="text" id="datepicker-inicial" class="form-control"
-							   placeholder="Data">
-					</div>
-					<div class="col-2"><input type="submit" class="btn btn-outline-dark" value="Buscar"></div>
-					<div class="col-2"></div>
-				</div>
-			</form>
-		</div>
-		<br>
-		<div class="col-lg-6 col-md-8 mx-auto">
-			<h1 class="fw-light justify-content-center">OOOOOPS...</h1>
-			<p class="lead text-muted">Não achamos nenhum resultado para a sua pesquisa :)</p>
+				</form>
+			</div>
+			<br>
+			<div class="col-lg-6 col-md-8 mx-auto">
+				<h1 class="fw-light justify-content-center">OOOOOPS...</h1>
+				<p class="lead text-muted">Não achamos nenhum resultado para a sua pesquisa :)</p>
+			</div>
 		</div>
 	</div>
 </body>
-<style>
-footer {
-   position: absolute;
-  bottom: 0;
-  width: 70%;
-  height: 50px;
-}
-</style>
 <div class="container">
 	<footer th:replace="~{basePiloto :: footer}" class="py-5"></footer>
 </div>

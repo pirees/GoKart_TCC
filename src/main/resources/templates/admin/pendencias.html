@@ -4,6 +4,10 @@
 <head th:replace="~{baseAdmin :: head}"></head>
 <div class="container">
     <header th:replace="~{baseAdmin :: header}"></header>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css">
+    <script type="text/javascript" th:src="@{/js/tabela.js}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 </div>
 <body>
 <div class="container p-1">
@@ -37,29 +41,8 @@
         </tr>
         </tbody>
     </table>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script>
-	$(document).ready(function () {
-    $('#example').DataTable({
-    	language: {
-    		url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
-            decimal: ',',
-            thousands: '.',
-        },
-    });
-});
-</script>
 </div>
 </body>
-<style>
-footer {
-   position: absolute;
-  bottom: 0;
-  width: 70%;
-  height: 50px;
-}
-</style>
 <div class="container">
     <footer th:replace="~{baseAdmin :: footer}" class="py-5"></footer>
 </div>

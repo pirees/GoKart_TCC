@@ -8,6 +8,7 @@
 		</div>
 	<script type="text/javascript" th:src="@{/js/jquery.mask.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/mascara.js}"></script>
+	<link rel="stylesheet" type="text/css" href="/css/footer.css">
 	<body>
 		<div class="container p-5">
 			<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${sucessmessage}">
@@ -71,14 +72,6 @@
 			</div>
 		</div>
 	</body>
-<style>
-footer {
-   position: absolute;
-  bottom: 0;
-  width: 70%;
-  height: 50px;
-}
-</style>
 	<div class="container">
 	<footer th:replace="~{baseKartodromo :: footer}" class="py-5"></footer>
 </div>

@@ -65,16 +65,23 @@ public class BateriaController {
         ModelAndView modelAndView = new ModelAndView("piloto/menuPiloto");
 
         if(!nomepesquisa.isEmpty() && datapesquisa == null){
+
             List<Bateria> baterias = bateriaRepository.findByKartodromoNome(nomepesquisa);
 
-            modelAndView.addObject("bateria", baterias);
+            if(!baterias.isEmpty()){
+                modelAndView.addObject("bateria", baterias);
 
-            return modelAndView;
+                return modelAndView;
+            }
+            ModelAndView model = new ModelAndView("piloto/menuPilotoSemBusca");
+
+            return model;
         }
         List<Bateria> baterias = bateriaRepository.findByKartodromoNomeData(nomepesquisa,datapesquisa);
 
         if(baterias.isEmpty()){
             ModelAndView model = new ModelAndView("piloto/menuPilotoSemBusca");
+
             return model;
         }
 

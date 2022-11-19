@@ -4,6 +4,9 @@
 <head th:replace="~{baseKartodromo :: head}"></head>
 <div class="container">
 	<header th:replace="~{baseKartodromo :: header}"></header>
+	<script type="text/javascript" th:src="@{/js/tabela.js}" defer></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 </div>
 <body>
 	<div class="container p-3">
@@ -31,34 +34,11 @@
 					<td th:text="${bateria.vagasConfirmadas}"></td>
 					<td th:text="${#numbers.formatDecimal(bateria.vagasConfirmadas * bateria.valorBateria,2,'POINT', 2, 'COMMA')}"></td>
 					<td> <a th:href="@{/kartodromo/visualizarBateria/{id}(id = ${bateria.id})}"><button type="button" class="btn-outline-dark">Ver</button></a></td>
-
-
 				</tr>
 			</tbody>
 		</table>
-		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-		<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-		<script>
-			$(document).ready(function () {
-   		    $('#example').DataTable({
-    			language: {
-    				url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/pt-BR.json',
-            		decimal: ',',
-            		thousands: '.',
-        		},
-    		});
-			});
-		</script>
 	</div>
 </body>
-<style>
-footer {
-   position: absolute;
-  bottom: 0;
-  width: 70%;
-  height: 50px;
-}
-</style>
 <div class="container">
 	<footer th:replace="~{baseKartodromo :: footer}" class="py-5"></footer>
 </div>
