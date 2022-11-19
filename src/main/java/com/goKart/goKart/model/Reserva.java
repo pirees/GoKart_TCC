@@ -29,15 +29,15 @@ public class Reserva {
 	@DateTimeFormat (pattern="dd/MM/yyyy")
 	private LocalDate dataReserva;
 	
-	@ManyToOne/*(cascade=CascadeType.PERSIST)*/
+	@ManyToOne
 	@JoinColumn(name="kartodromo_id")
 	private Kartodromo kartodromo;
 	
-	@ManyToOne/*(cascade=CascadeType.PERSIST)*/
+	@ManyToOne
 	@JoinColumn(name="bateria_id")
 	private Bateria bateria;
 	
-	@ManyToOne/*(cascade=CascadeType.PERSIST)*/
+	@ManyToOne
 	@JoinColumn(name="piloto_id")
 	private Piloto piloto;
 

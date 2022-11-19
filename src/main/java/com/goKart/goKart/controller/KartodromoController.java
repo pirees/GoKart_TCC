@@ -82,7 +82,7 @@ public class KartodromoController{
 			return "redirect:/cadastroKartodromo";
 		} else{
 			kartodromoRepository.save(kartodromo);
-			enviaEmailService.enviarcadastroKartodromoPendente(kartodromo);
+			//enviaEmailService.enviarcadastroKartodromoPendente(kartodromo);
 		}
 		return "redirect:/pendenciaCadastro";
 	}

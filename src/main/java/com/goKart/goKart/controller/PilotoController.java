@@ -92,7 +92,7 @@ public class PilotoController{
 			return "redirect:/piloto/cadastroPiloto";
 		}else{
 			pilotoRepository.save(piloto);
-			enviaEmailService.enviarCadastroSucesso(piloto);
+			//enviaEmailService.enviarCadastroSucesso(piloto);
 		}
 		return "redirect:/login";
 	}

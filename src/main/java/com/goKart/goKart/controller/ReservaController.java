@@ -159,7 +159,7 @@ public class ReservaController {
 		reserva.setStatus(StatusPagamento.DEVOLVIDO);
 		reservaRepository.save(reserva);
 
-		enviaEmailService.enviarReservaCanceladaPiloto(piloto, reserva);
+		//enviaEmailService.enviarReservaCanceladaPiloto(piloto, reserva);
 
 		return "redirect:/piloto/menuPiloto";
 	}

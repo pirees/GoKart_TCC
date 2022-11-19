@@ -113,7 +113,7 @@ public class MercadoPagoController {
             
             reservaRepository.save(reserva);
 
-			enviaEmailService.enviarPagamentoNaoConf(reserva.getPiloto(), reserva);
+			//enviaEmailService.enviarPagamentoNaoConf(reserva.getPiloto(), reserva);
             
         }else {
         	   
@@ -129,7 +129,7 @@ public class MercadoPagoController {
             reservaRepository.save(reserva);
 
 			//enviaEmailService.enviarReservaConfiKartodromo(reserva.getKartodromo(), reserva, reserva.getBateria());
-			enviaEmailService.enviarPagamentoConfiPiloto(reserva.getPiloto(), reserva);
+			//enviaEmailService.enviarPagamentoConfiPiloto(reserva.getPiloto(), reserva);
 
         }
                

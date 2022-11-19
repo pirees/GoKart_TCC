@@ -81,7 +81,7 @@ public class UsuarioController{
 			String encodedPassword = passwordEncoder.encode(password);
 			usuario.setSenha(encodedPassword);
 			usuarioRepository.save(usuario);
-			enviaEmailService.enviarUsuarioSenhaTrocada(usuario);
+			//enviaEmailService.enviarUsuarioSenhaTrocada(usuario);
 
 		}else{
 			redirectAttributes.addFlashAttribute("errormessage", "As senhas estão diferentes.");

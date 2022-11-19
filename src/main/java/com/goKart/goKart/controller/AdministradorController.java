@@ -90,7 +90,7 @@ public class AdministradorController {
 		kartodromo = kartodromoRepository.getById(id);
 		kartodromo.setStatusUsuario(StatusUsuario.APROVADO);
 		kartodromoRepository.save(kartodromo);
-		enviaEmailService.enviarcadastroKartodromoAprovado(kartodromo);
+		//enviaEmailService.enviarcadastroKartodromoAprovado(kartodromo);
 
 		return new ModelAndView("redirect:/admin/pendencias");
 	}
