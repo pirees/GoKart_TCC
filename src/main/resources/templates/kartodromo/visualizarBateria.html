@@ -19,7 +19,8 @@
 				<strong th:text="${errormessage}"></strong>
 			</div>
 			<h4>É possível editar ou deletar a bateria caso não tenha nenhum piloto cadastrado até o momento.</h4>
-			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<br>
+			<div class="d-grid gap-2 d-md-flex">
 				<a th:data-confirm-delete="|Você gostaria de apagar a bateria ${bateria.id}?|"
 				   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
 				   th:href="@{/kartodromo/visualizarBateria/apagar/{id}(id=${bateria.id})}"

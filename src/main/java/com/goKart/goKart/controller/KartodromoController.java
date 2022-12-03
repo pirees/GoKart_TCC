@@ -75,6 +75,7 @@ public class KartodromoController{
 		kartodromo.setPerfis(perfis);
 		kartodromo.setSenha(encodedPassword);
 		kartodromo.setStatusUsuario(StatusUsuario.PENDENTE);
+		kartodromo.setCelular(kartodromo.getCelular().replaceAll("[^\\d ]", ""));
 		kartodromo.setImagem(file.getBytes());
 
 		if(usuarioController.verificaCadastro(email)){
@@ -115,7 +116,7 @@ public class KartodromoController{
 
 	@GetMapping("piloto/kartodromos")
 	public String listarKartodromosPiloto(Model model) {
-		List<Kartodromo> kartodromo = kartodromoRepository.findAll();
+		List<Kartodromo> kartodromo = kartodromoRepository.findKartodromosAprovados();
 
 		model.addAttribute("kartodromo", kartodromo);
 
@@ -124,7 +125,7 @@ public class KartodromoController{
 
 	@GetMapping("/kartodromos")
 	public String listarKartodromosInicial(Model model) {
-		List<Kartodromo> kartodromo = kartodromoRepository.findAll();
+		List<Kartodromo> kartodromo = kartodromoRepository.findKartodromosAprovados();
 
 		model.addAttribute("kartodromo", kartodromo);
 

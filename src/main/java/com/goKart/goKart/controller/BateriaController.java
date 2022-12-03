@@ -95,25 +95,26 @@ public class BateriaController {
     public String listarBaterias(@PathVariable("id") Long id, String email, Model model) {
 
         Bateria bateria = bateriaRepository.getById(id);
-
         email = SecurityContextHolder.getContext().getAuthentication().getName();
-
         List<Reserva> reserva = reservaRepository.findPilotoByReserva(id);
 
-        for (Reserva reservas : reserva) {
-            if (reservas.getPiloto().getEmail().equals(email) && reservas.getStatus().equals(StatusPagamento.CONFIRMADO)) {
+        if(bateria.getNrMaxPiloto().equals(bateria.getVagasConfirmadas())) {
 
-                model.addAttribute("bateria", bateria);
-                model.addAttribute("reserva", reserva);
+            model.addAttribute("bateria", bateria);
+            model.addAttribute("reserva", reserva);
 
-                return "piloto/confirmarReservaPilotoPagoCancelar";
+            return "piloto/confirmarReservaBateriaCheia";
+        } else{
 
-            } else if(reservas.getBateria().getVagasConfirmadas().equals(reservas.getBateria().getNrMaxPiloto())){
+            for (Reserva reservas : reserva) {
+                if (reservas.getPiloto().getEmail().equals(email) && reservas.getStatus().equals(StatusPagamento.CONFIRMADO)) {
 
-                model.addAttribute("bateria", bateria);
-                model.addAttribute("reserva", reserva);
+                    model.addAttribute("bateria", bateria);
+                    model.addAttribute("reserva", reserva);
 
-                return "piloto/confirmarReservaBateriaCheia";
+                    return "piloto/confirmarReservaPilotoPagoCancelar";
+
+                }
             }
         }
 

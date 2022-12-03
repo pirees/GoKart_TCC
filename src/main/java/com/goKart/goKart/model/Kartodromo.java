@@ -1,5 +1,6 @@
 package com.goKart.goKart.model;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -36,6 +37,9 @@ public class Kartodromo extends Usuario implements UserDetails  {
 	private String logradouro;
 
 	private String complemento;
+
+	@NotBlank(message = "Celular não pode ficar em branco")
+	private String celular;
 
 	private StatusUsuario statusUsuario;
 

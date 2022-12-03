@@ -21,6 +21,7 @@ public class CustomQueryRepository {
                 "INNER JOIN r.kartodromo k " +
                 "INNER JOIN r.bateria b " +
                 "WHERE MONTH (r.dataReserva) = MONTH(CURRENT_DATE()) " +
+                "AND r.status = 0" +
                 "group by k";
 
         TypedQuery<FaturarDTO> typedQuery = em.createQuery(query, FaturarDTO.class);

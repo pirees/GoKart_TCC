@@ -17,4 +17,7 @@ public interface KartodromoRepository extends JpaRepository<Kartodromo, Long>  {
 
     @Query(value = "SELECT * FROM tb_usuario where status_usuario = 2 or status_usuario = 1", nativeQuery = true)
     List<Kartodromo> findByPendencia();
+
+    @Query("select k from Kartodromo k where k.statusUsuario = 0")
+    List<Kartodromo> findKartodromosAprovados();
 }

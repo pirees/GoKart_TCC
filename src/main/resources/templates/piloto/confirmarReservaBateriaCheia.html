@@ -17,6 +17,12 @@
 div.segundo {
 	margin-top: 50px;
 }
+div.whats {
+	position: fixed;
+	bottom: 30px;
+	left: 1200px;
+	z-index: 9999;
+}
 </style>
 <body>
 	<div class="container" >
@@ -25,7 +31,6 @@ div.segundo {
 			<h3 class="text-center">
 				<i>Faça a sua reserva agora mesmo</i>
 			</h3>
-<!-- 			<form class="row g-3" method="POST" th:action="@{/piloto/confirmarReserva/{id}(id = ${bateria.id})}" th:object="${reservaDTO}"> -->
  				<form class="row g-3" method="POST" th:action="@{/piloto/process_payment/{id}(id = ${bateria.id})}" th:object="${reserva}">
 			<div class="col-6">
 				<img alt="Image" th:src="|/imagem/${bateria.kartodromo.id}|" width="400" />
@@ -108,6 +113,11 @@ div.segundo {
 			<p>CEP: <span th:text="${bateria.kartodromo.CEP}"></span></p>
 			<p>Cidade: <span th:text="${bateria.kartodromo.cidade + '-' + bateria.kartodromo.estado}"></span></p>
 			<p>Contato: <span th:text="${bateria.kartodromo.email}"></span></p>
+			<div class="whats">
+				<a th:href="@{https://wa.me/+55{link}(link=${bateria.kartodromo.celular})}">
+					<img th:src="@{/images/whatsapp.png}" width="50" alt="Tire suas dúvidas com o kartódromo" title="Fale com o Kartódromo"/>
+				</a>
+			</div>
   			<br>
   			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.983457467097!2d-49.36449718437011!3d-25.53892794345982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dcfd45274d986d%3A0x835bd2061563fb71!2sUNIFACEAR%20-%20Campus%20Arauc%C3%A1ria!5e0!3m2!1spt-BR!2sbr!4v1654349292317!5m2!1spt-BR!2sbr"
   			width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
