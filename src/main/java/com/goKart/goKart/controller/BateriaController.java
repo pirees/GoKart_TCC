@@ -221,6 +221,11 @@ public class BateriaController {
 
         List<Bateria> bateria = bateriaRepository.findByDateKartodromoId(baterias.getKartodromo().getId());
 
+        if(bateria.isEmpty()){
+            ModelAndView modelAndView = new ModelAndView("kartodromo/menuKartodromoSemBateria");
+            return modelAndView;
+        }
+
         if(kartodromo.getStatusUsuario().equals(PENDENTE)){
             ModelAndView modelAndView = new ModelAndView("/pendenciaCadastro");
             return modelAndView;
