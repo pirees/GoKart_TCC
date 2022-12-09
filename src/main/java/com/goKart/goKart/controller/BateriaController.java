@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import static com.goKart.goKart.model.StatusUsuario.APROVADO;
 import static com.goKart.goKart.model.StatusUsuario.PENDENTE;
 
 @Controller
@@ -221,7 +222,7 @@ public class BateriaController {
 
         List<Bateria> bateria = bateriaRepository.findByDateKartodromoId(baterias.getKartodromo().getId());
 
-        if(bateria.isEmpty()){
+        if(bateria.isEmpty() && kartodromo.getStatusUsuario().equals(APROVADO)){
             ModelAndView modelAndView = new ModelAndView("kartodromo/menuKartodromoSemBateria");
             return modelAndView;
         }
